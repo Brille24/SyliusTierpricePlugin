@@ -1,0 +1,77 @@
+{% block stylesheets %}
+    <style>
+        .channelCurrency {
+            display: none;
+        }
+    </style>
+{% endblock %}
+
+{% macro tierPriceRow(tierprice, index, channel) %}
+    <tr class="item">
+        <td>
+            <div class="field">
+                {{ form_widget(tierprice.qty, {'attr' : {'class': 'TIERPRICE_SORTING_CHANGED'}}) }}
+                {{ form_errors(tierprice.qty) }}
+            </div>
+        </td>
+        <td>
+            <div class="field priceField">
+                {{ form_widget(tierprice.price, {currency: channel.baseCurrency|default('USD')}) }}
+                {{ form_errors(tierprice.price) }}
+            </div>
+            {{ form_widget(tierprice.channel) }}
+        </td>
+
+        <td>
+            <a class="ui red labeled icon button" onclick="tierPriceTableRemove(this);">
+                <i class="trash icon"></i>{{ 'sylius.ui.delete'|trans }}
+            </a>
+        </td>
+    </tr>
+{% endmacro %}
+
+{% block content %}
+    {% import _self as row %}
+    <div class="ui tab" data-tab="tierprice">
+
+        {% set tierPriceIndex = form.tierPrices|length %}
+        <script>
+            var tierPriceIndex = {{ tierPriceIndex }};
+        </script>
+        <span data-prototype="{{ row.tierPriceRow(form.tierPrices.vars.prototype, '__name__')|e('html_attr') }}"
+              id="prototype_holder">
+        </span>
+
+        {% for channel in form.vars.data.product.channels %}
+            <h3 class="ui dividing header"> {{ channel.name }}</h3>
+
+            {% set bodyId = "tierPricesTable_" ~ channel.id %}
+            {% set channel_id = channel.id %}
+
+            <table class="ui stackable celled table" id="{{ bodyId }}_table"
+                   data-prototype="{{ channel.baseCurrency|sylius_currency_symbol }}">
+                <thead>
+                <tr>
+                    <th class="table-column-quantity">{{ 'sylius.ui.quantity'|trans }}</th>
+                    <th>{{ 'sylius.ui.unit_price'|trans }} </th>
+                    <th>{{ 'sylius.ui.delete'|trans }}</th>
+                </tr>
+                </thead>
+                <tbody id="{{ bodyId }}">
+                {% for i, tierprice in form.tierPrices %}
+                    {% if tierprice.channel.vars['value'] == channel.id %}
+                        {{ row.tierPriceRow(tierprice, i, channel) }}
+                    {% endif %}
+                {% endfor %}
+                </tbody>
+            </table>
+
+            <div class="ui labeled icon primary button" onclick="tierPriceTableAdd('{{ bodyId }}', {{ channel_id }})">
+                <i class="add icon"></i> {{ 'sylius.ui.add'|trans }}
+            </div>
+        {% endfor %}
+
+        {{ sonata_block_render_event('sylius.admin.product_variant.' ~ action ~ '.tab_tierprice', {'form': form }) }}
+    </div>
+{% endblock %}
+

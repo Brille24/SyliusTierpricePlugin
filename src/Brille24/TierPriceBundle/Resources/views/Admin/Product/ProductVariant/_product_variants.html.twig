@@ -1,0 +1,5 @@
+{% set form = form|default(settings.form) %}
+
+<div style="display: none;">
+    {{ form_rest(form.children.variant) }}
+</div>

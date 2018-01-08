@@ -1,0 +1,5 @@
+sylius_product:
+    resources:
+        product_variant:
+            classes:
+                model: Brille24\TierPriceBundle\Entity\ProductVariant

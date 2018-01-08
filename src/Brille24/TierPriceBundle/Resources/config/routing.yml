@@ -1,0 +1,5 @@
+brille24_tierprice:
+  prefix: /api/product-variants/
+  resource: |
+    alias: brille24.tierprice
+  type: sylius.resource_api

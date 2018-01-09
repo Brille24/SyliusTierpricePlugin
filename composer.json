@@ -1,7 +1,7 @@
 {
-    "name": "sylius/plugin-skeleton",
+    "name": "brille24/tierprice-plugin",
     "type": "sylius-plugin",
-    "description": "Acme example plugin for Sylius.",
+    "description": "A plugin that allows to add tierprices to Sylius",
     "license": "MIT",
     "require": {
         "php": "^7.1",

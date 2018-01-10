@@ -1,0 +1,22 @@
+imports:
+    - vendor/sylius/sylius/behat.yml.dist
+    - tests/Behat/Resources/suites.yml
+
+default:
+    extensions:
+        FriendsOfBehat\ContextServiceExtension:
+            imports:
+                - vendor/sylius/sylius/src/Sylius/Behat/Resources/config/services.xml
+                - tests/Behat/Resources/pages.yml
+                - tests/Behat/Resources/contexts.yml
+
+        FriendsOfBehat\SymfonyExtension:
+            kernel:
+                class: AppKernel
+                path: tests/Application/app/AppKernel.php
+                bootstrap: vendor/autoload.php
+
+        Lakion\Behat\MinkDebugExtension:
+            directory: etc/build
+            clean_start: false
+            screenshot: true

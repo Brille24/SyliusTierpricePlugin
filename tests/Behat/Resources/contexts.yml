@@ -1,0 +1,5 @@
+services:
+  brille24.behat.context.tierprice:
+    class: Brille24\Behat\Context\TierpriceContext
+    tags:
+      - { name: fob.context_service }

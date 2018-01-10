@@ -2,7 +2,9 @@
 
 {% set product_variant = product_variant|default(block.settings.product|sylius_resolve_variant) %}
 
-{% if product_variant.hasTierPrices %}
+{% set tier_prices = product_variant.getTierPricesForChannel(sylius.channel) %}
+
+{% if tier_prices|length > 0 %}
 <span style="font-weight: bold;">{{ 'sylius.ui.tierprice'|trans }}</span>
 
 <table class="ui stackable celled table">
@@ -13,7 +15,7 @@
     </tr>
     </thead>
     <tbody>
-        {% for tierPrice in product_variant.tierPrices if tierPrice.channel.id == sylius.channel.id %}
+        {% for tierPrice in tier_prices %}
             <tr>
                 <td>{{ tierPrice.qty|number_format }}</td>
                 <td>{{ money.convertAndFormat(tierPrice.price, sylius.channel.baseCurrency) }}</td>

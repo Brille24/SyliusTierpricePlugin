@@ -102,7 +102,7 @@ class ProductVariantPriceCalculatorTest extends \PHPUnit_Framework_TestCase
         $tierPrice->method('getQty')->willReturn(5);
 
         $productVariant = $this->createMock(ProductVariant::class);
-        $productVariant->method('getTierPrices')->willReturn([$tierPrice]);
+        $productVariant->method('getTierPricesForChannel')->willReturn([$tierPrice]);
 
         ### EXECUTE
         $price = $this->priceCalculator->calculate(
@@ -128,7 +128,7 @@ class ProductVariantPriceCalculatorTest extends \PHPUnit_Framework_TestCase
         $tierPrice2->method('getQty')->willReturn(10);
 
         $productVariant = $this->createMock(ProductVariant::class);
-        $productVariant->method('getTierPrices')->willReturn([$tierPrice1, $tierPrice2]);
+        $productVariant->method('getTierPricesForChannel')->willReturn([$tierPrice1, $tierPrice2]);
 
         ### EXECUTE
         $price = $this->priceCalculator->calculate(

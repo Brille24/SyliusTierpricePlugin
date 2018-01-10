@@ -12,6 +12,7 @@ declare(strict_types=1);
 
 namespace Brille24\TierPriceBundle\Services;
 
+use Brille24\TierPriceBundle\Entity\TierPriceInterface;
 use Sylius\Component\Core\Calculator\ProductVariantPriceCalculatorInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
@@ -80,22 +81,23 @@ final class ProductVariantPriceCalculator implements ProductVariantPriceCalculat
         ChannelInterface $channel,
         int $quantity
     ): ?TierPrice {
-        $bestMatch = null;
-        foreach ($productVariant->getTierPrices() as $index => $tierPrice) {
-            /**
-             * @var TierPrice $tierPrice
-             * @var TierPrice $bestMatch
-             */
-            // If it is a possible tier price
-            if ($tierPrice->getChannel() === $channel && $quantity >= $tierPrice->getQty()) {
-                // Setting the better match
-                if ($bestMatch === null) {
-                    $bestMatch = $tierPrice;
-                    continue;
-                }
-                $bestMatch = ($tierPrice->getPrice() < $bestMatch->getPrice()) ? $tierPrice : $bestMatch;
-            }
-        }
-        return $bestMatch;
+
+        $tierPricesForChannel = $productVariant->getTierPricesForChannel($channel);
+
+        // Filters out all tier prices with amounts lower than purchased
+        $tierPricesWithQuantityMatching = array_filter($tierPricesForChannel,
+            function (TierPriceInterface $tierPrice) use ($quantity) {
+                return $tierPrice->getQty() <= $quantity;
+            });
+
+
+        // Gets the cheapest one
+        $cheapestTierprice = array_reduce($tierPricesWithQuantityMatching,
+            function (?TierPriceInterface $best, ?TierPriceInterface $tierPrice) {
+                $previous = $best ?: $tierPrice;
+                return $tierPrice->getPrice() < $previous->getPrice() ? $tierPrice : $previous;
+            }, null);
+
+        return $cheapestTierprice;
     }
 }

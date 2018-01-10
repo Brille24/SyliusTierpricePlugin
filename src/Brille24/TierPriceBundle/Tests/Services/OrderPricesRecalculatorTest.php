@@ -8,7 +8,7 @@
 
 declare(strict_types=1);
 
-namespace Brille24\TierPriceBundle\Tests;
+namespace Brille24\TierPriceBundle\Tests\Services;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Sylius\Component\Core\Calculator\ProductVariantPriceCalculatorInterface;

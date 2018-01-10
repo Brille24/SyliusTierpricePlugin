@@ -8,7 +8,7 @@
 
 declare(strict_types=1);
 
-namespace Brille24\TierPriceBundle\Tests;
+namespace Brille24\TierPriceBundle\Tests\Services;
 
 use Sylius\Component\Core\Calculator\ProductVariantPriceCalculatorInterface;
 use Sylius\Component\Core\Model\ChannelInterface;

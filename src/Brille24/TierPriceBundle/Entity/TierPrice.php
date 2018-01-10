@@ -27,7 +27,7 @@ use Sylius\Component\Resource\Model\ResourceInterface;
  *
  * @package Brille24\TierPriceBundle\Entity
  */
-class TierPrice implements ResourceInterface
+class TierPrice implements ResourceInterface, TierPriceInterface
 {
     /**
      * @var int

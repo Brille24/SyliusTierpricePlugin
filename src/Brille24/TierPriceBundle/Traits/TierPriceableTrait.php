@@ -15,6 +15,7 @@ namespace Brille24\TierPriceBundle\Traits;
 use Brille24\TierPriceBundle\Entity\ProductVariant;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Brille24\TierPriceBundle\Entity\TierPrice;
 
@@ -33,16 +34,18 @@ trait TierPriceableTrait
     /** @var Collection */
     protected $tierPrices;
 
-    public function hasTierPrices(): bool
-    {
-        return count($this->tierPrices) === 0;
-    }
-
     public function getTierPrices(): array
     {
         $this->tierPrices = $this->tierPrices ?: new ArrayCollection();
 
         return $this->tierPrices->toArray();
+    }
+
+    public function getTierPricesForChannel(ChannelInterface $channel): array
+    {
+        return array_filter($this->getTierPrices(), function (TierPrice $tierPrice) use ($channel){
+            return $tierPrice->getChannel()->getId() === $channel->getId();
+        });
     }
 
     public function removeTierPrice(TierPrice $tierPrice): void

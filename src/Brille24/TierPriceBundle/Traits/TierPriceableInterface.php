@@ -14,9 +14,20 @@ namespace Brille24\TierPriceBundle\Traits;
 
 
 use Brille24\TierPriceBundle\Entity\TierPrice;
+use Sylius\Component\Core\Model\ChannelInterface;
 
 interface TierPriceableInterface
 {
+
+    /**
+     * Returns all tier prices for a given channel
+     *
+     * @param ChannelInterface $channel
+     *
+     * @return TierPrice[]
+     */
+    public function getTierPricesForChannel(ChannelInterface $channel) : array;
+
     /**
      *Returns the tier prices associated
      *

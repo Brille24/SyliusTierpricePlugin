@@ -1,3 +1,11 @@
+# Overriding product variant of sylius
+sylius_product:
+    resources:
+        product_variant:
+            classes:
+                model: Brille24\TierPriceBundle\Entity\ProductVariant
+
+# New resources
 sylius_resource:
   resources:
     brille24.tierprice:

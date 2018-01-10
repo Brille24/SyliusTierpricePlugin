@@ -12,13 +12,6 @@ services:
         tags:
             - { name: form.type_extension, extended_type: Sylius\Bundle\ProductBundle\Form\Type\ProductVariantType }
 
-    # Validator
-    brille24_tier_price.form_validator.descending_prices_validator:
-        class: Brille24\TierPriceBundle\Form\Validator\DescendingPricesValidator
-        arguments: ['@brille24.repository.tierprice']
-        tags:
-            - { name: validator.constraint_validator }
-
     #Event listener
     app.listener.admin.product_variant.form.menu_builder:
         class: Brille24\TierPriceBundle\Menu\AdminProductVariantFormMenuListener

@@ -1,11 +1,4 @@
-{% block stylesheets %}
-    <style>
-        .channelCurrency {
-            display: none;
-        }
-    </style>
-{% endblock %}
-
+{# A macro rendering a row of the tier price table#}
 {% macro tierPriceRow(tierprice, index, channel) %}
     <tr class="item">
         <td>
@@ -30,18 +23,22 @@
     </tr>
 {% endmacro %}
 
+{# The tierprice tab #}
 {% block content %}
     {% import _self as row %}
     <div class="ui tab" data-tab="tierprice">
 
-        {% set tierPriceIndex = form.tierPrices|length %}
+        {# Setting the tierPriceIndex for javascript, to generate incremental ids #}
         <script>
-            var tierPriceIndex = {{ tierPriceIndex }};
+            var tierPriceIndex = {{ form.tierPrices|length }};
         </script>
+
+        {# Generating the new row prototype#}
         <span data-prototype="{{ row.tierPriceRow(form.tierPrices.vars.prototype, '__name__')|e('html_attr') }}"
               id="prototype_holder">
         </span>
 
+        {# Itterating over the channels #}
         {% for channel in form.vars.data.product.channels %}
             <h3 class="ui dividing header"> {{ channel.name }}</h3>
 
@@ -49,6 +46,7 @@
             {% set channel_id = channel.id %}
 
             <table class="ui stackable celled table" id="{{ bodyId }}_table"
+                   {# Setting the default currency for this table (channel) #}
                    data-prototype="{{ channel.baseCurrency|sylius_currency_symbol }}">
                 <thead>
                 <tr>
@@ -58,6 +56,7 @@
                 </tr>
                 </thead>
                 <tbody id="{{ bodyId }}">
+                {# Rendering the table body #}
                 {% for i, tierprice in form.tierPrices %}
                     {% if tierprice.channel.vars['value'] == channel.id %}
                         {{ row.tierPriceRow(tierprice, i, channel) }}
@@ -66,6 +65,7 @@
                 </tbody>
             </table>
 
+            {# The add button for every table #}
             <div class="ui labeled icon primary button" onclick="tierPriceTableAdd('{{ bodyId }}', {{ channel_id }})">
                 <i class="add icon"></i> {{ 'sylius.ui.add'|trans }}
             </div>

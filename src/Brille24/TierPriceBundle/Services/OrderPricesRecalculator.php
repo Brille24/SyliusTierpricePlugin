@@ -1,15 +1,16 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: mamazu
- * Date: 04/01/18
- * Time: 13:04
+ * This file is part of the Brille24 tierprice plugin.
+ *
+ * (c) Brille24 GmbH
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 declare(strict_types=1);
 
 namespace Brille24\TierPriceBundle\Services;
-
 
 use Sylius\Component\Core\Calculator\ProductVariantPriceCalculatorInterface;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -17,7 +18,14 @@ use Sylius\Component\Order\Model\OrderInterface as BaseOrderInterface;
 use Sylius\Component\Order\Processor\OrderProcessorInterface;
 use Webmozart\Assert\Assert;
 
-class OrderPricesRecalculator implements OrderProcessorInterface
+/**
+ * Class OrderPricesRecalculator
+ *
+ * Recalculates the price for the whole oder item
+ *
+ * @package Brille24\TierPriceBundle\Services
+ */
+final class OrderPricesRecalculator implements OrderProcessorInterface
 {
 
     /**

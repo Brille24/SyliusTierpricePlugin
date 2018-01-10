@@ -16,6 +16,13 @@ use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Brille24\TierPriceBundle\Form\TierPriceType;
 
+/**
+ * Class ProductVariantTypeExtension
+ *
+ * Extending the product variant and adding the tier price entity
+ *
+ * @package Brille24\TierPriceBundle\Form\Extension
+ */
 class ProductVariantTypeExtension extends AbstractTypeExtension
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void

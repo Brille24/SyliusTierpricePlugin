@@ -1,23 +1,42 @@
 <?php
+/**
+ * This file is part of the Brille24 tierprice plugin.
+ *
+ * (c) Brille24 GmbH
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+declare(strict_types=1);
 
 namespace Brille24\TierPriceBundle\Traits;
 
+use Brille24\TierPriceBundle\Entity\ProductVariant;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Brille24\TierPriceBundle\Entity\TierPrice;
 
 /**
- * Created by PhpStorm.
- * User: mamazu
- * Date: 29/12/17
- * Time: 16:35
+ * Trait TierPriceableTrait
+ *
+ * Trait that implements the tierpricing functionality.
+ * Used in:
+ * <li>@see ProductVariant</li>
+ *
+ * @package Brille24\TierPriceBundle\Traits
  */
 trait TierPriceableTrait
 {
 
     /** @var Collection */
     protected $tierPrices;
+
+    public function hasTierPrices(): bool
+    {
+        return count($this->tierPrices) === 0;
+    }
 
     public function getTierPrices(): array
     {

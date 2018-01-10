@@ -1,10 +1,14 @@
 <?php
+
 /**
- * Created by PhpStorm.
- * User: mamazu
- * Date: 29/12/17
- * Time: 10:58
+ * This file is part of the Brille24 tierprice plugin.
+ *
+ * (c) Brille24 GmbH
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
+
 declare(strict_types=1);
 
 namespace Brille24\TierPriceBundle\Entity;
@@ -17,9 +21,10 @@ use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 
 /**
+ * Class ProductVariant
+ *
  * Entity that stores a possible tier pricing for a product
  *
- * Class ProductVariant
  * @package Brille24\TierPriceBundle\Entity
  */
 class TierPrice implements ResourceInterface

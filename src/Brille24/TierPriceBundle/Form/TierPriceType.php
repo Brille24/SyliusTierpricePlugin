@@ -1,9 +1,11 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: mamazu
- * Date: 29/12/17
- * Time: 12:30
+ * This file is part of the Brille24 tierprice plugin.
+ *
+ * (c) Brille24 GmbH
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 declare(strict_types=1);
 
@@ -25,6 +27,13 @@ use Symfony\Component\Validator\Constraints\{
 };
 use Webmozart\Assert\Assert;
 
+/**
+ * Class TierPriceType
+ *
+ * Form type for the tier price entity
+ *
+ * @package Brille24\TierPriceBundle\Form
+ */
 class TierPriceType extends AbstractType
 {
 
@@ -74,6 +83,7 @@ class TierPriceType extends AbstractType
 
     public function configureOptions(OptionsResolver $resolver): void
     {
+        // Setting USD as fallback
         $resolver->setDefaults([
             'data_class' => TierPrice::class,
             'currency'   => 'USD',

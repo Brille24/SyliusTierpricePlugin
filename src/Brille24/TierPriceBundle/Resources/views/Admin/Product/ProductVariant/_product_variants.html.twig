@@ -1,5 +1,6 @@
 {% set form = form|default(settings.form) %}
 
+{# Rendering the form rest for the product variant in the product view so that the tierprices will not get droped on updating the product #}
 <div style="display: none;">
     {{ form_rest(form.children.variant) }}
 </div>

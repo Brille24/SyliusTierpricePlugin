@@ -53,8 +53,8 @@ services:
         class: Brille24\TierPriceBundle\Services\ProductVariantPriceCalculator
         arguments: ['@sylius.calculator.product_variant_price']
 
-    sylius.order_processing.order_prices_recalculator:
-        class: Brille24\TierPriceBundle\Services\OrderPricesRecalculator
-        arguments: ['@brille24_tier_price.services.product_variant_price_calculator']
-        tags:
-            - {name: sylius.order_processor, priority: 40}
+#    sylius.order_processing.order_prices_recalculator:
+#        class: Brille24\TierPriceBundle\Services\OrderPricesRecalculator
+#        arguments: ['@brille24_tier_price.services.product_variant_price_calculator']
+#        tags:
+#            - {name: sylius.order_processor, priority: 40}

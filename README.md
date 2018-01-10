@@ -23,6 +23,22 @@ imports:
     - { resource: '@Brille24TierPriceBundle/Resources/config/config.yml'}
 ```
 
+Add the `resources.yml` to the `app/config/resources.yml`
+```yml
+imports:
+    ...
+    - { resource: '@Brille24TierPriceBundle/Resources/config/resources.yml'}
+```
+
+If the `resources.yml` did not exist before add its reference to the `app/config/config.yml`
+```yml
+imports:
+    ...
+    - { resource: 'resources.yml'}
+```
+
+That way all the Sylius resource overriding happens in the `app/config/resources.yml`
+
 * If you want to use the API for creating and updating tierpices, you also have to add the `routing.yml` to the `app/config/routing.yml`
 ```yml
 ...
@@ -36,6 +52,9 @@ bin/console doctrine:schema:update --force
 bin/console assets:install
 bin/console translation:update
 ```
+
+### Integration
+The Bundle overrides the `ProductVariant` class that is provided by Sylius. This will be overridden in the `resource.yml` of the Bundle. If you want to override that class in your application too, you have to merge the two configurations. 
 
 ## Usage
 First of all you have to set up a product with as many variants as you want. Then in each of these variants you can set the tierpricing based on the channels.

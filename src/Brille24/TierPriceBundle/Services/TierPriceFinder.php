@@ -43,6 +43,7 @@ class TierPriceFinder implements TierPriceFinderInterface
 
         /** @var TierPrice[] $tierPricesForChannel */
         $tierPricesForChannel = $tierPriceableEntity->getTierPricesForChannel($channel);
+        dump($tierPricesForChannel);
 
         // Filters out all tier prices with amounts lower than purchased
         $tierPricesWithQuantityMatching = array_filter($tierPricesForChannel,

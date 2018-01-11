@@ -44,7 +44,10 @@ services:
     # Services
     brille24_tier_price.services.product_variant_price_calculator:
         class: Brille24\TierPriceBundle\Services\ProductVariantPriceCalculator
-        arguments: ['@sylius.calculator.product_variant_price']
+        arguments: ['@sylius.calculator.product_variant_price', '@brille24_tier_price.services.tier_price_finder']
+
+    brille24_tier_price.services.tier_price_finder:
+        class: Brille24\TierPriceBundle\Services\TierPriceFinder
 
 #    sylius.order_processing.order_prices_recalculator:
 #        class: Brille24\TierPriceBundle\Services\OrderPricesRecalculator

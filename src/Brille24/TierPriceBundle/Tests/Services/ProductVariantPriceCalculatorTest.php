@@ -10,11 +10,13 @@ declare(strict_types=1);
 
 namespace Brille24\TierPriceBundle\Tests\Services;
 
+use Brille24\TierPriceBundle\Services\TierPriceFinderInterface;
 use Sylius\Component\Core\Calculator\ProductVariantPriceCalculatorInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Brille24\TierPriceBundle\Entity\ProductVariant;
 use Brille24\TierPriceBundle\Entity\TierPrice;
 use Brille24\TierPriceBundle\Services\ProductVariantPriceCalculator;
+use Sylius\Component\Core\Model\ProductVariant as SyliusProductVariant;
 
 class ProductVariantPriceCalculatorTest extends \PHPUnit_Framework_TestCase
 {
@@ -24,6 +26,9 @@ class ProductVariantPriceCalculatorTest extends \PHPUnit_Framework_TestCase
     /** @var ProductVariantPriceCalculatorInterface */
     private $priceCalculator;
 
+    /** @var TierPriceFinderInterface */
+    private $tierPriceFinder;
+
     /** @var ChannelInterface */
     private $testChannel;
 
@@ -32,111 +37,54 @@ class ProductVariantPriceCalculatorTest extends \PHPUnit_Framework_TestCase
         $this->basePriceCalculator = $this->createMock(ProductVariantPriceCalculatorInterface::class);
         $this->basePriceCalculator->method('calculate')->willReturn(-1); // To indicate no tier prices
 
-        $this->priceCalculator = new ProductVariantPriceCalculator($this->basePriceCalculator);
+        $this->tierPriceFinder = $this->createMock(TierPriceFinderInterface::class);
+
+
+        $this->priceCalculator = new ProductVariantPriceCalculator($this->basePriceCalculator, $this->tierPriceFinder);
 
         $this->testChannel = $this->createMock(ChannelInterface::class);
     }
 
-    public function testCalculateWithNoTierPrice()
+    public function testCalculateWithNonTierpriceable()
     {
         ### PREPARE
-        $productVariant = $this->createMock(ProductVariant::class);
-        $productVariant->method('getTierPrices')->willReturn([]);
+        $productVariant = $this->createMock(SyliusProductVariant::class);
+        $testChannel    = $this->createMock(ChannelInterface::class);
 
         ### EXECUTE
-        $price = $this->priceCalculator->calculate(
-            $productVariant,
-            ['channel' => $this->testChannel, 'quantity' => 10]
-        );
+        $price = $this->priceCalculator->calculate($productVariant, ['channel' => $testChannel, 'quantity' => 10]);
 
         ### CHECK
         $this->assertEquals(-1, $price);
     }
 
-    public function testCalculateWithTierPriceFromDifferentChannel()
+    public function testCalculatePriceWithEmptyTierPrices()
     {
         ### PREPARE
-        $tierPrice = $this->createMock(TierPrice::class);
-        $tierPrice->method('getChannel')->willReturn($this->createMock(ChannelInterface::class));
-
         $productVariant = $this->createMock(ProductVariant::class);
-        $productVariant->method('getTierPrices')->willReturn([$tierPrice]);
+        $testChannel = $this->createMock(ChannelInterface::class);
+
+        $this->tierPriceFinder->method('find')->willReturn(null);
 
         ### EXECUTE
-        $price = $this->priceCalculator->calculate(
-            $productVariant,
-            ['channel' => $this->testChannel, 'quantity' => 10]
-        );
+        $result= $this->priceCalculator->calculate($productVariant, ['channel' => $testChannel, 'quantity' => 10]);
 
         ### CHECK
-        $this->assertEquals(-1, $price);
+        $this->assertEquals(-1, $result);
     }
 
-    public function testCalculateWithNoTierpriceAmount()
+    public function testCalculatePriceWithTierPrices()
     {
         ### PREPARE
-        $tierPrice = $this->createMock(TierPrice::class);
-        $tierPrice->method('getChannel')->willReturn($this->testChannel);
-        $tierPrice->method('getPrice')->willReturn(1);
-        $tierPrice->method('getQty')->willReturn(100);
-
         $productVariant = $this->createMock(ProductVariant::class);
-        $productVariant->method('getTierPrices')->willReturn([$tierPrice]);
+        $testChannel = $this->createMock(ChannelInterface::class);
+
+        $this->tierPriceFinder->method('find')->willReturn(new TierPrice(2, 2));
 
         ### EXECUTE
-        $price = $this->priceCalculator->calculate(
-            $productVariant,
-            ['channel' => $this->testChannel, 'quantity' => 10]
-        );
+        $result= $this->priceCalculator->calculate($productVariant, ['channel' => $testChannel, 'quantity' => 10]);
 
         ### CHECK
-        $this->assertEquals(-1, $price);
-    }
-
-    public function testCalculateWithOneTierPrice()
-    {
-        ### PREPARE
-        $tierPrice = $this->createMock(TierPrice::class);
-        $tierPrice->method('getChannel')->willReturn($this->testChannel);
-        $tierPrice->method('getPrice')->willReturn(1);
-        $tierPrice->method('getQty')->willReturn(5);
-
-        $productVariant = $this->createMock(ProductVariant::class);
-        $productVariant->method('getTierPricesForChannel')->willReturn([$tierPrice]);
-
-        ### EXECUTE
-        $price = $this->priceCalculator->calculate(
-            $productVariant,
-            ['channel' => $this->testChannel, 'quantity' => 10]
-        );
-
-        ### CHECK
-        $this->assertEquals(1, $price);
-    }
-
-    public function testCalculateWithHighestTierPrice()
-    {
-        ### PREPARE
-        $tierPrice1 = $this->createMock(TierPrice::class);
-        $tierPrice1->method('getChannel')->willReturn($this->testChannel);
-        $tierPrice1->method('getPrice')->willReturn(10);
-        $tierPrice1->method('getQty')->willReturn(5);
-
-        $tierPrice2 = $this->createMock(TierPrice::class);
-        $tierPrice2->method('getChannel')->willReturn($this->testChannel);
-        $tierPrice2->method('getPrice')->willReturn(5);
-        $tierPrice2->method('getQty')->willReturn(10);
-
-        $productVariant = $this->createMock(ProductVariant::class);
-        $productVariant->method('getTierPricesForChannel')->willReturn([$tierPrice1, $tierPrice2]);
-
-        ### EXECUTE
-        $price = $this->priceCalculator->calculate(
-            $productVariant,
-            ['channel' => $this->testChannel, 'quantity' => 10]
-        );
-
-        ### CHECK
-        $this->assertEquals(5, $price);
+        $this->assertEquals(2, $result);
     }
 }

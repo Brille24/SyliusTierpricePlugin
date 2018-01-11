@@ -35,9 +35,15 @@ final class ProductVariantPriceCalculator implements ProductVariantPriceCalculat
      */
     private $basePriceCalculator;
 
-    public function __construct(ProductVariantPriceCalculatorInterface $basePriceCalculator)
-    {
+    /** @var TierPriceFinderInterface  */
+    private $tierPriceFinder;
+
+    public function __construct(
+        ProductVariantPriceCalculatorInterface $basePriceCalculator,
+        TierPriceFinderInterface $tierPriceFinder
+    ) {
         $this->basePriceCalculator = $basePriceCalculator;
+        $this->tierPriceFinder     = $tierPriceFinder;
     }
 
     /**
@@ -49,6 +55,7 @@ final class ProductVariantPriceCalculator implements ProductVariantPriceCalculat
      * <ul>
      * <li>channel</li>
      * <li>quantity</li>
+     * </ul>
      *
      * @return int
      */
@@ -58,46 +65,13 @@ final class ProductVariantPriceCalculator implements ProductVariantPriceCalculat
 
         // Find a tier price and return it
         if ($productVariant instanceof TierPriceableInterface) {
-            $tierPrice = $this->findTierPrice($productVariant, $context['channel'], $context['quantity']);
+            $tierPrice = $this->tierPriceFinder->find($productVariant, $context['channel'], $context['quantity']);
             if ($tierPrice !== null) {
                 return $tierPrice->getPrice();
             }
         }
 
+        // Return the base price if there are no tier prices
         return $this->basePriceCalculator->calculate($productVariant, $context);
-    }
-
-    /**
-     * Finds the cheapest tier price for this product variant
-     *
-     * @param TierPriceableInterface $productVariant
-     * @param ChannelInterface       $channel
-     * @param int                    $quantity
-     *
-     * @return TierPrice|null
-     */
-    private function findTierPrice(
-        TierPriceableInterface $productVariant,
-        ChannelInterface $channel,
-        int $quantity
-    ): ?TierPrice {
-
-        $tierPricesForChannel = $productVariant->getTierPricesForChannel($channel);
-
-        // Filters out all tier prices with amounts lower than purchased
-        $tierPricesWithQuantityMatching = array_filter($tierPricesForChannel,
-            function (TierPriceInterface $tierPrice) use ($quantity) {
-                return $tierPrice->getQty() <= $quantity;
-            });
-
-
-        // Gets the cheapest one
-        $cheapestTierprice = array_reduce($tierPricesWithQuantityMatching,
-            function (?TierPriceInterface $best, ?TierPriceInterface $tierPrice) {
-                $previous = $best ?: $tierPrice;
-                return $tierPrice->getPrice() < $previous->getPrice() ? $tierPrice : $previous;
-            }, null);
-
-        return $cheapestTierprice;
     }
 }

@@ -15,13 +15,13 @@ use Brille24\TierPriceBundle\Entity\ProductVariant;
 use Brille24\TierPriceBundle\Entity\TierPrice;
 use Sylius\Component\Core\Model\ProductInterface;
 
-final class TierpriceContext implements Context
+final class TierPriceContext implements Context
 {
 
     /**
      * @Given /^"([^"]*)" has a tier price at (\d+) with ("[^"]+")$/
      */
-    public function producthasATierPrice(ProductInterface $product, int $quantity, int $price): void
+    public function productHasATierPrice(ProductInterface $product, int $quantity, int $price): void
     {
         /** @var ProductVariant $productVariant */
         $productVariant = array_values($product->getVariants())[0];
@@ -30,11 +30,13 @@ final class TierpriceContext implements Context
         $productVariant->addTierPrice($tierPrice);
     }
 
+    //<editor-fold desc="Helper Function">
     private function createTierPrice(int $quantity, $price): TierPrice
     {
         $tierPrice = new TierPrice($quantity);
-        $tierPrice->setPrice((int) (floatval($price)*100));
+        $tierPrice->setPrice((int)(floatval($price) * 100));
 
         return $tierPrice;
     }
+    //</editor-fold>
 }

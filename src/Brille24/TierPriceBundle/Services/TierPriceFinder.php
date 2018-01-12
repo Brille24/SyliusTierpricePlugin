@@ -12,9 +12,12 @@ declare(strict_types=1);
 
 namespace Brille24\TierPriceBundle\Services;
 
+use Brille24\TierPriceBundle\Entity\ProductVariant;
 use Brille24\TierPriceBundle\Entity\TierPriceInterface;
+use Brille24\TierPriceBundle\Repository\TierPriceRepository;
 use Brille24\TierPriceBundle\Traits\TierPriceableInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
+use Webmozart\Assert\Assert;
 
 /**
  * Class TierPriceFinder
@@ -25,6 +28,14 @@ use Sylius\Component\Core\Model\ChannelInterface;
  */
 class TierPriceFinder implements TierPriceFinderInterface
 {
+    /** @var TierPriceRepository */
+    private $tierPriceRepository;
+
+    public function __construct(TierPriceRepository $tierPriceRepository)
+    {
+        $this->tierPriceRepository = $tierPriceRepository;
+    }
+
     /**
      * Finds the cheapest tier price with the matching channel
      *
@@ -40,8 +51,13 @@ class TierPriceFinder implements TierPriceFinderInterface
         int $quantity
     ): ?TierPriceInterface {
 
+        Assert::isInstanceOf($tierPriceableEntity, ProductVariant::class);
+
+        $possibleTierPrices = $this->tierPriceRepository->getSortedTierPrice($tierPriceableEntity, $channel);
+
+        $cheapestTierPrice = null;
         /** @var TierPriceInterface[] $tierPricesForChannel */
-        foreach ($tierPriceableEntity->getTierPricesForChannel($channel) as $tierPrice) {
+        foreach ($possibleTierPrices as $tierPrice) {
             if ($tierPrice->getQty() <= $quantity) {
                 $cheapestTierPrice = $tierPrice;
                 break;

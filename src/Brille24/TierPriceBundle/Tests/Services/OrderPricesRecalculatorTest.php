@@ -30,7 +30,7 @@ class OrderPricesRecalculatorTest extends \PHPUnit_Framework_TestCase
     public function setUp(): void
     {
         $productVariantCalculator = $this->createMock(ProductVariantPriceCalculatorInterface::class);
-        $calculated              = &$this->calculated;
+        $calculated               = &$this->calculated;
 
         $productVariantCalculator->method('calculate')->willReturnCallback(
             function (ProductVariantInterface $productVariant, array $options) use (&$calculated) {

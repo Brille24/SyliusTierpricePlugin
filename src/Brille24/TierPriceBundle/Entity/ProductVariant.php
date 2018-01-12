@@ -28,4 +28,9 @@ class ProductVariant extends BaseProductVariant
 {
     use TierPriceableTrait;
 
+    public function __construct()
+    {
+        parent::__construct();
+        $this->initTierPriceableTrait();
+    }
 }

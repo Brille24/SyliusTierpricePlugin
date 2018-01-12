@@ -31,6 +31,10 @@ use Sylius\Component\Core\Model\{
  */
 trait TierPriceableTrait
 {
+    public function initTierPriceableTrait()
+    {
+        $this->tierPrices = new ArrayCollection();
+    }
 
     /** @var ArrayCollection */
     protected $tierPrices;
@@ -42,8 +46,6 @@ trait TierPriceableTrait
      */
     public function getTierPrices(): array
     {
-        $this->tierPrices = $this->tierPrices ?: new ArrayCollection();
-
         return $this->tierPrices->toArray();
     }
 

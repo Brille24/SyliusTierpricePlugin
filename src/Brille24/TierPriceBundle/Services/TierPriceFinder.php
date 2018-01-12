@@ -17,6 +17,7 @@ use Brille24\TierPriceBundle\Entity\{
 };
 use Brille24\TierPriceBundle\Repository\TierPriceRepository;
 use Brille24\TierPriceBundle\Traits\TierPriceableInterface;
+use Doctrine\ORM\EntityRepository;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Webmozart\Assert\Assert;
 

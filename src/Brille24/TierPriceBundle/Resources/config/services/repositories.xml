@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<container xmlns="http://symfony.com/schema/dic/services">
-    <services>
-        <service id="brille24_tier_price.repository.tier_price_repository"
-                 class="Brille24\TierPriceBundle\Repository\TierPriceRepository" />
-    </services>
-</container>

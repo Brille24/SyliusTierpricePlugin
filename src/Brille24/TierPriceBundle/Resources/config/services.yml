@@ -1,6 +1,3 @@
-imports:
-  - { resource: "services/repositories.xml"}
-
 services:
     # Form types
     brille24_tier_price.form.tier_price_type:
@@ -51,7 +48,7 @@ services:
 
     brille24_tier_price.services.tier_price_finder:
         class: Brille24\TierPriceBundle\Services\TierPriceFinder
-        arguments: ['@brille24_tier_price.repository.tier_price_repository']
+        arguments: ['@brille24.repository.tierprice']
 
 #    sylius.order_processing.order_prices_recalculator:
 #        class: Brille24\TierPriceBundle\Services\OrderPricesRecalculator

@@ -39,7 +39,7 @@ imports:
 
 That way all the Sylius resource overriding happens in the `app/config/resources.yml`
 
-* If you want to use the API for creating and updating tierpices, you also have to add the `routing.yml` to the `app/config/routing.yml`
+* If you want to use the API for creating and updating tier prices, you also have to add the `routing.yml` to the `app/config/routing.yml`
 ```yml
 ...
 brille24_tierprice_bundle:
@@ -54,10 +54,11 @@ bin/console translation:update
 ```
 
 ### Integration
-The Bundle overrides the `ProductVariant` class that is provided by Sylius. This will be overridden in the `resource.yml` of the Bundle. If you want to override that class in your application too, you have to merge the two configurations. 
+* The Bundle overrides the `ProductVariant` class that is provided by Sylius. This will be overridden in the `resource.yml` of the Bundle. If you want to override that class in your application too, you have to merge the two configurations.
+* Furthermore there is an entry in the `services.yml` inside the config folder that you have to uncomment if you want to have the default implementation of the tier price finder.
 
 ## Usage
-First of all you have to set up a product with as many variants as you want. Then in each of these variants you can set the tierpricing based on the channels.
+First of all you have to set up a product with as many variants as you want. Then in each of these variants you can set the tier pricing based on the channels.
 The table automatically sorts itself to provide a better overview for all different tiers, you configured.
 
 <img src="https://gitlab.dev-b24.de/mamazu/sylius-tierprice/raw/master/images/Backend.png" />

@@ -1,4 +1,4 @@
-<img src="https://gitlab.dev-b24.de/mamazu/sylius-tierprice/raw/master/images/logo.png" />
+<img src="images/logo.png" />
 # The Brille24 TierPrices Bundle
 The pricing in Sylius allows for many different customization like channels and different prices for different product variants. However, one thing that Sylius is missing is the ability to set the price bases on the amount of items the customer wants to buy. This tierpricing methodology can be implemented when this plugin is installed.
 
@@ -61,8 +61,8 @@ bin/console translation:update
 First of all you have to set up a product with as many variants as you want. Then in each of these variants you can set the tier pricing based on the channels.
 The table automatically sorts itself to provide a better overview for all different tiers, you configured.
 
-<img src="https://gitlab.dev-b24.de/mamazu/sylius-tierprice/raw/master/images/Backend.png" />
+<img src="images/Backend.png" />
 
 In the frontend the user will see a nice looking table right next to the "add to cart" button that shows the discount for the different tiers like so:
 
-<img src="https://gitlab.dev-b24.de/mamazu/sylius-tierprice/raw/master/images/Front-End.png" />
+<img src="images/Front-End.png" />

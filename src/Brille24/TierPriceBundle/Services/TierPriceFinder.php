@@ -53,7 +53,7 @@ class TierPriceFinder implements TierPriceFinderInterface
 
         Assert::isInstanceOf($tierPriceableEntity, ProductVariant::class);
 
-        $possibleTierPrices = $this->tierPriceRepository->getSortedTierPrice($tierPriceableEntity, $channel);
+        $possibleTierPrices = $this->tierPriceRepository->getSortedTierPrices($tierPriceableEntity, $channel);
 
         $cheapestTierPrice = null;
         /** @var TierPriceInterface[] $tierPricesForChannel */

@@ -30,7 +30,7 @@ class TierPriceRepository extends EntityRepository implements ObjectRepository
      *
      * @return TierPriceInterface[]
      */
-    public function getSortedTierPrice(ProductVariant $productVariant, ChannelInterface $channel): array
+    public function getSortedTierPrices(ProductVariant $productVariant, ChannelInterface $channel): array
     {
         return $this->findBy(['productVariant' => $productVariant, 'channel' => $channel], ['qty' => 'ASC']);
     }

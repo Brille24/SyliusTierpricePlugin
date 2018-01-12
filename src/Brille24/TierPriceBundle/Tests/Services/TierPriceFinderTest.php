@@ -55,7 +55,7 @@ class TierPriceFinderTest extends \PHPUnit_Framework_TestCase
         $tierPrice->method('getQty')->willReturn(20);
 
         $productVariant = $this->createMock(ProductVariant::class);
-        $this->tierPriceRepo->method('getSortedTierPrice')->willReturn([$tierPrice]);
+        $this->tierPriceRepo->method('getSortedTierPrices')->willReturn([$tierPrice]);
 
         ### EXECUTE
         $tierPriceFound = $this->tierPriceFinder->find($productVariant, $this->testChannel, 10);
@@ -72,7 +72,7 @@ class TierPriceFinderTest extends \PHPUnit_Framework_TestCase
         $tierPrice->method('getQty')->willReturn(5);
 
         $productVariant = $this->createMock(ProductVariant::class);
-        $this->tierPriceRepo->method('getSortedTierPrice')->willReturn([$tierPrice]);
+        $this->tierPriceRepo->method('getSortedTierPrices')->willReturn([$tierPrice]);
 
         ### EXECUTE
         $tierPriceFound = $this->tierPriceFinder->find($productVariant, $this->testChannel, 10);
@@ -93,7 +93,7 @@ class TierPriceFinderTest extends \PHPUnit_Framework_TestCase
         $tierPrice2->method('getQty')->willReturn(10);
 
         $productVariant = $this->createMock(ProductVariant::class);
-        $this->tierPriceRepo->method('getSortedTierPrice')->willReturn([$tierPrice1, $tierPrice2]);
+        $this->tierPriceRepo->method('getSortedTierPrices')->willReturn([$tierPrice1, $tierPrice2]);
 
         ### EXECUTE
         $tierPriceFound = $this->tierPriceFinder->find($productVariant, $this->testChannel, 10);

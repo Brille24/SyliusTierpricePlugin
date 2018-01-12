@@ -11,8 +11,9 @@ namespace Brille24\Behat\Context;
 
 
 use Behat\Behat\Context\Context;
-use Brille24\TierPriceBundle\Entity\ProductVariant;
-use Brille24\TierPriceBundle\Entity\TierPrice;
+use Brille24\TierPriceBundle\Entity\{
+    ProductVariant, TierPrice, TierPriceInterface
+};
 use Sylius\Component\Core\Model\ProductInterface;
 
 final class TierPriceContext implements Context
@@ -24,14 +25,14 @@ final class TierPriceContext implements Context
     public function productHasATierPrice(ProductInterface $product, int $quantity, int $price): void
     {
         /** @var ProductVariant $productVariant */
-        $productVariant = array_values($product->getVariants())[0];
+        $productVariant = $product->getVariants()->toArray()[0];
 
         $tierPrice = $this->createTierprice($quantity, $price);
         $productVariant->addTierPrice($tierPrice);
     }
 
     //<editor-fold desc="Helper Function">
-    private function createTierPrice(int $quantity, $price): TierPrice
+    private function createTierPrice(int $quantity, $price): TierPriceInterface
     {
         $tierPrice = new TierPrice($quantity);
         $tierPrice->setPrice((int)(floatval($price) * 100));

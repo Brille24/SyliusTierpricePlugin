@@ -17,7 +17,7 @@ Feature: Unit price changes based on tier price
   @ui
   Scenario: User buys a product that has a tierprice but that does not apply
     Given the store has a product "Cool Product" priced at "$11.32"
-    And "Cool Product" has a tier price at 5 with "$10.00"
+    And "this product" has a tier price at 5 with "$10.00"
     When I add this product to the cart
     Then I should be on my cart summary page
     And I should see "Cool Product" with unit price "$11.32" in my cart

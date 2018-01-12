@@ -12,13 +12,13 @@ declare(strict_types=1);
 
 namespace Brille24\TierPriceBundle\Traits;
 
-use Brille24\TierPriceBundle\Entity\ProductVariant;
-use Brille24\TierPriceBundle\Entity\TierPrice;
-use Brille24\TierPriceBundle\Entity\TierPriceInterface;
+use Brille24\TierPriceBundle\Entity\{
+    ProductVariant, TierPrice, TierPriceInterface
+};
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
-use Sylius\Component\Core\Model\ChannelInterface;
-use Sylius\Component\Core\Model\ProductVariantInterface;
+use Sylius\Component\Core\Model\{
+    ChannelInterface, ProductVariantInterface
+};
 
 /**
  * Trait TierPriceableTrait
@@ -32,7 +32,7 @@ use Sylius\Component\Core\Model\ProductVariantInterface;
 trait TierPriceableTrait
 {
 
-    /** @var Collection */
+    /** @var ArrayCollection */
     protected $tierPrices;
 
     /**

@@ -10,10 +10,12 @@ declare(strict_types=1);
 
 namespace Brille24\TierPriceBundle\Tests\Services;
 
-use Brille24\TierPriceBundle\Entity\ProductVariant;
-use Brille24\TierPriceBundle\Entity\TierPrice;
-use Brille24\TierPriceBundle\Services\ProductVariantPriceCalculator;
-use Brille24\TierPriceBundle\Services\TierPriceFinderInterface;
+use Brille24\TierPriceBundle\Entity\{
+    ProductVariant, TierPrice
+};
+use Brille24\TierPriceBundle\Services\{
+    ProductVariantPriceCalculator, TierPriceFinderInterface
+};
 use Sylius\Component\Core\Calculator\ProductVariantPriceCalculatorInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductVariant as SyliusProductVariant;

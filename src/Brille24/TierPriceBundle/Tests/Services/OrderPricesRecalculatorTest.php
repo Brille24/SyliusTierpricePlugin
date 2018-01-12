@@ -13,11 +13,9 @@ namespace Brille24\TierPriceBundle\Tests\Services;
 use Brille24\TierPriceBundle\Services\OrderPricesRecalculator;
 use Doctrine\Common\Collections\ArrayCollection;
 use Sylius\Component\Core\Calculator\ProductVariantPriceCalculatorInterface;
-use Sylius\Component\Core\Model\ChannelInterface;
-use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Core\Model\OrderItem;
-use Sylius\Component\Core\Model\OrderItemInterface;
-use Sylius\Component\Core\Model\ProductVariantInterface;
+use Sylius\Component\Core\Model\{
+    ChannelInterface, OrderInterface, OrderItem, OrderItemInterface, ProductVariantInterface
+};
 use Sylius\Component\Order\Processor\OrderProcessorInterface;
 use Webmozart\Assert\Assert;
 

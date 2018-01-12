@@ -12,8 +12,9 @@ declare(strict_types=1);
 
 namespace Brille24\TierPriceBundle\Services;
 
-use Brille24\TierPriceBundle\Entity\ProductVariant;
-use Brille24\TierPriceBundle\Entity\TierPriceInterface;
+use Brille24\TierPriceBundle\Entity\{
+    ProductVariant, TierPriceInterface
+};
 use Brille24\TierPriceBundle\Repository\TierPriceRepository;
 use Brille24\TierPriceBundle\Traits\TierPriceableInterface;
 use Sylius\Component\Core\Model\ChannelInterface;

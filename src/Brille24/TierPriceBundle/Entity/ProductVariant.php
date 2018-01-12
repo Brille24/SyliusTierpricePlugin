@@ -10,8 +10,9 @@
 
 namespace Brille24\TierPriceBundle\Entity;
 
-use Brille24\TierPriceBundle\Traits\TierPriceableInterface;
-use Brille24\TierPriceBundle\Traits\TierPriceableTrait;
+use Brille24\TierPriceBundle\Traits\{
+    TierPriceableInterface, TierPriceableTrait
+};
 use Sylius\Component\Core\Model\ProductVariant as BaseProductVariant;
 
 /**

@@ -12,8 +12,9 @@ declare(strict_types=1);
 
 namespace Brille24\TierPriceBundle\Tests\Entity;
 
-use Brille24\TierPriceBundle\Entity\ProductVariant;
-use Brille24\TierPriceBundle\Entity\TierPrice;
+use Brille24\TierPriceBundle\Entity\{
+    ProductVariant, TierPrice, TierPriceInterface
+};
 use Brille24\TierPriceBundle\Traits\TierPriceableInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 
@@ -42,7 +43,7 @@ class ProductVariantTest extends \PHPUnit_Framework_TestCase
         $this->otherChannel->method('getId')->willReturn(2);
     }
 
-    private function createTierPrice(ChannelInterface $channel, int $quantity): TierPrice
+    private function createTierPrice(ChannelInterface $channel, int $quantity): TierPriceInterface
     {
         $result = new TierPrice($quantity);
         $result->setChannel($channel);

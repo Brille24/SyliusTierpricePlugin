@@ -74,23 +74,23 @@ class ProductVariantTest extends \PHPUnit_Framework_TestCase
     {
         return
             [
-                'no tierprices'          => [
+                'no tier prices'          => [
                     [],
                     [],
                 ],
-                'one tierprice matches'  => [
+                'one tier price matches'  => [
                     // Input
                     [$this->createTierPrice($this->testChannel, 1)],
                     // Expected Output
                     [$this->createTierPrice($this->testChannel, 1)],
                 ],
-                'one tierprice no match' => [
+                'one tier price no match' => [
                     // Input
                     [$this->createTierPrice($this->otherChannel, 10)],
                     // Expected Output
                     [],
                 ],
-                'multiple tierprices'    => [
+                'multiple tier prices'    => [
                     // Input
                     [
                         $this->createTierPrice($this->otherChannel, 1),

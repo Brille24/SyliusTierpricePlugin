@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 namespace Brille24\TierPriceBundle\Tests\Services;
 
+use Brille24\TierPriceBundle\Services\OrderPricesRecalculator;
 use Doctrine\Common\Collections\ArrayCollection;
 use Sylius\Component\Core\Calculator\ProductVariantPriceCalculatorInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
@@ -18,7 +19,6 @@ use Sylius\Component\Core\Model\OrderItem;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Order\Processor\OrderProcessorInterface;
-use Brille24\TierPriceBundle\Services\OrderPricesRecalculator;
 use Webmozart\Assert\Assert;
 
 class OrderPricesRecalculatorTest extends \PHPUnit_Framework_TestCase
@@ -31,10 +31,10 @@ class OrderPricesRecalculatorTest extends \PHPUnit_Framework_TestCase
 
     public function setUp(): void
     {
-        $productVariantCalulator = $this->createMock(ProductVariantPriceCalculatorInterface::class);
+        $productVariantCalculator = $this->createMock(ProductVariantPriceCalculatorInterface::class);
         $calculated              = &$this->calculated;
 
-        $productVariantCalulator->method('calculate')->willReturnCallback(
+        $productVariantCalculator->method('calculate')->willReturnCallback(
             function (ProductVariantInterface $productVariant, array $options) use (&$calculated) {
                 Assert::keyExists($options, 'quantity');
                 Assert::keyExists($options, 'channel');
@@ -42,7 +42,7 @@ class OrderPricesRecalculatorTest extends \PHPUnit_Framework_TestCase
                 return 0;
             });
 
-        $this->orderPriceRecalculator = new OrderPricesRecalculator($productVariantCalulator);
+        $this->orderPriceRecalculator = new OrderPricesRecalculator($productVariantCalculator);
     }
 
     /** @dataProvider dataProcessOrder */
@@ -55,7 +55,7 @@ class OrderPricesRecalculatorTest extends \PHPUnit_Framework_TestCase
         $order->method('getChannel')->willReturn($channel);
         $order->method('getItems')->willReturn(new ArrayCollection($orderItems));
 
-        ### EXCUTE
+        ### EXECUTE
         $this->orderPriceRecalculator->process($order);
 
         ### CHECK

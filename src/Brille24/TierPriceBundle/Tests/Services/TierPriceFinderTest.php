@@ -14,7 +14,6 @@ namespace Brille24\TierPriceBundle\Tests\Services;
 
 use Brille24\TierPriceBundle\Entity\ProductVariant;
 use Brille24\TierPriceBundle\Entity\TierPrice;
-use Brille24\TierPriceBundle\Entity\TierPriceInterface;
 use Brille24\TierPriceBundle\Services\TierPriceFinder;
 use Sylius\Component\Core\Model\ChannelInterface;
 

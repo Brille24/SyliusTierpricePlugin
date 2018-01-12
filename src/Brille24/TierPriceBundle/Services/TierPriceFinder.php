@@ -12,7 +12,6 @@ declare(strict_types=1);
 
 namespace Brille24\TierPriceBundle\Services;
 
-use Brille24\TierPriceBundle\Entity\TierPrice;
 use Brille24\TierPriceBundle\Entity\TierPriceInterface;
 use Brille24\TierPriceBundle\Traits\TierPriceableInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
@@ -41,22 +40,13 @@ class TierPriceFinder implements TierPriceFinderInterface
         int $quantity
     ): ?TierPriceInterface {
 
-        /** @var TierPrice[] $tierPricesForChannel */
-        $tierPricesForChannel = $tierPriceableEntity->getTierPricesForChannel($channel);
-        dump($tierPricesForChannel);
-
-        // Filters out all tier prices with amounts lower than purchased
-        $tierPricesWithQuantityMatching = array_filter($tierPricesForChannel,
-            function (TierPriceInterface $tierPrice) use ($quantity) {
-                return $tierPrice->getQty() <= $quantity;
-            });
-
-        // Gets the cheapest one
-        $cheapestTierPrice = array_reduce($tierPricesWithQuantityMatching,
-            function (?TierPriceInterface $best, ?TierPriceInterface $tierPrice) {
-                $previous = $best ?: $tierPrice;
-                return $tierPrice->getPrice() < $previous->getPrice() ? $tierPrice : $previous;
-            }, null);
+        /** @var TierPriceInterface[] $tierPricesForChannel */
+        foreach ($tierPriceableEntity->getTierPricesForChannel($channel) as $tierPrice) {
+            if ($tierPrice->getQty() <= $quantity) {
+                $cheapestTierPrice = $tierPrice;
+                break;
+            }
+        }
 
         return $cheapestTierPrice;
     }

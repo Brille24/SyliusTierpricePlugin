@@ -10,12 +10,12 @@ declare(strict_types=1);
 
 namespace Brille24\TierPriceBundle\Tests\Services;
 
-use Brille24\TierPriceBundle\Services\TierPriceFinderInterface;
-use Sylius\Component\Core\Calculator\ProductVariantPriceCalculatorInterface;
-use Sylius\Component\Core\Model\ChannelInterface;
 use Brille24\TierPriceBundle\Entity\ProductVariant;
 use Brille24\TierPriceBundle\Entity\TierPrice;
 use Brille24\TierPriceBundle\Services\ProductVariantPriceCalculator;
+use Brille24\TierPriceBundle\Services\TierPriceFinderInterface;
+use Sylius\Component\Core\Calculator\ProductVariantPriceCalculatorInterface;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductVariant as SyliusProductVariant;
 
 class ProductVariantPriceCalculatorTest extends \PHPUnit_Framework_TestCase
@@ -62,12 +62,12 @@ class ProductVariantPriceCalculatorTest extends \PHPUnit_Framework_TestCase
     {
         ### PREPARE
         $productVariant = $this->createMock(ProductVariant::class);
-        $testChannel = $this->createMock(ChannelInterface::class);
+        $testChannel    = $this->createMock(ChannelInterface::class);
 
         $this->tierPriceFinder->method('find')->willReturn(null);
 
         ### EXECUTE
-        $result= $this->priceCalculator->calculate($productVariant, ['channel' => $testChannel, 'quantity' => 10]);
+        $result = $this->priceCalculator->calculate($productVariant, ['channel' => $testChannel, 'quantity' => 10]);
 
         ### CHECK
         $this->assertEquals(-1, $result);
@@ -77,12 +77,12 @@ class ProductVariantPriceCalculatorTest extends \PHPUnit_Framework_TestCase
     {
         ### PREPARE
         $productVariant = $this->createMock(ProductVariant::class);
-        $testChannel = $this->createMock(ChannelInterface::class);
+        $testChannel    = $this->createMock(ChannelInterface::class);
 
         $this->tierPriceFinder->method('find')->willReturn(new TierPrice(2, 2));
 
         ### EXECUTE
-        $result= $this->priceCalculator->calculate($productVariant, ['channel' => $testChannel, 'quantity' => 10]);
+        $result = $this->priceCalculator->calculate($productVariant, ['channel' => $testChannel, 'quantity' => 10]);
 
         ### CHECK
         $this->assertEquals(2, $result);

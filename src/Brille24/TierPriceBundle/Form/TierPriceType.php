@@ -13,7 +13,6 @@ namespace Brille24\TierPriceBundle\Form;
 
 
 use Brille24\TierPriceBundle\Entity\TierPrice;
-use Brille24\TierPriceBundle\Form\Validator\DescendingPrices;
 use Sylius\Bundle\ChannelBundle\Doctrine\ORM\ChannelRepository;
 use Sylius\Bundle\MoneyBundle\Form\Type\MoneyType;
 use Sylius\Component\Core\Model\Channel;
@@ -56,10 +55,10 @@ class TierPriceType extends AbstractType
             'required'    => true,
             'constraints' => [
                 new Range([
-                    'min'        => 0,
-                    'groups'     => 'sylius',
-                    'minMessage' => 'Quantity has to be positive',
-                ]),
+                              'min'        => 0,
+                              'groups'     => 'sylius',
+                              'minMessage' => 'Quantity has to be positive',
+                          ]),
                 new NotBlank(['groups' => 'sylius']),
             ],
         ]);
@@ -85,9 +84,9 @@ class TierPriceType extends AbstractType
     {
         // Setting USD as fallback
         $resolver->setDefaults([
-            'data_class' => TierPrice::class,
-            'currency'   => 'USD',
-        ]);
+                                   'data_class' => TierPrice::class,
+                                   'currency'   => 'USD',
+                               ]);
     }
 
     public function getBlockPrefix(): string

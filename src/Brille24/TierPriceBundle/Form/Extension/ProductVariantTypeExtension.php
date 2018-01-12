@@ -10,11 +10,11 @@ declare(strict_types=1);
 
 namespace Brille24\TierPriceBundle\Form\Extension;
 
+use Brille24\TierPriceBundle\Form\TierPriceType;
 use Sylius\Bundle\ProductBundle\Form\Type\ProductVariantType;
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Brille24\TierPriceBundle\Form\TierPriceType;
 
 /**
  * Class ProductVariantTypeExtension

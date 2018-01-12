@@ -12,12 +12,9 @@ declare(strict_types=1);
 
 namespace Brille24\TierPriceBundle\Services;
 
-use Brille24\TierPriceBundle\Entity\TierPriceInterface;
-use Sylius\Component\Core\Calculator\ProductVariantPriceCalculatorInterface;
-use Sylius\Component\Core\Model\ChannelInterface;
-use Sylius\Component\Core\Model\ProductVariantInterface;
-use Brille24\TierPriceBundle\Entity\TierPrice;
 use Brille24\TierPriceBundle\Traits\TierPriceableInterface;
+use Sylius\Component\Core\Calculator\ProductVariantPriceCalculatorInterface;
+use Sylius\Component\Core\Model\ProductVariantInterface;
 use Webmozart\Assert\Assert;
 
 /**
@@ -35,7 +32,7 @@ final class ProductVariantPriceCalculator implements ProductVariantPriceCalculat
      */
     private $basePriceCalculator;
 
-    /** @var TierPriceFinderInterface  */
+    /** @var TierPriceFinderInterface */
     private $tierPriceFinder;
 
     public function __construct(

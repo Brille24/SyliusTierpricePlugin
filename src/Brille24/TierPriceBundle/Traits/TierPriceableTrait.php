@@ -13,11 +13,12 @@ declare(strict_types=1);
 namespace Brille24\TierPriceBundle\Traits;
 
 use Brille24\TierPriceBundle\Entity\ProductVariant;
+use Brille24\TierPriceBundle\Entity\TierPrice;
+use Brille24\TierPriceBundle\Entity\TierPriceInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
-use Brille24\TierPriceBundle\Entity\TierPrice;
 
 /**
  * Trait TierPriceableTrait
@@ -34,6 +35,11 @@ trait TierPriceableTrait
     /** @var Collection */
     protected $tierPrices;
 
+    /**
+     * Returns all tier prices for this product variant.
+     *
+     * @return TierPriceInterface[]
+     */
     public function getTierPrices(): array
     {
         $this->tierPrices = $this->tierPrices ?: new ArrayCollection();
@@ -41,24 +47,46 @@ trait TierPriceableTrait
         return $this->tierPrices->toArray();
     }
 
+    /**
+     * Returns the tier prices only for one channel
+     *
+     * @param ChannelInterface $channel
+     *
+     * @return TierPriceInterface[]
+     */
     public function getTierPricesForChannel(ChannelInterface $channel): array
     {
-        return array_filter($this->getTierPrices(), function (TierPrice $tierPrice) use ($channel){
+        return array_filter($this->getTierPrices(), function (TierPrice $tierPrice) use ($channel) {
             return $tierPrice->getChannel()->getId() === $channel->getId();
         });
     }
 
+    /**
+     * Removes a tier price from the array collection
+     *
+     * @param TierPrice $tierPrice
+     */
     public function removeTierPrice(TierPrice $tierPrice): void
     {
         $this->tierPrices->removeElement($tierPrice);
     }
 
+    /**
+     * Adds an element to the list
+     *
+     * @param TierPrice $tierPrice
+     */
     public function addTierPrice(TierPrice $tierPrice): void
     {
         $tierPrice->setProductVariant($this);
         $this->tierPrices->add($tierPrice);
     }
 
+    /**
+     * Sets the tier prices form the array collection
+     *
+     * @param array $tierPrices
+     */
     public function setTierPrices(array $tierPrices): void
     {
         if ($this instanceof ProductVariantInterface) {

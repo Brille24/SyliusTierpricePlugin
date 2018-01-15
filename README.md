@@ -19,30 +19,17 @@ public function registerBundles()
 }
 ```
 
-* Add the `config.yml` to the `app/config/config.yml`
+* Add the `config.yml` and `resources.yml` to your local `app/config/config.yml`
 ```yml
 imports:
     ...
     - { resource: '@Brille24TierPriceBundle/Resources/config/config.yml'}
-```
-
-Add the `resources.yml` to the `app/config/resources.yml`
-```yml
-imports:
-    ...
     - { resource: '@Brille24TierPriceBundle/Resources/config/resources.yml'}
-```
-
-If the `resources.yml` did not exist before add its reference to the `app/config/config.yml`
-```yml
-imports:
-    ...
-    - { resource: 'resources.yml'}
 ```
 
 That way all the Sylius resource overriding happens in the `app/config/resources.yml`
 
-* If you want to use the API for creating and updating tier prices, you also have to add the `routing.yml` to the `app/config/routing.yml`
+* For API functionality add the bundle's `routing.yml` to the local `app/config/routing.yml`
 ```yml
 ...
 brille24_tierprice_bundle:
@@ -58,8 +45,14 @@ bin/console translation:update
 
 ### Integration
 * The Bundle overrides the `ProductVariant` class that is provided by Sylius. This will be overridden in the `resource.yml` of the Bundle. If you want to override that class in your application too, you have to merge the two configurations.
-* Furthermore there is an entry in the `services.yml` inside the config folder that you have to uncomment if you want to have the default implementation of the tier price finder.
-
+* Furthermore there is an entry in the `services.yml` inside the config folder that you have to uncomment if you want to have the default implementation of the tier price finder:
+```yaml
+    sylius.order_processing.order_prices_recalculator:
+        class: Brille24\TierPriceBundle\Services\OrderPricesRecalculator
+        arguments: ['@brille24_tier_price.services.product_variant_price_calculator']
+        tags:
+            - {name: sylius.order_processor, priority: 40}
+```
 ## Usage
 First of all you have to set up a product with as many variants as you want. Then in each of these variants you can set the tier pricing based on the channels.
 The table automatically sorts itself to provide a better overview for all different tiers, you configured.

@@ -60,10 +60,10 @@ class TierPriceFinder implements TierPriceFinderInterface
         $cheapestTierPrice = null;
         /** @var TierPriceInterface[] $tierPricesForChannel */
         foreach ($possibleTierPrices as $tierPrice) {
-            if ($tierPrice->getQty() <= $quantity) {
-                $cheapestTierPrice = $tierPrice;
+            if ($tierPrice->getQty() > $quantity) {
                 break;
             }
+            $cheapestTierPrice = $tierPrice;
         }
 
         return $cheapestTierPrice;

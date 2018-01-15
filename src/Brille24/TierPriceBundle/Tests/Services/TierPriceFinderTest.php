@@ -85,20 +85,20 @@ class TierPriceFinderTest extends \PHPUnit_Framework_TestCase
     {
         ### PREPARE
         $tierPrice1 = $this->createMock(TierPrice::class);
-        $tierPrice1->method('getPrice')->willReturn(10);
-        $tierPrice1->method('getQty')->willReturn(50);
+        $tierPrice1->method('getPrice')->willReturn(500);
+        $tierPrice1->method('getQty')->willReturn(10);
 
         $tierPrice2 = $this->createMock(TierPrice::class);
-        $tierPrice2->method('getPrice')->willReturn(5);
-        $tierPrice2->method('getQty')->willReturn(10);
+        $tierPrice2->method('getPrice')->willReturn(10);
+        $tierPrice2->method('getQty')->willReturn(50);
 
         $productVariant = $this->createMock(ProductVariant::class);
         $this->tierPriceRepo->method('getSortedTierPrices')->willReturn([$tierPrice1, $tierPrice2]);
 
         ### EXECUTE
-        $tierPriceFound = $this->tierPriceFinder->find($productVariant, $this->testChannel, 10);
+        $tierPriceFound = $this->tierPriceFinder->find($productVariant, $this->testChannel, 11);
 
         ### CHECK
-        $this->assertEquals($tierPriceFound, $tierPrice2);
+        $this->assertEquals($tierPrice2, $tierPriceFound);
     }
 }

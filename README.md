@@ -1,7 +1,3 @@
-<p align="center">
-    <img src="images/logo.png" />
-</p>
-
 # The Brille24 TierPrices Bundle
 The pricing in Sylius allows for many different customization like channels and different prices for different product variants. However, one thing that Sylius is missing is the ability to set the price bases on the amount of items the customer wants to buy. This tier pricing methodology can be implemented when this plugin is installed.
 

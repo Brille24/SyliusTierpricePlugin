@@ -27,6 +27,13 @@ services:
         tags:
             - { name: kernel.event_listener, event: sonata.block.event.sylius.admin.layout.javascripts, method: onBlockEvent }
 
+    block_event_listener.shop.layout.javascripts:
+        class: Sylius\Bundle\UiBundle\Block\BlockEventListener
+        arguments:
+            - '@@Brille24TierPriceBundle/Resources/views/Shop/_javascripts.html.twig'
+        tags:
+            - { name: kernel.event_listener, event: sonata.block.event.sylius.shop.layout.javascripts, method: onBlockEvent }
+
     brille24_tier_price.sylius.admin.product.update.tab_details:
         class: Sylius\Bundle\UiBundle\Block\BlockEventListener
         arguments:

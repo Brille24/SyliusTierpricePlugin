@@ -2,8 +2,6 @@
 
 {% set product = block.settings.product %}
 
-<span style="font-weight: bold;">{{ 'sylius.ui.tierprice'|trans }}</span>
-
 <div id="tier_prices_tables">
     {% for product_variant in product.variants %}
         {% set tier_prices = product_variant.getTierPricesForChannel(sylius.channel) %}
@@ -11,22 +9,28 @@
         {% set tier_prices_table_id = product_variant.code~'_table' %}
 
         {% if tier_prices|length > 0 %}
-            <table class="ui stackable celled table" id="{{ tier_prices_table_id }}">
-                <thead>
-                <tr>
-                    <th>{{ 'sylius.ui.quantity'|trans }}</th>
-                    <th>{{ 'sylius.ui.unit_price'|trans }}</th>
-                </tr>
-                </thead>
-                <tbody>
-                {% for tierPrice in tier_prices %}
+            <div id="{{ tier_prices_table_id }}">
+                <span style="font-weight: bold;">{{ 'sylius.ui.tierprice'|trans }}</span>
+
+                <table class="ui stackable celled table">
+                    <thead>
                     <tr>
-                        <td>{{ tierPrice.qty|number_format }}</td>
-                        <td>{{ money.convertAndFormat(tierPrice.price, sylius.channel.baseCurrency) }}</td>
+                        <th>{{ 'sylius.ui.quantity'|trans }}</th>
+                        <th>{{ 'sylius.ui.unit_price'|trans }}</th>
                     </tr>
-                {% endfor %}
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                    {% for tierPrice in tier_prices %}
+                        <tr>
+                            <td>{{ tierPrice.qty|number_format }}</td>
+                            <td>{{ money.convertAndFormat(tierPrice.price, sylius.channel.baseCurrency) }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+
+                <span style="font-weight: bold;">{{ 'sylius.ui.variant_choice'|trans }}</span>
+            </div>
         {% endif %}
     {% endfor %}
 </div>

@@ -13,7 +13,11 @@ function hideOtherTierPriceTable(targetTableId) {
 }
 
 $(document).ready(function () {
-    var tableId = $('[name="sylius_add_to_cart[cartItem][variant]"]:checked').attr('value') + '_table';
+    var currentVariantCode = $('[name="sylius_add_to_cart[cartItem][variant]"]:checked').attr('value');
+    if (currentVariantCode === undefined) {
+        return;
+    }
+    var tableId = currentVariantCode + '_table';
     hideOtherTierPriceTable(tableId);
 });
 

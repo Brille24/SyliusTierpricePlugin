@@ -18,6 +18,6 @@
 
         <many-to-one target-entity="Sylius\Component\Core\Model\Channel" field="channel" />
 
-        <many-to-one target-entity="Brille24\TierPriceBundle\Entity\ProductVariant" field="productVariant" />
+        <many-to-one target-entity="Brille24\TierPriceBundle\Entity\ProductVariant" field="productVariant" inversed-by="tierPrices"/>
     </entity>
 </doctrine-mapping>

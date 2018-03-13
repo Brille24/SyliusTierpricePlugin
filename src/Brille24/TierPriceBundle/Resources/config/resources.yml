@@ -13,3 +13,4 @@ sylius_resource:
         model: Brille24\TierPriceBundle\Entity\TierPrice
         form: Brille24\TierPriceBundle\Form\TierPriceType
         repository: Brille24\TierPriceBundle\Repository\TierPriceRepository
+        factory: Brille24\TierPriceBundle\Factory\TierPriceFactory

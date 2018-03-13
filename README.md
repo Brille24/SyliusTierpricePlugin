@@ -58,3 +58,20 @@ The table automatically sorts itself to provide a better overview for all differ
 In the frontend the user will see a nice looking table right next to the "add to cart" button that shows the discount for the different tiers like so:
 
 <img src="images/Front-End.png" />
+
+### Creating data
+You can easily create the tier prices with fixtures like that.
+```yaml
+sylius_fixtures:
+    suites:
+        my_suite:
+            fixtures:
+                tier_prices:
+                    options:
+                        custom:
+                            - product_variant: "20125148-54ca-3f05-875f-5524f95aa85b"
+                              channel: US_WEB
+                              quantity: 10
+                              price: 5
+```
+For this the products need to be created first and the product variant must also exist.

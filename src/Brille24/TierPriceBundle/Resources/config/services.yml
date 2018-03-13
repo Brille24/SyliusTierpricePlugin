@@ -3,3 +3,5 @@ imports:
     - { resource: "services/sonata_events.yml" }
     - { resource: "services/event_listener.yml" }
     - { resource: "services/brille24.yml" }
+    - { resource: "services/fixtures.yml" }
+    - { resource: "services/factories.yml" }

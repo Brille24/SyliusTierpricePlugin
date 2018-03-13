@@ -10,7 +10,6 @@ imports:
 
     - { resource: "@Brille24TierPriceBundle/Resources/config/config.yml"}
     - { resource: "resources.yml" }
-    - { resource: "fixtures.yml" }
 
     - { resource: "../../../../vendor/sylius/sylius/app/config/security.yml" }
 

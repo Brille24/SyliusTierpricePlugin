@@ -41,7 +41,7 @@ bin/console translation:update
 
 ### Integration
 * The Bundle overrides the `ProductVariant` class that is provided by Sylius. This will be overridden in the `resource.yml` of the Bundle. If you want to override that class in your application too, you have to merge the two configurations.
-* Furthermore there is an entry in the `services.yml` inside the config folder that you have to uncomment if you want to have the default implementation of the tier price finder:
+* Furthermore there is an entry in the `services/brille24.yml` inside the config folder that you have to uncomment if you want to have the default implementation of the tier price finder:
 ```yaml
     sylius.order_processing.order_prices_recalculator:
         class: Brille24\TierPriceBundle\Services\OrderPricesRecalculator

@@ -29,12 +29,14 @@
     "prefer-stable": true,
     "autoload": {
         "psr-4": {
-            "Brille24\\TierPriceBundle\\": "src/Brille24/TierPriceBundle/",
-            "Brille24\\Behat\\": "tests/Behat"
+            "Brille24\\SyliusTierPricePlugin\\": "src/"
         }
     },
     "autoload-dev": {
-        "classmap": ["tests/Application/app/AppKernel.php"]
+        "classmap": ["tests/Application/app/AppKernel.php"],
+        "psr-4": {
+            "Brille24\\Behat\\": "tests/Behat"
+        }
     },
     "config": {
         "bin-dir": "bin"

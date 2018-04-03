@@ -1,0 +1,16 @@
+# Overriding product variant of sylius
+sylius_product:
+    resources:
+        product_variant:
+            classes:
+                model: Brille24\SyliusTierPricePlugin\Entity\ProductVariant
+
+# New resources
+sylius_resource:
+  resources:
+    brille24.tierprice:
+      classes:
+        model: Brille24\SyliusTierPricePlugin\Entity\TierPrice
+        form: Brille24\SyliusTierPricePlugin\Form\TierPriceType
+        repository: Brille24\SyliusTierPricePlugin\Repository\TierPriceRepository
+        factory: Brille24\SyliusTierPricePlugin\Factory\TierPriceFactory

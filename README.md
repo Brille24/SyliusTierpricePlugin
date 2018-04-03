@@ -10,7 +10,7 @@ public function registerBundles()
     return array_merge(parent::registerBundles(), [
         ...
 
-        new \Brille24\TierPriceBundle\Brille24TierPriceBundle(),
+        new \Brille24\SyliusTierPricePlugin\Brille24SyliusTierPriceBundle(),
     ]);
 }
 ```
@@ -19,8 +19,8 @@ public function registerBundles()
 ```yml
 imports:
     ...
-    - { resource: '@Brille24TierPriceBundle/Resources/config/config.yml'}
-    - { resource: '@Brille24TierPriceBundle/Resources/config/resources.yml'}
+    - { resource: '@Brille24SyliusTierPricePlugin/Resources/config/config.yml'}
+    - { resource: '@Brille24SyliusTierPricePlugin/Resources/config/resources.yml'}
 ```
 
 That way all the Sylius resource overriding happens in the `app/config/resources.yml`
@@ -29,7 +29,7 @@ That way all the Sylius resource overriding happens in the `app/config/resources
 ```yml
 ...
 brille24_tierprice_bundle:
-    resource: '@Brille24TierPriceBundle/Resources/config/routing.yml'
+    resource: '@Brille24SyliusTierPricePlugin/Resources/config/routing.yml'
 ```
 
 * Finally update the database, install the assets and update the translations:
@@ -44,7 +44,7 @@ bin/console translation:update
 * Furthermore there is an entry in the `services/brille24.yml` inside the config folder that you have to uncomment if you want to have the default implementation of the tier price finder:
 ```yaml
     sylius.order_processing.order_prices_recalculator:
-        class: Brille24\TierPriceBundle\Services\OrderPricesRecalculator
+        class: Brille24\SyliusTierPricePlugin\Services\OrderPricesRecalculator
         arguments: ['@brille24_tier_price.services.product_variant_price_calculator']
         tags:
             - {name: sylius.order_processor, priority: 40}

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd"
+>
+
+    <entity
+            name="Brille24\SyliusTierPricePlugin\Entity\TierPrice"
+            repository-class="Brille24\SyliusTierPricePlugin\Repository\TierPriceRepository"
+            table="brille24_tierprice"
+    >
+        <id name="id" type="integer" column="id">
+            <generator strategy="AUTO"/>
+        </id>
+
+        <field name="price" type="integer" />
+        <field name="qty" type="integer" />
+
+        <many-to-one target-entity="Sylius\Component\Core\Model\Channel" field="channel" />
+
+        <many-to-one target-entity="Brille24\SyliusTierPricePlugin\Entity\ProductVariant" field="productVariant" inversed-by="tierPrices"/>
+    </entity>
+</doctrine-mapping>

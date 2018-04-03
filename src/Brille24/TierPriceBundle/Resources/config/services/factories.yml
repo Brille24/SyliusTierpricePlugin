@@ -1,4 +1,0 @@
-services:
-  brille24_tierprice_tierprice_factory:
-    class: Brille24\TierPriceBundle\Factory\TierPriceFactory
-    arguments: ['@sylius.repository.product_variant', '@sylius.repository.channel']

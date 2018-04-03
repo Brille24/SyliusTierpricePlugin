@@ -1,6 +1,0 @@
-services:
-    app.listener.admin.product_variant.form.menu_builder:
-        class: Brille24\TierPriceBundle\Menu\AdminProductVariantFormMenuListener
-        arguments: ['@sylius.theme.translation.theme_aware_translator.inner']
-        tags:
-            - { name: kernel.event_listener, event: sylius.menu.admin.product_variant.form, method: addItems }

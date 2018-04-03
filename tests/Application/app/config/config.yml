@@ -8,7 +8,7 @@ imports:
     - { resource: "@SyliusShopBundle/Resources/config/app/config.yml" }
     - { resource: "@SyliusAdminApiBundle/Resources/config/app/config.yml" }
 
-    - { resource: "@Brille24TierPriceBundle/Resources/config/config.yml"}
+    - { resource: "@Brille24SyliusTierPricePlugin/Resources/config/config.yml"}
     - { resource: "resources.yml" }
 
     - { resource: "../../../../vendor/sylius/sylius/app/config/security.yml" }

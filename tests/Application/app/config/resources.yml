@@ -1,5 +1,2 @@
-sylius_product:
-    resources:
-        product_variant:
-            classes:
-                model: Brille24\TierPriceBundle\Entity\ProductVariant
+imports:
+  - { resource: "@Brille24SyliusTierPricePlugin/Resources/config/resources.yml"}

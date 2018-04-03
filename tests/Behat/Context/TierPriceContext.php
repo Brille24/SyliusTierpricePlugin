@@ -11,7 +11,7 @@ namespace Brille24\Behat\Context;
 
 
 use Behat\Behat\Context\Context;
-use Brille24\TierPriceBundle\Entity\{
+use Brille24\SyliusTierPricePlugin\Entity\{
     ProductVariant, TierPrice, TierPriceInterface
 };
 use Sylius\Component\Core\Model\ProductInterface;
@@ -27,7 +27,7 @@ final class TierPriceContext implements Context
         /** @var ProductVariant $productVariant */
         $productVariant = $product->getVariants()->toArray()[0];
 
-        $tierPrice = $this->createTierprice($quantity, $price);
+        $tierPrice = $this->createTierPrice($quantity, $price);
         $productVariant->addTierPrice($tierPrice);
     }
 

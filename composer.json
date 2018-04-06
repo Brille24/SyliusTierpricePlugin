@@ -1,5 +1,5 @@
 {
-    "name": "brille24/tierprice-plugin",
+    "name": "brille24/sylius-tierprice-plugin",
     "type": "sylius-plugin",
     "description": "A plugin that allows to add tierprices to Sylius",
     "license": "MIT",

@@ -7,7 +7,6 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-
 declare(strict_types=1);
 
 namespace Brille24\SyliusTierPricePlugin\Tests\Services;
@@ -20,7 +19,6 @@ use Sylius\Component\Core\Model\ChannelInterface;
 
 class TierPriceFinderTest extends \PHPUnit_Framework_TestCase
 {
-
     /** @var TierPriceFinder */
     private $tierPriceFinder;
 
@@ -40,8 +38,8 @@ class TierPriceFinderTest extends \PHPUnit_Framework_TestCase
     ) {
         parent::__construct($name, $data, $dataName);
 
-        $this->tierPriceRepo      = $this->createMock(TierPriceRepository::class);
-        $this->tierPriceFinder    = new TierPriceFinder($this->tierPriceRepo);
+        $this->tierPriceRepo = $this->createMock(TierPriceRepository::class);
+        $this->tierPriceFinder = new TierPriceFinder($this->tierPriceRepo);
         $this->testProductVariant = new ProductVariant();
 
         $this->testChannel = $this->createMock(ChannelInterface::class);
@@ -49,7 +47,7 @@ class TierPriceFinderTest extends \PHPUnit_Framework_TestCase
 
     public function testCalculateWithNotEnoughQuantity()
     {
-        ### PREPARE
+        //## PREPARE
         $tierPrice = $this->createMock(TierPrice::class);
         $tierPrice->method('getPrice')->willReturn(1);
         $tierPrice->method('getQty')->willReturn(20);
@@ -57,16 +55,16 @@ class TierPriceFinderTest extends \PHPUnit_Framework_TestCase
         $productVariant = $this->createMock(ProductVariant::class);
         $this->tierPriceRepo->method('getSortedTierPrices')->willReturn([$tierPrice]);
 
-        ### EXECUTE
+        //## EXECUTE
         $tierPriceFound = $this->tierPriceFinder->find($productVariant, $this->testChannel, 10);
 
-        ### CHECK
+        //## CHECK
         $this->assertEquals(null, $tierPriceFound);
     }
 
     public function testCalculateWithOneTierPrice()
     {
-        ### PREPARE
+        //## PREPARE
         $tierPrice = $this->createMock(TierPrice::class);
         $tierPrice->method('getPrice')->willReturn(1);
         $tierPrice->method('getQty')->willReturn(5);
@@ -74,16 +72,16 @@ class TierPriceFinderTest extends \PHPUnit_Framework_TestCase
         $productVariant = $this->createMock(ProductVariant::class);
         $this->tierPriceRepo->method('getSortedTierPrices')->willReturn([$tierPrice]);
 
-        ### EXECUTE
+        //## EXECUTE
         $tierPriceFound = $this->tierPriceFinder->find($productVariant, $this->testChannel, 10);
 
-        ### CHECK
+        //## CHECK
         $this->assertEquals($tierPriceFound, $tierPrice);
     }
 
     public function testCalculateWithHighestTierPrice()
     {
-        ### PREPARE
+        //## PREPARE
         $tierPrice1 = $this->createMock(TierPrice::class);
         $tierPrice1->method('getPrice')->willReturn(500);
         $tierPrice1->method('getQty')->willReturn(10);
@@ -95,10 +93,10 @@ class TierPriceFinderTest extends \PHPUnit_Framework_TestCase
         $productVariant = $this->createMock(ProductVariant::class);
         $this->tierPriceRepo->method('getSortedTierPrices')->willReturn([$tierPrice1, $tierPrice2]);
 
-        ### EXECUTE
+        //## EXECUTE
         $tierPriceFound = $this->tierPriceFinder->find($productVariant, $this->testChannel, 11);
 
-        ### CHECK
+        //## CHECK
         $this->assertEquals($tierPrice2, $tierPriceFound);
     }
 }

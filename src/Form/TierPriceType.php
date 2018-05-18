@@ -11,7 +11,6 @@ declare(strict_types=1);
 
 namespace Brille24\SyliusTierPricePlugin\Form;
 
-
 use Brille24\SyliusTierPricePlugin\Entity\TierPrice;
 use Sylius\Bundle\ChannelBundle\Doctrine\ORM\ChannelRepository;
 use Sylius\Bundle\MoneyBundle\Form\Type\MoneyType;
@@ -21,21 +20,17 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Validator\Constraints\{
-    NotBlank, Range
-};
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\Range;
 use Webmozart\Assert\Assert;
 
 /**
  * Class TierPriceType
  *
  * Form type for the tier price entity
- *
- * @package Brille24\SyliusTierPricePlugin\Form
  */
 class TierPriceType extends AbstractType
 {
-
     /**
      * @var ChannelRepository
      */
@@ -51,12 +46,12 @@ class TierPriceType extends AbstractType
         Assert::keyExists($options, 'currency');
 
         $builder->add('qty', NumberType::class, [
-            'label'       => 'sylius.ui.amount',
-            'required'    => true,
+            'label' => 'sylius.ui.amount',
+            'required' => true,
             'constraints' => [
                 new Range([
-                              'min'        => 0,
-                              'groups'     => 'sylius',
+                              'min' => 0,
+                              'groups' => 'sylius',
                               'minMessage' => 'Quantity has to be positive',
                           ]),
                 new NotBlank(['groups' => 'sylius']),
@@ -64,20 +59,18 @@ class TierPriceType extends AbstractType
         ]);
 
         $builder->add('price', MoneyType::class, [
-            'label'    => 'sylius.ui.price',
+            'label' => 'sylius.ui.price',
             'required' => true,
             'currency' => $options['currency'],
         ]);
 
         $builder->add('channel', EntityType::class, [
-            'attr'        => ['style' => 'display:none'],
-            'class'       => Channel::class,
+            'attr' => ['style' => 'display:none'],
+            'class' => Channel::class,
             'constraints' => [
                 new NotBlank(['groups' => 'sylius']),
             ],
         ]);
-
-
     }
 
     public function configureOptions(OptionsResolver $resolver): void
@@ -85,7 +78,7 @@ class TierPriceType extends AbstractType
         // Setting USD as fallback
         $resolver->setDefaults([
                                    'data_class' => TierPrice::class,
-                                   'currency'   => 'USD',
+                                   'currency' => 'USD',
                                ]);
     }
 

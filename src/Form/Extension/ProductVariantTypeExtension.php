@@ -5,7 +5,6 @@
  * Date: 29/12/17
  * Time: 16:49
  */
-
 declare(strict_types=1);
 
 namespace Brille24\SyliusTierPricePlugin\Form\Extension;
@@ -20,18 +19,16 @@ use Symfony\Component\Form\FormBuilderInterface;
  * Class ProductVariantTypeExtension
  *
  * Extending the product variant and adding the tier price entity
- *
- * @package Brille24\SyliusTierPricePlugin\Form\Extension
  */
 class ProductVariantTypeExtension extends AbstractTypeExtension
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->add('tierPrices', CollectionType::class, [
-            'entry_type'    => TierPriceType::class,
+            'entry_type' => TierPriceType::class,
             'entry_options' => ['label' => false],
-            'allow_add'     => true,
-            'allow_delete'  => true,
+            'allow_add' => true,
+            'allow_delete' => true,
         ]);
     }
 

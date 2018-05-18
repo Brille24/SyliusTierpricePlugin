@@ -8,11 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-
 declare(strict_types=1);
 
 namespace Brille24\SyliusTierPricePlugin\Entity;
-
 
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Channel\Model\Channel;
@@ -24,8 +22,6 @@ use Sylius\Component\Resource\Model\ResourceInterface;
  * Class ProductVariant
  *
  * Entity that stores a possible tier pricing for a product
- *
- * @package Brille24\SyliusTierPricePlugin\Entity
  */
 class TierPrice implements ResourceInterface, TierPriceInterface
 {
@@ -52,7 +48,7 @@ class TierPrice implements ResourceInterface, TierPriceInterface
 
     public function __construct(int $quantity = 0, int $price = 0)
     {
-        $this->qty   = $quantity;
+        $this->qty = $quantity;
         $this->price = $price;
     }
 

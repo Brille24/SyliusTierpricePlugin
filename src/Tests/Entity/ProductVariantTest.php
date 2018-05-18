@@ -7,14 +7,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-
 declare(strict_types=1);
 
 namespace Brille24\SyliusTierPricePlugin\Tests\Entity;
 
-use Brille24\SyliusTierPricePlugin\Entity\{
-    ProductVariant, TierPrice, TierPriceInterface
-};
+use Brille24\SyliusTierPricePlugin\Entity\ProductVariant;
+use Brille24\SyliusTierPricePlugin\Entity\TierPrice;
+use Brille24\SyliusTierPricePlugin\Entity\TierPriceInterface;
 use Brille24\SyliusTierPricePlugin\Traits\TierPriceableInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 
@@ -48,26 +47,27 @@ class ProductVariantTest extends \PHPUnit_Framework_TestCase
         $result = new TierPrice($quantity);
         $result->setChannel($channel);
         $result->setQty($quantity);
+
         return $result;
     }
 
     /** @dataProvider data_getTierPricesForChannel */
     public function test_getTierPricesForChannel(array $givenTierPrices, array $expectedTierPrices): void
     {
-        ### PREPARE
+        //## PREPARE
         $productVariant = new ProductVariant();
         $productVariant->setTierPrices($givenTierPrices);
 
-        ### EXECUTE
+        //## EXECUTE
         $resultEntries = $productVariant->getTierPricesForChannel($this->testChannel);
 
-        ### CHECK
+        //## CHECK
         $this->assertEquals(count($resultEntries), count($expectedTierPrices));
         $i = 0;
         foreach ($resultEntries as $entry) {
             /** @var TierPrice $entry */
             $this->assertEquals($expectedTierPrices[$i]->getQty(), $entry->getQty());
-            $i++;
+            ++$i;
         }
     }
 
@@ -75,11 +75,11 @@ class ProductVariantTest extends \PHPUnit_Framework_TestCase
     {
         return
             [
-                'no tier prices'          => [
+                'no tier prices' => [
                     [],
                     [],
                 ],
-                'one tier price matches'  => [
+                'one tier price matches' => [
                     // Input
                     [$this->createTierPrice($this->testChannel, 1)],
                     // Expected Output
@@ -91,7 +91,7 @@ class ProductVariantTest extends \PHPUnit_Framework_TestCase
                     // Expected Output
                     [],
                 ],
-                'multiple tier prices'    => [
+                'multiple tier prices' => [
                     // Input
                     [
                         $this->createTierPrice($this->otherChannel, 1),
@@ -108,5 +108,4 @@ class ProductVariantTest extends \PHPUnit_Framework_TestCase
                 ],
             ];
     }
-
 }

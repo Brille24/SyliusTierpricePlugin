@@ -7,7 +7,6 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-
 declare(strict_types=1);
 
 namespace Brille24\SyliusTierPricePlugin\Menu;
@@ -19,12 +18,9 @@ use Symfony\Component\Translation\Translator;
  * Class AdminProductVariantFormMenuListener
  *
  * Adding the tier price point to the menu
- *
- * @package Brille24\SyliusTierPricePlugin\Menu
  */
 final class AdminProductVariantFormMenuListener
 {
-
     /**
      * @var Translator
      */

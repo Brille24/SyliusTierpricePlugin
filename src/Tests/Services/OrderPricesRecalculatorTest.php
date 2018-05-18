@@ -5,7 +5,6 @@
  * Date: 08/01/18
  * Time: 10:45
  */
-
 declare(strict_types=1);
 
 namespace Brille24\SyliusTierPricePlugin\Tests\Services;
@@ -13,9 +12,11 @@ namespace Brille24\SyliusTierPricePlugin\Tests\Services;
 use Brille24\SyliusTierPricePlugin\Services\OrderPricesRecalculator;
 use Doctrine\Common\Collections\ArrayCollection;
 use Sylius\Component\Core\Calculator\ProductVariantPriceCalculatorInterface;
-use Sylius\Component\Core\Model\{
-    ChannelInterface, OrderInterface, OrderItem, OrderItemInterface, ProductVariantInterface
-};
+use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\OrderItem;
+use Sylius\Component\Core\Model\OrderItemInterface;
+use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Order\Processor\OrderProcessorInterface;
 use Webmozart\Assert\Assert;
 
@@ -30,13 +31,14 @@ class OrderPricesRecalculatorTest extends \PHPUnit_Framework_TestCase
     public function setUp(): void
     {
         $productVariantCalculator = $this->createMock(ProductVariantPriceCalculatorInterface::class);
-        $calculated               = &$this->calculated;
+        $calculated = &$this->calculated;
 
         $productVariantCalculator->method('calculate')->willReturnCallback(
             function (ProductVariantInterface $productVariant, array $options) use (&$calculated) {
                 Assert::keyExists($options, 'quantity');
                 Assert::keyExists($options, 'channel');
                 $calculated[] = $options['quantity'] * 2;
+
                 return 0;
             });
 
@@ -46,17 +48,17 @@ class OrderPricesRecalculatorTest extends \PHPUnit_Framework_TestCase
     /** @dataProvider dataProcessOrder */
     public function testProcessOrder(array $orderItems, array $expectedUnitPrices): void
     {
-        ### PREPARE
+        //## PREPARE
         $channel = $this->createMock(ChannelInterface::class);
 
         $order = $this->createMock(OrderInterface::class);
         $order->method('getChannel')->willReturn($channel);
         $order->method('getItems')->willReturn(new ArrayCollection($orderItems));
 
-        ### EXECUTE
+        //## EXECUTE
         $this->orderPriceRecalculator->process($order);
 
-        ### CHECK
+        //## CHECK
         foreach ($expectedUnitPrices as $index => $expectedUnitPrice) {
             $this->assertEquals($expectedUnitPrice, $this->calculated[$index]);
         }
@@ -65,7 +67,7 @@ class OrderPricesRecalculatorTest extends \PHPUnit_Framework_TestCase
     public function dataProcessOrder(): array
     {
         return [
-            'one product'       => [
+            'one product' => [
                 [$this->createOrder(2)],
                 [4],
             ],
@@ -78,13 +80,12 @@ class OrderPricesRecalculatorTest extends \PHPUnit_Framework_TestCase
 
     private function createOrder(int $quantity): OrderItemInterface
     {
-        $orderItem      = $this->createMock(OrderItem::class);
+        $orderItem = $this->createMock(OrderItem::class);
         $productVariant = $this->createMock(ProductVariantInterface::class);
 
         $orderItem->method('getVariant')->willReturn($productVariant);
         $orderItem->method('getQuantity')->willReturn($quantity);
 
         return $orderItem;
-
     }
 }

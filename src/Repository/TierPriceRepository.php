@@ -7,20 +7,18 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-
 declare(strict_types=1);
 
 namespace Brille24\SyliusTierPricePlugin\Repository;
 
-
-use Brille24\SyliusTierPricePlugin\Entity\{ProductVariant, TierPriceInterface};
+use Brille24\SyliusTierPricePlugin\Entity\ProductVariant;
+use Brille24\SyliusTierPricePlugin\Entity\TierPriceInterface;
 use Doctrine\Common\Persistence\ObjectRepository;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Core\Model\ChannelInterface;
 
 class TierPriceRepository extends EntityRepository implements ObjectRepository
 {
-
     /**
      * Gets all tier prices for a product variant for a channel with quantity in ascending order
      *

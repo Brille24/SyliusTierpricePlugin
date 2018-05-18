@@ -5,7 +5,6 @@
  * Date: 02/01/18
  * Time: 10:07
  */
-
 declare(strict_types=1);
 
 namespace Brille24\SyliusTierPricePlugin\DependencyInjection;
@@ -21,7 +20,7 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
 class Configuration implements ConfigurationInterface
 {
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getConfigTreeBuilder()
     {

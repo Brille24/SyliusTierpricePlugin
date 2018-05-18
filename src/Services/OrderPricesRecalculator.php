@@ -7,7 +7,6 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-
 declare(strict_types=1);
 
 namespace Brille24\SyliusTierPricePlugin\Services;
@@ -22,12 +21,9 @@ use Webmozart\Assert\Assert;
  * Class OrderPricesRecalculator
  *
  * Recalculates the price for the whole oder item
- *
- * @package Brille24\SyliusTierPricePlugin\Services
  */
 final class OrderPricesRecalculator implements OrderProcessorInterface
 {
-
     /**
      * @var ProductVariantPriceCalculatorInterface
      */

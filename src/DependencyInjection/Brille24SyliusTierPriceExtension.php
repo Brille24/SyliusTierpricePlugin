@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Brille24\SyliusTierPricePlugin\DependencyInjection;
 
 use Symfony\Component\Config\FileLocator;

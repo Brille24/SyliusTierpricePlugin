@@ -7,18 +7,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-
 declare(strict_types=1);
 
 namespace Brille24\SyliusTierPricePlugin\Traits;
 
-use Brille24\SyliusTierPricePlugin\Entity\{
-    ProductVariant, TierPrice, TierPriceInterface
-};
+use Brille24\SyliusTierPricePlugin\Entity\ProductVariant;
+use Brille24\SyliusTierPricePlugin\Entity\TierPrice;
+use Brille24\SyliusTierPricePlugin\Entity\TierPriceInterface;
 use Doctrine\Common\Collections\ArrayCollection;
-use Sylius\Component\Core\Model\{
-    ChannelInterface, ProductVariantInterface
-};
+use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\Model\ProductVariantInterface;
 
 /**
  * Trait TierPriceableTrait
@@ -26,8 +24,6 @@ use Sylius\Component\Core\Model\{
  * Trait that implements the tierpricing functionality.
  * Used in:
  * <li>@see ProductVariant</li>
- *
- * @package Brille24\SyliusTierPricePlugin\Traits
  */
 trait TierPriceableTrait
 {
@@ -100,5 +96,4 @@ trait TierPriceableTrait
             }
         }
     }
-
 }

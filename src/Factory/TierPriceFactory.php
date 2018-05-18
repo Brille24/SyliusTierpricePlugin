@@ -1,18 +1,17 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Brille24\SyliusTierPricePlugin\Factory;
-
 
 use Brille24\SyliusTierPricePlugin\Entity\ProductVariant;
 use Brille24\SyliusTierPricePlugin\Entity\TierPrice;
 use Brille24\SyliusTierPricePlugin\Entity\TierPriceInterface;
 use Doctrine\ORM\EntityNotFoundException;
-use Sylius\Bundle\CoreBundle\Fixture\OptionsResolver\LazyOption;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
+use Sylius\Bundle\CoreBundle\Fixture\OptionsResolver\LazyOption;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\Channel;
-use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\Product;
 use Sylius\Component\Core\Repository\ProductVariantRepositoryInterface;
 use Sylius\Component\Product\Factory\ProductVariantFactory;
@@ -39,7 +38,7 @@ class TierPriceFactory implements ExampleFactoryInterface
         ChannelRepositoryInterface $channelRepository
     ) {
         $this->productVariantRepository = $productVariantRepository;
-        $this->channelRepository        = $channelRepository;
+        $this->channelRepository = $channelRepository;
     }
 
     public function create(array $options = []): TierPriceInterface
@@ -81,5 +80,4 @@ class TierPriceFactory implements ExampleFactoryInterface
 
         return $tierPrice;
     }
-
 }

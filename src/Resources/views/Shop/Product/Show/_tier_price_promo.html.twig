@@ -20,6 +20,10 @@
                     </tr>
                     </thead>
                     <tbody>
+                    <tr style="display: none">
+                        <td>{{ 1|number_format }}</td>
+                        <td>{{ money.convertAndFormat(product_variant.channelPricings[sylius.channel.code].price) }}</td>
+                    </tr>
                     {% for tierPrice in tier_prices %}
                         <tr>
                             <td>{{ tierPrice.qty|number_format }}</td>
@@ -29,7 +33,7 @@
                     </tbody>
                 </table>
 
-                <span style="font-weight: bold;">{{ 'sylius.ui.variant_choice'|trans }}</span>
+                <br />
             </div>
         {% endif %}
     {% endfor %}

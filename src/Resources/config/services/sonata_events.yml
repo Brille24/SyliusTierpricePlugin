@@ -1,13 +1,13 @@
 services:
     # Sonata
-    block_event_listener.admin.layout.javascripts:
+    brille24_tier_price.block_event_listener.admin.layout.javascripts:
         class: Sylius\Bundle\UiBundle\Block\BlockEventListener
         arguments:
             - '@@Brille24SyliusTierPricePlugin/Resources/views/Admin/_javascripts.html.twig'
         tags:
             - { name: kernel.event_listener, event: sonata.block.event.sylius.admin.layout.javascripts, method: onBlockEvent }
 
-    block_event_listener.shop.layout.javascripts:
+    brille24_tier_price.block_event_listener.shop.layout.javascripts.tierprice:
         class: Sylius\Bundle\UiBundle\Block\BlockEventListener
         arguments:
             - '@@Brille24SyliusTierPricePlugin/Resources/views/Shop/_javascripts.html.twig'

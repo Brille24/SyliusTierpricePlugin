@@ -33,5 +33,5 @@
             "Brille24\\TierPriceBundle\\": "src/Brille24/TierPriceBundle/"
         },
         "classmap": ["app/AppKernel.php", "app/AppCache.php"]
-    },
+    }
 }

@@ -1,0 +1,16 @@
+parameters:
+    excludes_analyse:
+        # Makes PHPStan crash
+        - 'src/DependencyInjection/Configuration.php'
+
+        # Not testing config
+        - 'src/Fixtures/TierPriceFixture.php'
+
+        # Test dependencies
+        - 'tests/Application/app/**.php'
+        - 'tests/Application/src/**.php'
+
+        - '*Test.php'
+
+    ignoreErrors:
+        - '/Parameter #1 $configuration of method Symfony\Component\DependencyInjection\Extension\Extension::processConfiguration() expects Symfony\Component\Config\Definition\ConfigurationInterface, Symfony\Component\Config\Definition\ConfigurationInterface|null given./'

@@ -14,16 +14,10 @@ use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\Channel;
 use Sylius\Component\Core\Model\Product;
 use Sylius\Component\Core\Repository\ProductVariantRepositoryInterface;
-use Sylius\Component\Product\Factory\ProductVariantFactory;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class TierPriceFactory implements ExampleFactoryInterface
 {
-    /**
-     * @var ProductVariantFactory
-     */
-    private $productVariantFactory;
-
     /**
      * @var ProductVariantRepositoryInterface
      */
@@ -41,9 +35,19 @@ class TierPriceFactory implements ExampleFactoryInterface
         $this->channelRepository = $channelRepository;
     }
 
+    /**
+     * Creates a tierprice
+     *
+     * @param array $options The configuration of the tierprice
+     *
+     * @return TierPriceInterface
+     *
+     * @throws EntityNotFoundException
+     */
     public function create(array $options = []): TierPriceInterface
     {
-        $productVariant = $this->productVariantRepository->findOneByCode($options['product_variant']);
+        /** @var ProductVariant|null $productVariant */
+        $productVariant = $this->productVariantRepository->findOneBy(['code' => $options['product_variant']]);
         if ($productVariant === null) {
             throw new EntityNotFoundException('Create the product variant first');
         }
@@ -51,6 +55,11 @@ class TierPriceFactory implements ExampleFactoryInterface
         return $this->createAtProductVariant($options, $productVariant);
     }
 
+    /**
+     * Configuring the options that are allowed in the factory
+     *
+     * @param OptionsResolver $resolver
+     */
     protected function configureOption(OptionsResolver $resolver)
     {
         $resolver->setDefault('quantity', 1);
@@ -66,6 +75,14 @@ class TierPriceFactory implements ExampleFactoryInterface
         $resolver->setAllowedTypes('quantity', Channel::class);
     }
 
+    /**
+     * Creates a product variant and attaches the tier price
+     *
+     * @param array          $options
+     * @param ProductVariant $productVariant
+     *
+     * @return TierPriceInterface
+     */
     public function createAtProductVariant(array $options = [], ProductVariant $productVariant): TierPriceInterface
     {
         $tierPrice = new TierPrice();
@@ -73,7 +90,7 @@ class TierPriceFactory implements ExampleFactoryInterface
         $tierPrice->setQty($options['quantity']);
         $tierPrice->setProductVariant($productVariant);
 
-        $tierPrice->setChannel($this->channelRepository->findOneByCode($options['channel']));
+        $tierPrice->setChannel($this->channelRepository->findOneBy(['code' => $options['channel']]));
         $tierPrice->setPrice($options['price']);
 
         $productVariant->addTierPrice($tierPrice);

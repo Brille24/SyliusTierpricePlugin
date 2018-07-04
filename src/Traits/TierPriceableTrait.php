@@ -55,7 +55,9 @@ trait TierPriceableTrait
     public function getTierPricesForChannel(ChannelInterface $channel): array
     {
         return array_filter($this->getTierPrices(), function (TierPrice $tierPrice) use ($channel) {
-            return $tierPrice->getChannel()->getId() === $channel->getId();
+            $tierPriceChannel = $tierPrice->getChannel();
+
+            return $tierPriceChannel === null ? false : $tierPriceChannel->getId() === $channel->getId();
         });
     }
 

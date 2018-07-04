@@ -13,9 +13,10 @@ namespace Brille24\SyliusTierPricePlugin\Services;
 
 use Sylius\Component\Core\Calculator\ProductVariantPriceCalculatorInterface;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Order\Model\OrderInterface as BaseOrderInterface;
 use Sylius\Component\Order\Processor\OrderProcessorInterface;
-use Webmozart\Assert\Assert;
+use TypeError;
 
 /**
  * Class OrderPricesRecalculator
@@ -43,10 +44,17 @@ final class OrderPricesRecalculator implements OrderProcessorInterface
     public function process(BaseOrderInterface $order): void
     {
         /** @var OrderInterface $order */
-        Assert::isInstanceOf($order, OrderInterface::class);
+        if (!$order instanceof OrderInterface) {
+            throw new TypeError('Order has to implement ' . OrderInterface::class);
+        }
+
         $channel = $order->getChannel();
 
         foreach ($order->getItems() as $item) {
+            if (!$item instanceof OrderItemInterface) {
+                throw new TypeError('Order item has to implement ' . OrderItemInterface::class);
+            }
+
             if ($item->isImmutable()) {
                 continue;
             }

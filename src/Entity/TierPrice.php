@@ -12,8 +12,6 @@ declare(strict_types=1);
 
 namespace Brille24\SyliusTierPricePlugin\Entity;
 
-use Doctrine\Common\Collections\Collection;
-use Sylius\Component\Channel\Model\Channel;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
@@ -52,6 +50,12 @@ class TierPrice implements ResourceInterface, TierPriceInterface
         $this->price = $price;
     }
 
+    /** {@inheritdoc} */
+    public function getId()
+    {
+        return $this->id;
+    }
+
     /**
      * @return int
      */
@@ -76,51 +80,31 @@ class TierPrice implements ResourceInterface, TierPriceInterface
         return $this->qty;
     }
 
-    /**
-     * This function does not allow negative values
-     *
-     * @param int $qty
-     */
+    /** {@inheritdoc} */
     public function setQty(int $qty): void
     {
         $this->qty = max($qty, 0);
     }
 
-    /**
-     * @return Collection
-     */
+    /** {@inheritdoc} */
     public function getProductVariant(): ProductVariantInterface
     {
         return $this->productVariant;
     }
 
-    /**
-     * @param Collection $productVariants
-     */
+    /** {@inheritdoc} */
     public function setProductVariant(ProductVariantInterface $productVariants): void
     {
         $this->productVariant = $productVariants;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * @return Channel
-     */
+    /** {@inheritdoc} */
     public function getChannel(): ?ChannelInterface
     {
         return $this->channel;
     }
 
-    /**
-     * @param Channel $channel
-     */
+    /** {@inheritdoc} */
     public function setChannel(?ChannelInterface $channel): void
     {
         $this->channel = $channel;

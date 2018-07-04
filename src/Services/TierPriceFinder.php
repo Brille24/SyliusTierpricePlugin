@@ -16,7 +16,7 @@ use Brille24\SyliusTierPricePlugin\Entity\TierPriceInterface;
 use Brille24\SyliusTierPricePlugin\Repository\TierPriceRepository;
 use Brille24\SyliusTierPricePlugin\Traits\TierPriceableInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
-use Webmozart\Assert\Assert;
+use TypeError;
 
 /**
  * Class TierPriceFinder
@@ -47,7 +47,9 @@ class TierPriceFinder implements TierPriceFinderInterface
         ChannelInterface $channel,
         int $quantity
     ): ?TierPriceInterface {
-        Assert::isInstanceOf($tierPriceableEntity, ProductVariant::class);
+        if (!$tierPriceableEntity instanceof ProductVariant) {
+            throw new TypeError('The tierpriceable entity must be a ' . ProductVariant::class);
+        }
 
         $possibleTierPrices = $this->tierPriceRepository->getSortedTierPrices($tierPriceableEntity, $channel);
 

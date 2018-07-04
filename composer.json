@@ -28,8 +28,7 @@
     "prefer-stable": true,
     "autoload": {
         "psr-4": {
-            "Brille24\\SyliusTierPricePlugin\\": "src/",
-            "Brille24\\SyliusTierPricePlugin\\Tests": "tests/PHPUnit/"
+            "Brille24\\SyliusTierPricePlugin\\": "src/"
         }
     },
     "autoload-dev": {

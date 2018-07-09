@@ -32,7 +32,7 @@ class TierPriceFactory implements ExampleFactoryInterface
         ChannelRepositoryInterface $channelRepository
     ) {
         $this->productVariantRepository = $productVariantRepository;
-        $this->channelRepository = $channelRepository;
+        $this->channelRepository        = $channelRepository;
     }
 
     /**

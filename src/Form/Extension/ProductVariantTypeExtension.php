@@ -25,10 +25,10 @@ class ProductVariantTypeExtension extends AbstractTypeExtension
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->add('tierPrices', CollectionType::class, [
-            'entry_type' => TierPriceType::class,
+            'entry_type'    => TierPriceType::class,
             'entry_options' => ['label' => false],
-            'allow_add' => true,
-            'allow_delete' => true,
+            'allow_add'     => true,
+            'allow_delete'  => true,
         ]);
     }
 

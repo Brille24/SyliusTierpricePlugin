@@ -48,7 +48,7 @@ class TierPriceFinder implements TierPriceFinderInterface
         int $quantity
     ): ?TierPriceInterface {
         if (!$tierPriceableEntity instanceof ProductVariant) {
-            throw new TypeError('The tierpriceable entity must be a ' . ProductVariant::class);
+            throw new TypeError('The tierpriceable entity must be a '.ProductVariant::class);
         }
 
         $possibleTierPrices = $this->tierPriceRepository->getSortedTierPrices($tierPriceableEntity, $channel);

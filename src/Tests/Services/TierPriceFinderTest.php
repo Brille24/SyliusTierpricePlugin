@@ -38,8 +38,8 @@ class TierPriceFinderTest extends \PHPUnit_Framework_TestCase
     ) {
         parent::__construct($name, $data, $dataName);
 
-        $this->tierPriceRepo = $this->createMock(TierPriceRepository::class);
-        $this->tierPriceFinder = new TierPriceFinder($this->tierPriceRepo);
+        $this->tierPriceRepo      = $this->createMock(TierPriceRepository::class);
+        $this->tierPriceFinder    = new TierPriceFinder($this->tierPriceRepo);
         $this->testProductVariant = new ProductVariant();
 
         $this->testChannel = $this->createMock(ChannelInterface::class);

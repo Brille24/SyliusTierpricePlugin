@@ -3,7 +3,8 @@
 
 /vendor/
 /node_modules/
-/composer.lock
 
 /etc/build/*
 !/etc/build/.gitkeep
+
+tests/Application/app/sqlite.db

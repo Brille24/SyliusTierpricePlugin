@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-declare (strict_types = 1);
+declare(strict_types=1);
 
 namespace Brille24\SyliusTierPricePlugin\Traits;
 
@@ -28,7 +28,7 @@ use Sylius\Component\Core\Model\ProductVariantInterface;
  */
 trait TierPriceableTrait
 {
-    public function initTierPriceableTrait() : void
+    public function initTierPriceableTrait(): void
     {
         $this->tierPrices = new ArrayCollection();
     }
@@ -41,7 +41,7 @@ trait TierPriceableTrait
      *
      * @return TierPriceInterface[]
      */
-    public function getTierPrices() : array
+    public function getTierPrices(): array
     {
         return $this->tierPrices->toArray();
     }
@@ -53,7 +53,7 @@ trait TierPriceableTrait
      *
      * @return TierPriceInterface[]
      */
-    public function getTierPricesForChannel(ChannelInterface $channel) : array
+    public function getTierPricesForChannel(ChannelInterface $channel): array
     {
         return array_filter($this->getTierPrices(), function (TierPrice $tierPrice) use ($channel) {
             $tierPriceChannel = $tierPrice->getChannel();
@@ -67,7 +67,7 @@ trait TierPriceableTrait
      *
      * @param TierPrice $tierPrice
      */
-    public function removeTierPrice(TierPrice $tierPrice) : void
+    public function removeTierPrice(TierPrice $tierPrice): void
     {
         $this->tierPrices->removeElement($tierPrice);
     }
@@ -77,7 +77,7 @@ trait TierPriceableTrait
      *
      * @param TierPrice $tierPrice
      */
-    public function addTierPrice(TierPrice $tierPrice) : void
+    public function addTierPrice(TierPrice $tierPrice): void
     {
         $tierPrice->setProductVariant($this);
         $this->tierPrices->add($tierPrice);
@@ -88,7 +88,7 @@ trait TierPriceableTrait
      *
      * @param array $tierPrices
      */
-    public function setTierPrices(array $tierPrices) : void
+    public function setTierPrices(array $tierPrices): void
     {
         if (!$this instanceof ProductVariantInterface) {
             return;

@@ -60,7 +60,7 @@ class TierPriceFactory implements ExampleFactoryInterface
      *
      * @param OptionsResolver $resolver
      */
-    protected function configureOption(OptionsResolver $resolver)
+    protected function configureOption(OptionsResolver $resolver): void
     {
         $resolver->setDefault('quantity', 1);
         $resolver->setAllowedTypes('quantity', 'integer');

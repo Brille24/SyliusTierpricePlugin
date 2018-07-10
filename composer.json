@@ -24,7 +24,8 @@
         "lakion/mink-debug-extension": "^1.2.3",
         "se/selenium-server-standalone": "^2.52",
         "phpstan/phpstan-shim": "^0.10.1",
-        "sylius-labs/coding-standard": "^2.0"
+        "sylius-labs/coding-standard": "^2.0",
+        "phpstan/phpstan-strict-rules": "^0.10.0"
     },
     "prefer-stable": true,
     "autoload": {

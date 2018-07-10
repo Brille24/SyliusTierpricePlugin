@@ -43,18 +43,14 @@ final class OrderPricesRecalculator implements OrderProcessorInterface
      */
     public function process(BaseOrderInterface $order): void
     {
-        /** @var OrderInterface $order */
         if (!$order instanceof OrderInterface) {
             throw new TypeError('Order has to implement '.OrderInterface::class);
         }
 
         $channel = $order->getChannel();
 
+        /** @var OrderInterface $order */
         foreach ($order->getItems() as $item) {
-            if (!$item instanceof OrderItemInterface) {
-                throw new TypeError('Order item has to implement '.OrderItemInterface::class);
-            }
-
             if ($item->isImmutable()) {
                 continue;
             }

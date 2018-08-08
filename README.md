@@ -12,7 +12,7 @@ public function registerBundles()
     return array_merge(parent::registerBundles(), [
         ...
 
-        new \Brille24\SyliusTierPricePlugin\Brille24SyliusTierPriceBundle(),
+        new \Brille24\SyliusTierPricePlugin\Brille24SyliusTierPricePlugin(),
     ]);
 }
 ```

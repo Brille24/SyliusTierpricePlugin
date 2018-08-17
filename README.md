@@ -46,7 +46,7 @@ bin/console translation:update
 
 If you want to override the default price shown for a variant in the product overview and detail page, override the default product variant price calculation class of Sylius.
 ```yaml
-  sylius.calculator.product_variant_price.decorator:
+  brille24.calculator.product_variant_price.decorator:
     class: Brille24\SyliusTierPricePlugin\Services\ProductVariantPriceCalculator
     decorates: sylius.calculator.product_variant_price
     public: false

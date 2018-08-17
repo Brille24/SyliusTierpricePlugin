@@ -1,1 +1,3 @@
-sylius.ui.tierprice: 'Tier prices'
+brille24_tier_price:
+    ui:
+        tier_prices: Tier prices

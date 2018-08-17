@@ -22,7 +22,6 @@ public function registerBundles()
 imports:
     ...
     - { resource: '@Brille24SyliusTierPricePlugin/Resources/config/config.yml'}
-    - { resource: '@Brille24SyliusTierPricePlugin/Resources/config/resources.yml'}
 ```
 
 That way all the Sylius resource overriding happens in the `app/config/resources.yml`
@@ -44,6 +43,17 @@ bin/console translation:update
 ### Integration
 * The Bundle overrides the `ProductVariant` class that is provided by Sylius. This will be overridden in the `resource.yml` of the Bundle. If you want to override that class in your application too, you have to merge the two configurations.
 * This bundle registers an [order processor](https://docs.sylius.com/en/1.2/components_and_bundles/components/Order/processors.html) service `brille24_tier_price.order_processing.order_prices_recalculator`. If you wish to use your own order processor or change its priority, you could register a [compiler pass](https://symfony.com/doc/current/service_container/compiler_passes.html).
+
+If you want to override the default price shown for a variant in the product overview and detail page, override the default product variant price calculation class of Sylius.
+```yaml
+  sylius.calculator.product_variant_price.decorator:
+    class: Brille24\SyliusTierPricePlugin\Services\ProductVariantPriceCalculator
+    decorates: sylius.calculator.product_variant_price
+    public: false
+    arguments:
+      - '@sylius.calculator.product_variant_price.decorator.inner'
+      - '@brille24_tier_price.services.tier_price_finder'
+```
 
 ## Usage
 First of all you have to set up a product with as many variants as you want. Then in each of these variants you can set the tier pricing based on the channels.

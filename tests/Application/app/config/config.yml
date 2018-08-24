@@ -11,8 +11,6 @@ imports:
     - { resource: "@Brille24SyliusTierPricePlugin/Resources/config/config.yml"}
     - { resource: "resources.yml" }
 
-    - { resource: "../../../../vendor/sylius/sylius/app/config/security.yml" }
-
 framework:
     translator: { fallbacks: ["%locale%", "en"] }
     secret: "%secret"

@@ -7,15 +7,13 @@ imports:
     - { resource: "@SyliusAdminBundle/Resources/config/app/config.yml" }
     - { resource: "@SyliusShopBundle/Resources/config/app/config.yml" }
     - { resource: "@SyliusAdminApiBundle/Resources/config/app/config.yml" }
-
     - { resource: "@Brille24SyliusTierPricePlugin/Resources/config/config.yml"}
-    
+
     - { resource: "../../../../vendor/sylius/sylius/app/config/security.yml" }
-    - { resource: "resources.yml" }
 
 framework:
     translator: { fallbacks: ["%locale%", "en"] }
-    secret: "%secret"
+    secret: "%secret%"
     router:
         resource: "%kernel.root_dir%/config/routing.yml"
         strict_requirements: "%kernel.debug%"

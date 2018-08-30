@@ -14,7 +14,6 @@ namespace Brille24\SyliusTierPricePlugin\Services;
 use Brille24\SyliusTierPricePlugin\Traits\TierPriceableInterface;
 use Sylius\Component\Core\Calculator\ProductVariantPriceCalculatorInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
-use Webmozart\Assert\Assert;
 
 /**
  * Class ProductVariantPriceCalculator
@@ -54,7 +53,10 @@ final class ProductVariantPriceCalculator implements ProductVariantPriceCalculat
      */
     public function calculate(ProductVariantInterface $productVariant, array $context): int
     {
-        Assert::keyExists($context, 'quantity');
+        // Return the base price if the quantity is not provided
+        if (!array_key_exists('quantity', $context)) {
+            return $this->basePriceCalculator->calculate($productVariant, $context);
+        }
 
         // Find a tier price and return it
         if ($productVariant instanceof TierPriceableInterface) {

@@ -1,5 +1,5 @@
 services:
-    app.listener.admin.product_variant.form.menu_builder:
+    brille24_tier_price.listener.admin.product_variant.form.menu_builder:
         class: Brille24\SyliusTierPricePlugin\Menu\AdminProductVariantFormMenuListener
         arguments: ['@sylius.theme.translation.theme_aware_translator.inner']
         tags:

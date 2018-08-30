@@ -1,14 +1,18 @@
 services:
-    brille24_tier_price.services.product_variant_price_calculator:
-        class: Brille24\SyliusTierPricePlugin\Services\ProductVariantPriceCalculator
-        arguments: ['@sylius.calculator.product_variant_price', '@brille24_tier_price.services.tier_price_finder']
-
-    brille24_tier_price.services.tier_price_finder:
+    brille24_tier_price.tier_price_finder:
         class: Brille24\SyliusTierPricePlugin\Services\TierPriceFinder
-        arguments: ['@brille24.repository.tierprice']
+        arguments:
+            - '@brille24.repository.tierprice'
+
+    brille24_tier_price.calculator.product_variant_price:
+        class: Brille24\SyliusTierPricePlugin\Services\ProductVariantPriceCalculator
+        decorates: sylius.calculator.product_variant_price
+        arguments:
+            - '@brille24_tier_price.calculator.product_variant_price.inner'
+            - '@brille24_tier_price.tier_price_finder'
 
     brille24_tier_price.order_processing.order_prices_recalculator:
         class: Brille24\SyliusTierPricePlugin\Services\OrderPricesRecalculator
-        arguments: ['@brille24_tier_price.services.product_variant_price_calculator']
-        tags:
-            - { name: sylius.order_processor, priority: 39 } # run after sylius.order_processing.order_prices_recalculator
+        decorates: sylius.order_processing.order_prices_recalculator
+        arguments:
+            - '@brille24_tier_price.calculator.product_variant_price'

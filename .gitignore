@@ -8,4 +8,7 @@
 /etc/build/*
 !/etc/build/.gitkeep
 
-tests/Application/app/sqlite.db
+/tests/Application/yarn.lock
+/tests/Application/app/sqlite.db
+
+/.env.test

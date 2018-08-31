@@ -16,8 +16,8 @@
         <field name="price" type="integer" />
         <field name="qty" type="integer" />
 
-        <many-to-one target-entity="Sylius\Component\Core\Model\Channel" field="channel" />
+        <many-to-one target-entity="Sylius\Component\Channel\Model\ChannelInterface" field="channel" />
 
-        <many-to-one target-entity="Brille24\SyliusTierPricePlugin\Entity\ProductVariant" field="productVariant" inversed-by="tierPrices"/>
+        <many-to-one target-entity="Sylius\Component\Product\Model\ProductVariantInterface" field="productVariant" inversed-by="tierPrices"/>
     </entity>
 </doctrine-mapping>

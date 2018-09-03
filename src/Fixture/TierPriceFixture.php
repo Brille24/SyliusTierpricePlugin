@@ -2,13 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Brille24\SyliusTierPricePlugin\Fixtures;
+namespace Brille24\SyliusTierPricePlugin\Fixture;
 
 use Sylius\Bundle\CoreBundle\Fixture\AbstractResourceFixture;
-use Sylius\Bundle\FixturesBundle\Fixture\FixtureInterface;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 
-class TierPriceFixture extends AbstractResourceFixture implements FixtureInterface
+class TierPriceFixture extends AbstractResourceFixture
 {
     protected function configureResourceNode(ArrayNodeDefinition $resourceNode): void
     {

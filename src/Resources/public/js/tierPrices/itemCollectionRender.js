@@ -2,33 +2,31 @@
  * Adds an element to the tierprice table
  *
  * @param bodyId Id of the body element
- * @param channelId Id of the channel
+ * @param channelCode The channel code
  */
-function tierPriceTableAdd(bodyId, channelId) {
+function tierPriceTableAdd(bodyId, channelCode) {
     // Sorts the table and adds the body
-    const tableId = bodyId + '_table';
+    var tableId = bodyId + '_table';
     tierPriceTableSort(tableId);
 
-    const prototype_text = $('#prototype_holder').attr('data-prototype');
-    const prototype_currency = $('table#' + tableId).attr('data-prototype');
+    var prototypeHtml = $('#sylius_product_variant_tierPrices_prototype_holder').data('prototype');
+    var currencySymbol = $('#' + tableId).data('currency');
 
-    const bodySelector = '#' + bodyId;
-    const body = $(bodySelector);
+    var body = $('#' + bodyId);
 
     // Replace '__name__' in the prototype's HTML to
     // instead be a number based on how many items we have
-    var elementSource = prototype_text.replace(new RegExp('__name__', 'g'), tierPriceIndex);
-    body.append(elementSource);
+    var newRow = $(prototypeHtml.replace(/__name__/g, tierPriceIndex));
 
-    // Selects the element again and set the channel
-    const newElement_channel = $(bodySelector + ' #sylius_product_variant_tierPrices_' + tierPriceIndex + '_channel');
-    newElement_channel.val(channelId);
+    // Set the currency symbol
+    newRow.find('.priceField .ui.label').html(currencySymbol);
 
-    // Setting the currency
-    const newElement_currency = $('tbody#'+bodyId + ' tr:last-child div.ui.label');
-    newElement_currency.html(prototype_currency);
+    // Set the channel code
+    newRow.find('select[name$="[channel]"]').val(channelCode);
 
-    // Adds the new element to the sorting listener
+    body.append(newRow);
+
+    // Add the new element to the sorting listener
     setSortingListener();
 
     tierPriceIndex++;
@@ -92,10 +90,8 @@ function setSortingListener() {
 setSortingListener();
 
 $(document).ready(function () {
-    $('table').filter(function () {
-        return $(this).attr('id').indexOf('tierPricesTable_') === 0;
-    }).each(function () {
+    $('table[id^="sylius_product_variant_tierPrices_"]').each(function () {
         var tableId = $(this).attr('id');
         tierPriceTableSort(tableId);
-    })
+    });
 });

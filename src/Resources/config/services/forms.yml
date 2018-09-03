@@ -1,13 +1,15 @@
 services:
     # Form types
-    brille24_tier_price.form.tier_price_type:
-        class: Brille24\SyliusTierPricePlugin\Form\TierPriceType
-        arguments: ['@sylius.repository.channel']
+    brille24_tier_price.form.type.tier_price_type:
+        class: Brille24\SyliusTierPricePlugin\Form\Type\TierPriceType
+        arguments:
+            - Brille24\SyliusTierPricePlugin\Entity\TierPrice
+            - ['sylius']
         tags:
-            - {'name': form.type}
+            - { name: form.type }
 
-    #Form type Extensions
-    brille24_tier_price.form.extension.product_variant_type:
+    # Form type extensions
+    brille24_tier_price.form.extension.type.product_variant_type:
         class: Brille24\SyliusTierPricePlugin\Form\Extension\ProductVariantTypeExtension
         tags:
             - { name: form.type_extension, extended_type: Sylius\Bundle\ProductBundle\Form\Type\ProductVariantType }

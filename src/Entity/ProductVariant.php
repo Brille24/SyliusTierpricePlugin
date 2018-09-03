@@ -21,7 +21,7 @@ use Sylius\Component\Core\Model\ProductVariant as BaseProductVariant;
  *
  * Entity for the product variant with the tier prices implemented as trait.
  *
- * @see     TierPriceableTrait
+ * @see TierPriceableTrait
  */
 class ProductVariant extends BaseProductVariant implements TierPriceableInterface
 {

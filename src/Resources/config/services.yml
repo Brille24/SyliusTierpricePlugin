@@ -4,4 +4,4 @@ imports:
     - { resource: "services/event_listener.yml" }
     - { resource: "services/brille24.yml" }
     - { resource: "services/fixtures.yml" }
-    - { resource: "services/factories.yml" }
+    - { resource: "services/fixtures_factories.yml" }

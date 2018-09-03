@@ -35,7 +35,7 @@ final class ProductVariantPriceCalculator implements ProductVariantPriceCalculat
         TierPriceFinderInterface $tierPriceFinder
     ) {
         $this->basePriceCalculator = $basePriceCalculator;
-        $this->tierPriceFinder     = $tierPriceFinder;
+        $this->tierPriceFinder = $tierPriceFinder;
     }
 
     /**

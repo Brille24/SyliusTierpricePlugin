@@ -11,16 +11,11 @@ declare(strict_types=1);
 
 namespace Brille24\SyliusTierPricePlugin\Entity;
 
-use Sylius\Component\Channel\Model\Channel;
-use Sylius\Component\Core\Model\ChannelInterface;
-use Sylius\Component\Core\Model\ProductVariantInterface;
+use Sylius\Component\Channel\Model\ChannelInterface;
+use Sylius\Component\Product\Model\ProductVariantInterface;
+use Sylius\Component\Resource\Model\ResourceInterface;
 
-/**
- * Class ProductVariant
- *
- * Entity that stores a possible tier pricing for a product
- */
-interface TierPriceInterface
+interface TierPriceInterface extends ResourceInterface
 {
     /**
      * @return int
@@ -53,11 +48,6 @@ interface TierPriceInterface
      * @param ProductVariantInterface $productVariants
      */
     public function setProductVariant(ProductVariantInterface $productVariants): void;
-
-    /**
-     * @return mixed
-     */
-    public function getId();
 
     /**
      * @return ChannelInterface|null

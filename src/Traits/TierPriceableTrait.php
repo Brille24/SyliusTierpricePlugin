@@ -13,11 +13,11 @@ declare(strict_types=1);
 namespace Brille24\SyliusTierPricePlugin\Traits;
 
 use Brille24\SyliusTierPricePlugin\Entity\ProductVariant;
-use Brille24\SyliusTierPricePlugin\Entity\TierPrice;
 use Brille24\SyliusTierPricePlugin\Entity\TierPriceInterface;
 use Doctrine\Common\Collections\ArrayCollection;
-use Sylius\Component\Core\Model\ChannelInterface;
-use Sylius\Component\Core\Model\ProductVariantInterface;
+use Doctrine\Common\Collections\Collection;
+use Sylius\Component\Channel\Model\ChannelInterface;
+use Sylius\Component\Product\Model\ProductVariantInterface;
 
 /**
  * Trait TierPriceableTrait
@@ -28,13 +28,15 @@ use Sylius\Component\Core\Model\ProductVariantInterface;
  */
 trait TierPriceableTrait
 {
+    /**
+     * @var Collection<TierPriceInterface>
+     */
+    protected $tierPrices;
+
     public function initTierPriceableTrait(): void
     {
         $this->tierPrices = new ArrayCollection();
     }
-
-    /** @var ArrayCollection */
-    protected $tierPrices;
 
     /**
      * Returns all tier prices for this product variant.
@@ -55,7 +57,7 @@ trait TierPriceableTrait
      */
     public function getTierPricesForChannel(ChannelInterface $channel): array
     {
-        return array_filter($this->getTierPrices(), function (TierPrice $tierPrice) use ($channel) {
+        return array_filter($this->getTierPrices(), function (TierPriceInterface $tierPrice) use ($channel) {
             $tierPriceChannel = $tierPrice->getChannel();
 
             return $tierPriceChannel === null ? false : $tierPriceChannel->getId() === $channel->getId();
@@ -65,9 +67,9 @@ trait TierPriceableTrait
     /**
      * Removes a tier price from the array collection
      *
-     * @param TierPrice $tierPrice
+     * @param TierPriceInterface $tierPrice
      */
-    public function removeTierPrice(TierPrice $tierPrice): void
+    public function removeTierPrice(TierPriceInterface $tierPrice): void
     {
         $this->tierPrices->removeElement($tierPrice);
     }
@@ -75,9 +77,9 @@ trait TierPriceableTrait
     /**
      * Adds an element to the list
      *
-     * @param TierPrice $tierPrice
+     * @param TierPriceInterface $tierPrice
      */
-    public function addTierPrice(TierPrice $tierPrice): void
+    public function addTierPrice(TierPriceInterface $tierPrice): void
     {
         $tierPrice->setProductVariant($this);
         $this->tierPrices->add($tierPrice);
@@ -97,7 +99,7 @@ trait TierPriceableTrait
         $this->tierPrices = new ArrayCollection();
 
         foreach ($tierPrices as $tierPrice) {
-            /** @var TierPrice $tierPrice */
+            /** @var TierPriceInterface $tierPrice */
             $this->addTierPrice($tierPrice);
         }
     }

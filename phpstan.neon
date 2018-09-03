@@ -8,7 +8,7 @@ parameters:
         - 'src/DependencyInjection/Configuration.php'
 
         # Not testing config
-        - 'src/Fixtures/TierPriceFixture.php'
+        - 'src/Fixture/TierPriceFixture.php'
 
         # Test dependencies
         - 'tests/Application/app/**.php'

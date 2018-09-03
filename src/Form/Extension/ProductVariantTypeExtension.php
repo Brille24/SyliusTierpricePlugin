@@ -9,7 +9,7 @@ declare(strict_types=1);
 
 namespace Brille24\SyliusTierPricePlugin\Form\Extension;
 
-use Brille24\SyliusTierPricePlugin\Form\TierPriceType;
+use Brille24\SyliusTierPricePlugin\Form\Type\TierPriceType;
 use Sylius\Bundle\ProductBundle\Form\Type\ProductVariantType;
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
@@ -25,10 +25,10 @@ class ProductVariantTypeExtension extends AbstractTypeExtension
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->add('tierPrices', CollectionType::class, [
-            'entry_type'    => TierPriceType::class,
-            'entry_options' => ['label' => false],
-            'allow_add'     => true,
-            'allow_delete'  => true,
+            'entry_type' => TierPriceType::class,
+            'allow_add' => true,
+            'allow_delete' => true,
+            'by_reference' => false,
         ]);
     }
 

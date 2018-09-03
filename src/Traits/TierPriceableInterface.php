@@ -11,8 +11,8 @@ declare(strict_types=1);
 
 namespace Brille24\SyliusTierPricePlugin\Traits;
 
-use Brille24\SyliusTierPricePlugin\Entity\TierPrice;
-use Sylius\Component\Core\Model\ChannelInterface;
+use Brille24\SyliusTierPricePlugin\Entity\TierPriceInterface;
+use Sylius\Component\Channel\Model\ChannelInterface;
 
 interface TierPriceableInterface
 {
@@ -21,21 +21,21 @@ interface TierPriceableInterface
      *
      * @param ChannelInterface $channel
      *
-     * @return TierPrice[]
+     * @return TierPriceInterface[]
      */
     public function getTierPricesForChannel(ChannelInterface $channel): array;
 
     /**
      *Returns the tier prices associated
      *
-     * @return TierPrice[]
+     * @return TierPriceInterface[]
      */
     public function getTierPrices(): array;
 
     /**
      * Sets the tier prices from an array
      *
-     * @param TierPrice[] $tierPrices
+     * @param TierPriceInterface[] $tierPrices
      */
     public function setTierPrices(array $tierPrices): void;
 }

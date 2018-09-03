@@ -1,0 +1,4 @@
+services:
+    brille24_tier_price.fixture.example_factory.tier_price:
+        class: Brille24\SyliusTierPricePlugin\Fixture\Factory\TierPriceExampleFactory
+        arguments: ['@sylius.repository.product_variant', '@sylius.repository.channel']

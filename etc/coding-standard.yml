@@ -77,8 +77,8 @@ services:
     PhpCsFixer\Fixer\NamespaceNotation\SingleBlankLineBeforeNamespaceFixer: ~
     PhpCsFixer\Fixer\Naming\NoHomoglyphNamesFixer: ~
     PhpCsFixer\Fixer\Operator\BinaryOperatorSpacesFixer:
-        align_double_arrow: true
-        align_equals: true
+        align_double_arrow: false
+        align_equals: false
     PhpCsFixer\Fixer\Operator\ConcatSpaceFixer:
         spacing: 'none'
     PhpCsFixer\Fixer\Operator\NewWithBracesFixer: ~

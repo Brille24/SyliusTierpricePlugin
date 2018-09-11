@@ -24,7 +24,7 @@ interface ProductVariantInterface extends TierPriceableInterface
      * @param TierPrice $tierPrice
      */
     public function removeTierPrice(TierPrice $tierPrice): void;
-    
+
     /**
      * @param TierPrice $tierPrice
      */

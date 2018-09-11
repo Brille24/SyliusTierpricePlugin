@@ -22,8 +22,8 @@ class TierPriceRepository extends EntityRepository implements ObjectRepository
     /**
      * Gets all tier prices for a product variant for a channel with quantity in ascending order
      *
-     * @param ProductVariant   $productVariant
-     * @param ChannelInterface $channel
+     * @param ProductVariantInterface   $productVariant
+     * @param ChannelInterface          $channel
      *
      * @return TierPriceInterface[]
      */

@@ -11,7 +11,7 @@ declare(strict_types=1);
 
 namespace Brille24\SyliusTierPricePlugin\Services;
 
-use Brille24\SyliusTierPricePlugin\Entity\ProductVariant;
+use Brille24\SyliusTierPricePlugin\Entity\ProductVariantInterface;
 use Brille24\SyliusTierPricePlugin\Entity\TierPriceInterface;
 use Brille24\SyliusTierPricePlugin\Repository\TierPriceRepository;
 use Brille24\SyliusTierPricePlugin\Traits\TierPriceableInterface;
@@ -47,8 +47,8 @@ class TierPriceFinder implements TierPriceFinderInterface
         ChannelInterface $channel,
         int $quantity
     ): ?TierPriceInterface {
-        if (!$tierPriceableEntity instanceof ProductVariant) {
-            throw new TypeError('The tierpriceable entity must be a '.ProductVariant::class);
+        if (!$tierPriceableEntity instanceof ProductVariantInterface) {
+            throw new TypeError('The tierpriceable entity must be a '.ProductVariantInterface::class);
         }
 
         $possibleTierPrices = $this->tierPriceRepository->getSortedTierPrices($tierPriceableEntity, $channel);

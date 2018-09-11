@@ -4,3 +4,9 @@ services:
         arguments: ['@sylius.theme.translation.theme_aware_translator.inner']
         tags:
             - { name: kernel.event_listener, event: sylius.menu.admin.product_variant.form, method: addItems }
+
+    brille24.listener.admin.product.form.menu_builder:
+        class: Brille24\SyliusTierPricePlugin\Menu\AdminProductFormMenuListener
+        arguments: ['@sylius.theme.translation.theme_aware_translator.inner']
+        tags:
+            - { name: kernel.event_listener, event: sylius.menu.admin.product.form, method: addItems }

@@ -11,7 +11,7 @@ declare(strict_types=1);
 
 namespace Brille24\SyliusTierPricePlugin\Repository;
 
-use Brille24\SyliusTierPricePlugin\Entity\ProductVariant;
+use Brille24\SyliusTierPricePlugin\Entity\ProductVariantInterface;
 use Brille24\SyliusTierPricePlugin\Entity\TierPriceInterface;
 use Doctrine\Common\Persistence\ObjectRepository;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
@@ -22,12 +22,12 @@ class TierPriceRepository extends EntityRepository implements ObjectRepository
     /**
      * Gets all tier prices for a product variant for a channel with quantity in ascending order
      *
-     * @param ProductVariant   $productVariant
-     * @param ChannelInterface $channel
+     * @param ProductVariantInterface   $productVariant
+     * @param ChannelInterface          $channel
      *
      * @return TierPriceInterface[]
      */
-    public function getSortedTierPrices(ProductVariant $productVariant, ChannelInterface $channel): array
+    public function getSortedTierPrices(ProductVariantInterface $productVariant, ChannelInterface $channel): array
     {
         return $this->findBy(['productVariant' => $productVariant, 'channel' => $channel], ['qty' => 'ASC']);
     }

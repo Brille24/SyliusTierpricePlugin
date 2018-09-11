@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 /**
  * This file is part of the Brille24 tierprice plugin.
  *
@@ -16,8 +16,6 @@ use Brille24\SyliusTierPricePlugin\Traits\TierPriceableInterface;
 
 /**
  * Interface ProductVariantInterface
- *
- * @package Brille24\SyliusTierPricePlugin\Entity
  */
 interface ProductVariantInterface extends TierPriceableInterface
 {

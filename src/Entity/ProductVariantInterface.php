@@ -19,7 +19,6 @@ use Brille24\SyliusTierPricePlugin\Traits\TierPriceableInterface;
  */
 interface ProductVariantInterface extends TierPriceableInterface
 {
-    
     /**
      * @param TierPrice $tierPrice
      */

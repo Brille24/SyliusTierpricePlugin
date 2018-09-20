@@ -14,13 +14,6 @@ services:
         tags:
             - { name: kernel.event_listener, event: sonata.block.event.sylius.shop.layout.javascripts, method: onBlockEvent }
 
-    brille24_tier_price.sylius.admin.product.update.tab_details:
-        class: Sylius\Bundle\UiBundle\Block\BlockEventListener
-        arguments:
-            - '@@Brille24SyliusTierPricePlugin/Resources/views/Admin/Product/ProductVariant/_product_variants.html.twig'
-        tags:
-            - { name: kernel.event_listener, event: sonata.block.event.sylius.admin.product.update.tab_details, method: onBlockEvent }
-
     brille24_tier_price.sylius.product.show_before_add_to_cart:
         class: Sylius\Bundle\UiBundle\Block\BlockEventListener
         arguments:

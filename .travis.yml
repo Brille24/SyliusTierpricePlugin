@@ -37,6 +37,7 @@ before_script:
     - (cd tests/Application && ls -lah)
     - (cd tests/Application && bin/console doctrine:database:create --env=test -vvv)
     - (cd tests/Application && bin/console doctrine:schema:create --env=test -vvv)
+    - (cd tests/Application && bin/console doctrine:schema:validate --env=test -vvv)
     - (cd tests/Application && bin/console assets:install web --env=test -vvv)
     - (cd tests/Application && yarn run gulp)
 

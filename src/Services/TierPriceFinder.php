@@ -11,12 +11,10 @@ declare(strict_types=1);
 
 namespace Brille24\SyliusTierPricePlugin\Services;
 
-use Brille24\SyliusTierPricePlugin\Entity\ProductVariantInterface;
 use Brille24\SyliusTierPricePlugin\Entity\TierPriceInterface;
-use Brille24\SyliusTierPricePlugin\Repository\TierPriceRepository;
+use Brille24\SyliusTierPricePlugin\Repository\TierPriceRepositoryInterface;
 use Brille24\SyliusTierPricePlugin\Traits\TierPriceableInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
-use TypeError;
 
 /**
  * Class TierPriceFinder
@@ -25,10 +23,10 @@ use TypeError;
  */
 class TierPriceFinder implements TierPriceFinderInterface
 {
-    /** @var TierPriceRepository */
+    /** @var TierPriceRepositoryInterface */
     private $tierPriceRepository;
 
-    public function __construct(TierPriceRepository $tierPriceRepository)
+    public function __construct(TierPriceRepositoryInterface $tierPriceRepository)
     {
         $this->tierPriceRepository = $tierPriceRepository;
     }

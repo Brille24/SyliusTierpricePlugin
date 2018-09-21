@@ -13,7 +13,7 @@ namespace Brille24\SyliusTierPricePlugin\Tests\Services;
 
 use Brille24\SyliusTierPricePlugin\Entity\ProductVariant;
 use Brille24\SyliusTierPricePlugin\Entity\TierPrice;
-use Brille24\SyliusTierPricePlugin\Repository\TierPriceRepository;
+use Brille24\SyliusTierPricePlugin\Repository\TierPriceRepositoryInterface;
 use Brille24\SyliusTierPricePlugin\Services\TierPriceFinder;
 use Sylius\Component\Core\Model\ChannelInterface;
 
@@ -28,7 +28,7 @@ class TierPriceFinderTest extends \PHPUnit_Framework_TestCase
     /** @var ChannelInterface */
     private $testChannel;
 
-    /** @var TierPriceRepository */
+    /** @var TierPriceRepositoryInterface */
     private $tierPriceRepo;
 
     public function __construct(
@@ -38,7 +38,7 @@ class TierPriceFinderTest extends \PHPUnit_Framework_TestCase
     ) {
         parent::__construct($name, $data, $dataName);
 
-        $this->tierPriceRepo      = $this->createMock(TierPriceRepository::class);
+        $this->tierPriceRepo      = $this->createMock(TierPriceRepositoryInterface::class);
         $this->tierPriceFinder    = new TierPriceFinder($this->tierPriceRepo);
         $this->testProductVariant = new ProductVariant();
 

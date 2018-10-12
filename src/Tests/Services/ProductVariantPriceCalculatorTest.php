@@ -17,7 +17,7 @@ use Sylius\Component\Core\Calculator\ProductVariantPriceCalculatorInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductVariant as SyliusProductVariant;
 
-class ProductVariantPriceCalculatorTest extends \PHPUnit_Framework_TestCase
+class ProductVariantPriceCalculatorTest extends \PHPUnit\Framework\TestCase
 {
     /** @var ProductVariantPriceCalculatorInterface */
     private $basePriceCalculator;
@@ -28,9 +28,6 @@ class ProductVariantPriceCalculatorTest extends \PHPUnit_Framework_TestCase
     /** @var TierPriceFinderInterface */
     private $tierPriceFinder;
 
-    /** @var ChannelInterface */
-    private $testChannel;
-
     public function setup()
     {
         $this->basePriceCalculator = $this->createMock(ProductVariantPriceCalculatorInterface::class);
@@ -39,8 +36,6 @@ class ProductVariantPriceCalculatorTest extends \PHPUnit_Framework_TestCase
         $this->tierPriceFinder = $this->createMock(TierPriceFinderInterface::class);
 
         $this->priceCalculator = new ProductVariantPriceCalculator($this->basePriceCalculator, $this->tierPriceFinder);
-
-        $this->testChannel = $this->createMock(ChannelInterface::class);
     }
 
     public function testCalculateWithNonTierpriceable()

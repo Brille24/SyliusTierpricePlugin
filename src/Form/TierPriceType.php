@@ -12,7 +12,6 @@ declare(strict_types=1);
 namespace Brille24\SyliusTierPricePlugin\Form;
 
 use Brille24\SyliusTierPricePlugin\Entity\TierPrice;
-use Sylius\Bundle\ChannelBundle\Doctrine\ORM\ChannelRepository;
 use Sylius\Bundle\MoneyBundle\Form\Type\MoneyType;
 use Sylius\Component\Core\Model\Channel;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -31,16 +30,6 @@ use Webmozart\Assert\Assert;
  */
 class TierPriceType extends AbstractType
 {
-    /**
-     * @var ChannelRepository
-     */
-    private $channelRepository;
-
-    public function __construct(ChannelRepository $channelRepository)
-    {
-        $this->channelRepository = $channelRepository;
-    }
-
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         Assert::keyExists($options, 'currency');
@@ -50,10 +39,10 @@ class TierPriceType extends AbstractType
             'required'    => true,
             'constraints' => [
                 new Range([
-                              'min'        => 0,
-                              'groups'     => 'sylius',
-                              'minMessage' => 'Quantity has to be positive',
-                          ]),
+                  'min'        => 0,
+                  'groups'     => 'sylius',
+                  'minMessage' => 'Quantity has to be positive',
+                ]),
                 new NotBlank(['groups' => 'sylius']),
             ],
         ]);

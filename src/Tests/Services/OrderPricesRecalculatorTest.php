@@ -20,7 +20,7 @@ use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Order\Processor\OrderProcessorInterface;
 use Webmozart\Assert\Assert;
 
-class OrderPricesRecalculatorTest extends \PHPUnit_Framework_TestCase
+class OrderPricesRecalculatorTest extends \PHPUnit\Framework\TestCase
 {
     /** @var OrderProcessorInterface */
     private $orderPriceRecalculator;

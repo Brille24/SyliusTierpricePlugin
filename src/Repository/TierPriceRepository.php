@@ -18,8 +18,10 @@ use Sylius\Component\Core\Model\ChannelInterface;
 
 class TierPriceRepository extends EntityRepository implements TierPriceRepositoryInterface
 {
-
-    /** {@inheritdoc} */
+    /** {@inheritdoc}
+     *
+     * @return TierPriceInterface[]
+     */
     public function getSortedTierPrices(TierPriceableInterface $productVariant, ChannelInterface $channel): array
     {
         return $this->findBy(['productVariant' => $productVariant, 'channel' => $channel], ['qty' => 'ASC']);

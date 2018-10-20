@@ -12,9 +12,8 @@ declare(strict_types=1);
 namespace Brille24\SyliusTierPricePlugin\Form;
 
 use Brille24\SyliusTierPricePlugin\Entity\TierPrice;
+use Sylius\Bundle\ChannelBundle\Form\Type\ChannelChoiceType;
 use Sylius\Bundle\MoneyBundle\Form\Type\MoneyType;
-use Sylius\Component\Core\Model\Channel;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -58,7 +57,6 @@ class TierPriceType extends AbstractType
 
     public function configureOptions(OptionsResolver $resolver): void
     {
-
         $resolver->setRequired(['currency']);
         $resolver->setDefaults([
            'data_class' => TierPrice::class,

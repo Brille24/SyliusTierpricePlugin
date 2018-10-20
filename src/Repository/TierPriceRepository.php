@@ -18,14 +18,8 @@ use Sylius\Component\Core\Model\ChannelInterface;
 
 class TierPriceRepository extends EntityRepository implements TierPriceRepositoryInterface
 {
-    /**
-     * Gets all tier prices for a product variant for a channel with quantity in ascending order
-     *
-     * @param TierPriceableInterface  $productVariant
-     * @param ChannelInterface        $channel
-     *
-     * @return TierPriceInterface[]
-     */
+
+    /** {@inheritdoc} */
     public function getSortedTierPrices(TierPriceableInterface $productVariant, ChannelInterface $channel): array
     {
         return $this->findBy(['productVariant' => $productVariant, 'channel' => $channel], ['qty' => 'ASC']);

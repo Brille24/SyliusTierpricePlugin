@@ -16,11 +16,6 @@ use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 
-/**
- * Class ProductVariant
- *
- * Entity that stores a possible tier pricing for a product
- */
 class TierPrice implements ResourceInterface, TierPriceInterface
 {
     /**
@@ -38,10 +33,14 @@ class TierPrice implements ResourceInterface, TierPriceInterface
      */
     private $qty;
 
-    /** @var ChannelInterface|null */
+    /**
+     * @var ChannelInterface|null
+     */
     private $channel;
 
-    /** @var ProductVariantInterface */
+    /**
+     * @var ProductVariantInterface
+     */
     private $productVariant;
 
     public function __construct(int $quantity = 0, int $price = 0)

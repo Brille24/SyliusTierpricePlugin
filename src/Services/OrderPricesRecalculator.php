@@ -17,11 +17,6 @@ use Sylius\Component\Order\Model\OrderInterface as BaseOrderInterface;
 use Sylius\Component\Order\Processor\OrderProcessorInterface;
 use TypeError;
 
-/**
- * Class OrderPricesRecalculator
- *
- * Recalculates the price for the whole oder item
- */
 final class OrderPricesRecalculator implements OrderProcessorInterface
 {
     /**

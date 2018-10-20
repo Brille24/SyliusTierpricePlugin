@@ -15,11 +15,6 @@ use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 
-/**
- * Class ProductVariantTypeExtension
- *
- * Extending the product variant and adding the tier price entity
- */
 class ProductVariantTypeExtension extends AbstractTypeExtension
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void

@@ -16,11 +16,6 @@ use Brille24\SyliusTierPricePlugin\Repository\TierPriceRepositoryInterface;
 use Brille24\SyliusTierPricePlugin\Traits\TierPriceableInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 
-/**
- * Class TierPriceFinder
- *
- * Finds the cheapest tier price with a given channel
- */
 class TierPriceFinder implements TierPriceFinderInterface
 {
     /** @var TierPriceRepositoryInterface */

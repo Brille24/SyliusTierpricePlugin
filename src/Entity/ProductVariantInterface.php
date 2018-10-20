@@ -14,9 +14,6 @@ namespace Brille24\SyliusTierPricePlugin\Entity;
 
 use Brille24\SyliusTierPricePlugin\Traits\TierPriceableInterface;
 
-/**
- * Interface ProductVariantInterface
- */
 interface ProductVariantInterface extends TierPriceableInterface
 {
     /**

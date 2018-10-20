@@ -15,11 +15,6 @@ use Brille24\SyliusTierPricePlugin\Traits\TierPriceableInterface;
 use Sylius\Component\Core\Calculator\ProductVariantPriceCalculatorInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 
-/**
- * Class ProductVariantPriceCalculator
- *
- * Calcultes the unit price of a given product variant and its amount
- */
 final class ProductVariantPriceCalculator implements ProductVariantPriceCalculatorInterface
 {
     /**

@@ -15,13 +15,6 @@ namespace Brille24\SyliusTierPricePlugin\Entity;
 use Brille24\SyliusTierPricePlugin\Traits\TierPriceableTrait;
 use Sylius\Component\Core\Model\ProductVariant as BaseProductVariant;
 
-/**
- * Class ProductVariant
- *
- * Entity for the product variant with the tier prices implemented as trait.
- *
- * @see     TierPriceableTrait
- */
 class ProductVariant extends BaseProductVariant implements ProductVariantInterface
 {
     use TierPriceableTrait;

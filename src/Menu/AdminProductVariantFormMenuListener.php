@@ -14,11 +14,6 @@ namespace Brille24\SyliusTierPricePlugin\Menu;
 use Sylius\Bundle\UiBundle\Menu\Event\MenuBuilderEvent;
 use Symfony\Component\Translation\Translator;
 
-/**
- * Class AdminProductVariantFormMenuListener
- *
- * Adding the tier price point to the menu
- */
 final class AdminProductVariantFormMenuListener
 {
     /**

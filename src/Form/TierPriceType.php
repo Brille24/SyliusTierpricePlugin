@@ -23,11 +23,6 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Range;
 use Webmozart\Assert\Assert;
 
-/**
- * Class TierPriceType
- *
- * Form type for the tier price entity
- */
 class TierPriceType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
@@ -53,9 +48,8 @@ class TierPriceType extends AbstractType
             'currency' => $options['currency'],
         ]);
 
-        $builder->add('channel', EntityType::class, [
+        $builder->add('channel', ChannelChoiceType::class, [
             'attr'        => ['style' => 'display:none'],
-            'class'       => Channel::class,
             'constraints' => [
                 new NotBlank(['groups' => 'sylius']),
             ],
@@ -64,15 +58,16 @@ class TierPriceType extends AbstractType
 
     public function configureOptions(OptionsResolver $resolver): void
     {
-        // Setting USD as fallback
+
+        $resolver->setRequired(['currency']);
         $resolver->setDefaults([
-                                   'data_class' => TierPrice::class,
-                                   'currency'   => 'USD',
-                               ]);
+           'data_class' => TierPrice::class,
+           'currency'   => 'USD',
+        ]);
     }
 
     public function getBlockPrefix(): string
     {
-        return 'tier_price';
+        return 'brille24_tier_price';
     }
 }

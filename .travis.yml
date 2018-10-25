@@ -75,12 +75,12 @@ before_script:
 
 script:
     - composer validate --strict
-    - vendor/bin/phpstan analyse -c phpstan.neon -l max src/
-    - vendor/bin/ecs check --config etc/coding-standard.yml src/
+    - bin/phpstan analyse -c phpstan.neon -l max src/
+    - bin/ecs check --config etc/coding-standard.yml src/
 
-    - vendor/bin/phpunit
-    - vendor/bin/phpspec run
-    - vendor/bin/behat --strict -vvv --no-interaction || vendor/bin/behat --strict -vvv --no-interaction --rerun
+    - bin/phpunit
+    - bin/phpspec run
+    - bin/behat --strict -vvv --no-interaction || bin/behat --strict -vvv --no-interaction --rerun
 
 after_failure:
     - vendor/lakion/mink-debug-extension/travis/tools/upload-textfiles "${SYLIUS_BUILD_DIR}/*.log"

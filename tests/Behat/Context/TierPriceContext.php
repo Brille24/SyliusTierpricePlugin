@@ -7,7 +7,7 @@
  */
 
 
-namespace Brille24\Behat\Context;
+namespace Tests\Brille24\SyliusTierPricePlugin\Behat\Context;
 
 
 use Behat\Behat\Context\Context;

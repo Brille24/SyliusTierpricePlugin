@@ -53,4 +53,3 @@ default:
         - brille24.behat.context.tierprice
       filters:
         tags: "@tierprices && @ui"
-

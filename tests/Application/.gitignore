@@ -4,3 +4,21 @@
 !/var/.gitkeep
 
 /web/bundles
+/var/*
+!/var/.gitignore
+
+/public/assets
+/public/bundles
+/public/css
+/public/js
+/public/media
+!/public/media/image/.gitignore
+
+/vendor
+/node_modules
+
+/.env
+/.env.prod
+/.env.staging
+/.env.test
+/.env.test_cached

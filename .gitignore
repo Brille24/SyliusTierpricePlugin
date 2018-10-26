@@ -7,6 +7,7 @@
 
 /etc/build/*
 !/etc/build/.gitkeep
+!/etc/build/.gitignore
 
 /tests/Application/yarn.lock
 /tests/Application/app/sqlite.db

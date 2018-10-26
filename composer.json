@@ -6,8 +6,7 @@
     "require": {
         "php": "^7.2",
 
-        "sylius/sylius": "^1.3",
-        "friends-of-behat/page-object-extension": "^0.2.0"
+        "sylius/sylius": "^1.1"
     },
     "require-dev": {
         "behat/behat": "^3.4",
@@ -20,6 +19,7 @@
         "friends-of-behat/service-container-extension": "^1.0",
         "friends-of-behat/symfony-extension": "^1.2.1",
         "friends-of-behat/variadic-extension": "^1.1",
+        "friends-of-behat/page-object-extension": "^0.2.0",
         "lakion/mink-debug-extension": "^1.2.3",
         "phpspec/phpspec": "^5.0",
         "phpstan/phpstan-doctrine": "^0.10",

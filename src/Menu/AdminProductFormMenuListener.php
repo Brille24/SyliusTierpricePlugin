@@ -30,7 +30,7 @@ final class AdminProductFormMenuListener
     {
         $menu = $event->getMenu();
 
-        if($event->getProduct()->isConfigurable()){
+        if ($event->getProduct()->isConfigurable()) {
             return;
         }
 

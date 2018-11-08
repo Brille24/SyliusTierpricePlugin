@@ -1,7 +1,12 @@
-# UPGRADE FROM `v1.2.X` TO `v1.3.0`
+# Change log
+## v0.6 to v0.7
+* See the "Update plugin from Sylius `v1.2.X` TO `v1.3.0`"
+* Method signiture of tierprice factory has changed:
+`public function createAtProductVariant(array $options = [], ProductVariant $productVariant)`
+to 
+`public function createAtProductVariant(ProductVariant $productVariant, array $options = [])`
 
-## Application
-
+## Upgrade plugin from Sylius `v1.2.X` TO `v1.3.0`
 * Run `composer require sylius/sylius:~1.3.0 --no-update`
 
 * Add the following code in your `behat.yml(.dist)` file:

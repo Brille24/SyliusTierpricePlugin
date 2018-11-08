@@ -47,7 +47,6 @@
             <h3 class="ui dividing header"> {{ channel.name }}</h3>
 
             {% set bodyId = "tierPricesTable_" ~ channel.id %}
-            {% set channel_id = channel.id %}
 
             <table class="ui stackable celled table" id="{{ bodyId }}_table"
                    {# Setting the default currency for this table (channel) #}
@@ -62,7 +61,7 @@
                 <tbody id="{{ bodyId }}">
                 {# Rendering the table body #}
                 {% for i, tierprice in variantForm.tierPrices %}
-                    {% if tierprice.channel.vars['value'] == channel.id %}
+                    {% if tierprice.channel.vars['value'] == channel.code %}
                         {{ row.tierPriceRow(tierprice, i, channel) }}
                     {% endif %}
                 {% endfor %}
@@ -70,7 +69,7 @@
             </table>
 
             {# The add button for every table #}
-            <div class="ui labeled icon primary button" onclick="tierPriceTableAdd('{{ bodyId }}', {{ channel_id }})">
+            <div class="ui labeled icon primary button" onclick="tierPriceTableAdd('{{ bodyId }}', '{{ channel.code }}')">
                 <i class="add icon"></i> {{ 'sylius.ui.add'|trans }}
             </div>
         {% endfor %}
@@ -78,4 +77,3 @@
         {{ sonata_block_render_event('sylius.admin.product_variant.' ~ action ~ '.tab_tierprice', {'form': form }) }}
     </div>
 {% endblock %}
-

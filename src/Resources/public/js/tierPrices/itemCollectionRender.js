@@ -2,9 +2,9 @@
  * Adds an element to the tierprice table
  *
  * @param bodyId Id of the body element
- * @param channelId Id of the channel
+ * @param channelCode Code of the channel
  */
-function tierPriceTableAdd(bodyId, channelId) {
+function tierPriceTableAdd(bodyId, channelCode) {
     // Sorts the table and adds the body
     const tableId = bodyId + '_table';
     tierPriceTableSort(tableId);
@@ -22,7 +22,7 @@ function tierPriceTableAdd(bodyId, channelId) {
 
     // Selects the element again and set the channel
     const newElement_channel = $(bodySelector + ' #sylius_product_variant_tierPrices_' + tierPriceIndex + '_channel');
-    newElement_channel.val(channelId);
+    newElement_channel.val(channelCode);
 
     // Setting the currency
     const newElement_currency = $('tbody#'+bodyId + ' tr:last-child div.ui.label');

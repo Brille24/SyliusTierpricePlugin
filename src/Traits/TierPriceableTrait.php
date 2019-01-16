@@ -61,6 +61,22 @@ trait TierPriceableTrait
             return $tierPriceChannel === null ? false : $tierPriceChannel->getId() === $channel->getId();
         });
     }
+    
+    /**
+     * Returns the tier prices only for one channel
+     *
+     * @param $code
+     *
+     * @return TierPriceInterface[]
+     */
+    public function getTierPricesForChannelCode(string $code): array
+    {
+        return array_filter($this->getTierPrices(), function (TierPrice $tierPrice) use ($code) {
+            $tierPriceChannel = $tierPrice->getChannel();
+
+            return $tierPriceChannel === null ? false : $tierPriceChannel->getCode() === $code;
+        });
+    }
 
     /**
      * Removes a tier price from the array collection

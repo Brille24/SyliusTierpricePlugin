@@ -32,7 +32,7 @@ interface TierPriceableInterface
      *
      * @return TierPrice[]
      */
-    public function getTierPricesForChannelCode(string $code): array 
+    public function getTierPricesForChannelCode(string $code): array;
 
     /**
      *Returns the tier prices associated

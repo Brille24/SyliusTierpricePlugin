@@ -65,7 +65,7 @@ trait TierPriceableTrait
     /**
      * Returns the tier prices only for one channel
      *
-     * @param $code
+     * @param string $code
      *
      * @return TierPriceInterface[]
      */

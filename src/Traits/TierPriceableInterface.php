@@ -26,6 +26,15 @@ interface TierPriceableInterface
     public function getTierPricesForChannel(ChannelInterface $channel): array;
 
     /**
+     * Returns all tier prices for a given channel
+     *
+     * @param string $code
+     *
+     * @return TierPrice[]
+     */
+    public function getTierPricesForChannelCode(string $code): array;
+
+    /**
      *Returns the tier prices associated
      *
      * @return TierPrice[]

@@ -61,7 +61,7 @@ trait TierPriceableTrait
             return $tierPriceChannel === null ? false : $tierPriceChannel->getId() === $channel->getId();
         });
     }
-    
+
     /**
      * Returns the tier prices only for one channel
      *

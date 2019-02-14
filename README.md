@@ -1,4 +1,6 @@
 # Tier prices in Sylius
+<p align="center"><img src="https://sylius.com/assets/badge-approved-by-sylius.png" width="100"></p>
+
 [![Build Status](https://travis-ci.org/Brille24/SyliusTierpricePlugin.svg?branch=master)](https://travis-ci.org/Brille24/SyliusTierpricePlugin)
 
 Sylius allows for many different customizations like channels and different prices for different product variants. However, one thing that Sylius is missing is the ability to set the price based on the amount of items the customer wants to buy. This tier pricing methodology can be implemented when this plugin is installed.

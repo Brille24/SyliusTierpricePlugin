@@ -74,7 +74,6 @@ before_script:
     - (cd tests/Application && bin/console server:run 127.0.0.1:8080 -d public --env=test --quiet > /dev/null 2>&1 &)
 
 script:
-    - composer validate --strict
     - bin/phpstan analyse -c phpstan.neon -l max src/
     - bin/ecs check --config etc/coding-standard.yml src/
 

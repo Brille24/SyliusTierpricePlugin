@@ -1,5 +1,3 @@
 services:
-  brille24.behat.context.tierprice:
-    class: Tests\Brille24\SyliusTierPricePlugin\Behat\Context\TierPriceContext
-    tags:
-      - { name: fob.context_service }
+    brille24.behat.context.tierprice:
+        class: Tests\Brille24\SyliusTierPricePlugin\Behat\Context\TierPriceContext

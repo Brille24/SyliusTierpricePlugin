@@ -30,10 +30,10 @@ class ProductVariantTypeExtension extends AbstractTypeExtension
     /**
      * Returns the name of the type being extended.
      *
-     * @return string The name of the type being extended
+     * @return array The name of the type being extended
      */
-    public function getExtendedType(): string
+    public function getExtendedTypes(): array
     {
-        return ProductVariantType::class;
+        return [ProductVariantType::class];
     }
 }

@@ -8,13 +8,14 @@ use Brille24\SyliusTierPricePlugin\Entity\ProductVariantInterface;
 use Brille24\SyliusTierPricePlugin\Entity\TierPrice;
 use Brille24\SyliusTierPricePlugin\Entity\TierPriceInterface;
 use Doctrine\ORM\EntityNotFoundException;
+use Sylius\Bundle\CoreBundle\Fixture\Factory\AbstractExampleFactory;
 use Sylius\Bundle\CoreBundle\Fixture\OptionsResolver\LazyOption;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Repository\ProductVariantRepositoryInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class TierPriceFactory implements TierPriceFactoryInterface
+class TierPriceExampleFactory extends AbstractExampleFactory
 {
     /**
      * @var ProductVariantRepositoryInterface
@@ -45,14 +46,19 @@ class TierPriceFactory implements TierPriceFactoryInterface
      */
     public function create(array $options = []): TierPriceInterface
     {
-        /** @var ProductVariantInterface|null $productVariant */
-        $productVariant = $this->productVariantRepository->findOneBy(['code' => $options['product_variant']]);
+        $productVariant = $options['product_variant'];
 
-        if ($productVariant === null) {
-            throw new EntityNotFoundException('Create the product variant first');
-        }
+        $tierPrice = new TierPrice();
 
-        return $this->createAtProductVariant($productVariant, $options);
+        $tierPrice->setQty($options['quantity']);
+        $tierPrice->setProductVariant($productVariant);
+
+        $tierPrice->setChannel($options['channel']);
+        $tierPrice->setPrice($options['price']);
+
+        $productVariant->addTierPrice($tierPrice);
+
+        return $tierPrice;
     }
 
     /**
@@ -60,7 +66,7 @@ class TierPriceFactory implements TierPriceFactoryInterface
      *
      * @param OptionsResolver $resolver
      */
-    protected function configureOption(OptionsResolver $resolver): void
+    protected function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefault('quantity', 1);
         $resolver->setAllowedTypes('quantity', 'integer');
@@ -70,28 +76,11 @@ class TierPriceFactory implements TierPriceFactoryInterface
 
         $resolver->setDefault('product_variant', LazyOption::randomOne($this->productVariantRepository));
         $resolver->setAllowedTypes('product_variant', ProductVariantInterface::class);
+        $resolver->setNormalizer('product_variant', LazyOption::findOneBy($this->productVariantRepository, 'code'));
 
         $resolver->setDefault('channel', LazyOption::randomOne($this->channelRepository));
         $resolver->setAllowedTypes('channel', ChannelInterface::class);
+        $resolver->setNormalizer('channel', LazyOption::findOneBy($this->channelRepository, 'code'));
     }
 
-    /**
-     * @inheritdoc
-     */
-    public function createAtProductVariant(
-        ProductVariantInterface $productVariant,
-        array $options = []
-    ): TierPriceInterface {
-        $tierPrice = new TierPrice();
-
-        $tierPrice->setQty($options['quantity']);
-        $tierPrice->setProductVariant($productVariant);
-
-        $tierPrice->setChannel($this->channelRepository->findOneBy(['code' => $options['channel']]));
-        $tierPrice->setPrice($options['price']);
-
-        $productVariant->addTierPrice($tierPrice);
-
-        return $tierPrice;
-    }
 }

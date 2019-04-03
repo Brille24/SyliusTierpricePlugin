@@ -48,9 +48,9 @@ interface TierPriceInterface
     public function getProductVariant(): ProductVariantInterface;
 
     /**
-     * @param ProductVariantInterface $productVariants
+     * @param ProductVariantInterface $productVariant
      */
-    public function setProductVariant(ProductVariantInterface $productVariants): void;
+    public function setProductVariant(ProductVariantInterface $productVariant): void;
 
     /**
      * @return mixed

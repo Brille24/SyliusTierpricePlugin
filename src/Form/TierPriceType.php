@@ -20,7 +20,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Range;
-use Webmozart\Assert\Assert;
 
 class TierPriceType extends AbstractType
 {

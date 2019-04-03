@@ -49,7 +49,7 @@ class TierPrice implements ResourceInterface, TierPriceInterface
     }
 
     /** {@inheritdoc} */
-    public function getId()
+    public function getId(): ?int
     {
         return $this->id;
     }
@@ -91,9 +91,9 @@ class TierPrice implements ResourceInterface, TierPriceInterface
     }
 
     /** {@inheritdoc} */
-    public function setProductVariant(ProductVariantInterface $productVariants): void
+    public function setProductVariant(ProductVariantInterface $productVariant): void
     {
-        $this->productVariant = $productVariants;
+        $this->productVariant = $productVariant;
     }
 
     /** {@inheritdoc} */

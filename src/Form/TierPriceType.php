@@ -26,8 +26,6 @@ class TierPriceType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        Assert::keyExists($options, 'currency');
-
         $builder->add('qty', NumberType::class, [
             'label'       => 'sylius.ui.amount',
             'required'    => true,

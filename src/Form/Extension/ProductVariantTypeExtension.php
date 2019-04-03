@@ -27,13 +27,15 @@ class ProductVariantTypeExtension extends AbstractTypeExtension
         ]);
     }
 
-    /**
-     * Returns the name of the type being extended.
-     *
-     * @return array The name of the type being extended
-     */
+    /** {@inheritdoc}     */
     public function getExtendedTypes(): array
     {
         return [ProductVariantType::class];
+    }
+
+    /** {@inheritdoc} */
+    public function getExtendedType(): string
+    {
+        return $this->getExtendedTypes()[0];
     }
 }

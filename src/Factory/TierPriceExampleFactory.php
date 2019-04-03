@@ -82,5 +82,4 @@ class TierPriceExampleFactory extends AbstractExampleFactory
         $resolver->setAllowedTypes('channel', ChannelInterface::class);
         $resolver->setNormalizer('channel', LazyOption::findOneBy($this->channelRepository, 'code'));
     }
-
 }

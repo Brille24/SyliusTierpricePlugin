@@ -34,7 +34,7 @@ before_install:
 
 install:
     - composer require "symfony/symfony:${SYMFONY_VERSION}" --no-interaction --no-update
-    - composer install --no-interaction --prefer-dist
+    - composer install --no-interaction --prefer-dist --no-suggest
     - (cd tests/Application && yarn install)
 
 before_script:

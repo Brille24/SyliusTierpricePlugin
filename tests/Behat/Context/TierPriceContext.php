@@ -8,10 +8,10 @@ use Brille24\SyliusTierPricePlugin\Entity\{
     ProductVariant, TierPrice, TierPriceInterface
 };
 use Sylius\Component\Core\Model\ProductInterface;
+use TierPriceFactoryInterface;
 
 final class TierPriceContext implements Context
 {
-
     /**
      * @Given /^"([^"]*)" has a tier price at (\d+) with ("[^"]+")$/
      */

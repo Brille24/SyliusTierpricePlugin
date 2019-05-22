@@ -32,7 +32,7 @@ class TierPriceExampleFactory extends AbstractExampleFactory
         ChannelRepositoryInterface $channelRepository
     ) {
         $this->productVariantRepository = $productVariantRepository;
-        $this->channelRepository        = $channelRepository;
+        $this->channelRepository = $channelRepository;
     }
 
     /**
@@ -46,16 +46,15 @@ class TierPriceExampleFactory extends AbstractExampleFactory
      */
     public function create(array $options = []): TierPriceInterface
     {
-        $productVariant = $options['product_variant'];
-
         $tierPrice = new TierPrice();
 
         $tierPrice->setQty($options['quantity']);
-        $tierPrice->setProductVariant($productVariant);
-
         $tierPrice->setChannel($options['channel']);
         $tierPrice->setPrice($options['price']);
 
+        /** @var ProductVariantInterface $productVariant */
+        $productVariant = $options['product_variant'];
+        $tierPrice->setProductVariant($productVariant);
         $productVariant->addTierPrice($tierPrice);
 
         return $tierPrice;

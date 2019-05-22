@@ -42,7 +42,7 @@ class ProductVariantPriceCalculatorTest extends \PHPUnit\Framework\TestCase
     {
         //## PREPARE
         $productVariant = $this->createMock(SyliusProductVariant::class);
-        $testChannel    = $this->createMock(ChannelInterface::class);
+        $testChannel = $this->createMock(ChannelInterface::class);
 
         //## EXECUTE
         $price = $this->priceCalculator->calculate($productVariant, ['channel' => $testChannel, 'quantity' => 10]);
@@ -55,7 +55,7 @@ class ProductVariantPriceCalculatorTest extends \PHPUnit\Framework\TestCase
     {
         //## PREPARE
         $productVariant = $this->createMock(ProductVariant::class);
-        $testChannel    = $this->createMock(ChannelInterface::class);
+        $testChannel = $this->createMock(ChannelInterface::class);
 
         $this->tierPriceFinder->method('find')->willReturn(null);
 
@@ -70,7 +70,7 @@ class ProductVariantPriceCalculatorTest extends \PHPUnit\Framework\TestCase
     {
         //## PREPARE
         $productVariant = $this->createMock(ProductVariant::class);
-        $testChannel    = $this->createMock(ChannelInterface::class);
+        $testChannel = $this->createMock(ChannelInterface::class);
 
         $this->tierPriceFinder->method('find')->willReturn(new TierPrice(2, 2));
 

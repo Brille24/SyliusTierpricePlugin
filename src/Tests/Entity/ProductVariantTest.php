@@ -62,7 +62,7 @@ class ProductVariantTest extends \PHPUnit\Framework\TestCase
         $resultEntries = $productVariant->getTierPricesForChannel($this->testChannel);
 
         //## CHECK
-        $this->assertEquals(count($resultEntries), count($expectedTierPrices));
+        $this->assertCount(count($resultEntries), $expectedTierPrices);
         $i = 0;
         foreach ($resultEntries as $entry) {
             /** @var TierPrice $entry */

@@ -32,7 +32,7 @@ class TierPriceExampleFactory extends AbstractExampleFactory
         ChannelRepositoryInterface $channelRepository
     ) {
         $this->productVariantRepository = $productVariantRepository;
-        $this->channelRepository = $channelRepository;
+        $this->channelRepository        = $channelRepository;
     }
 
     /**

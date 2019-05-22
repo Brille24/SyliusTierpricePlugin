@@ -23,6 +23,6 @@ final class Brille24SyliusTierPriceExtension extends Extension
     public function load(array $config, ContainerBuilder $container): void
     {
         $this->processConfiguration($this->getConfiguration([], $container), $config);
-        new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
+        new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
     }
 }

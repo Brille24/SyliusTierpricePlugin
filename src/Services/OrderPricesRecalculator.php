@@ -38,7 +38,7 @@ final class OrderPricesRecalculator implements OrderProcessorInterface
     public function process(BaseOrderInterface $order): void
     {
         if (!$order instanceof OrderInterface) {
-            throw new TypeError('Order has to implement ' . OrderInterface::class);
+            throw new TypeError('Order has to implement '.OrderInterface::class);
         }
 
         $channel = $order->getChannel();

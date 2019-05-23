@@ -27,7 +27,7 @@ final class TierPriceFactory implements TierPriceFactoryInterface
     }
 
     /** {@inheritdoc} */
-    public function createForProductVariant(
+    public function createAtProductVariant(
         ProductVariantInterface $productVariant,
         array $options = []
     ): TierPriceInterface {

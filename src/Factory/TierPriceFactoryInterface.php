@@ -36,6 +36,6 @@ interface TierPriceFactoryInterface
      *
      * @return TierPriceInterface
      */
-    public function createForProductVariant(ProductVariantInterface $productVariant, array $options = []
+    public function createAtProductVariant(ProductVariantInterface $productVariant, array $options = []
     ): TierPriceInterface;
 }

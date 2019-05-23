@@ -1,7 +1,7 @@
 # Change log
 ## v0.6 to v0.7
 * See the "Update plugin from Sylius `v1.2.X` TO `v1.3.0`"
-* Method signiture of tierprice factory has changed:
+* Method signature of tierprice factory has changed:
 `public function createAtProductVariant(array $options = [], ProductVariant $productVariant)`
 to 
 `public function createAtProductVariant(ProductVariant $productVariant, array $options = [])`

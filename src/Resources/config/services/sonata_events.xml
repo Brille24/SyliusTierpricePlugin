@@ -1,0 +1,24 @@
+<container xmlns="http://symfony.com/schema/dic/services">
+    <services>
+        <service class="Sylius\Bundle\UiBundle\Block\BlockEventListener"
+                 id="brille24_tier_price.block_event_listener.admin.layout.javascripts"
+        >
+            <tag name="kernel.event_listener" event="sonata.block.event.sylius.admin.layout.javascripts" method="onBlockEvent" />
+            <argument>@Brille24SyliusTierPricePlugin/Resources/views/Admin/_javascripts.html.twig</argument>
+        </service>
+
+        <service class="Sylius\Bundle\UiBundle\Block\BlockEventListener"
+                 id="brille24_tier_price.block_event_listener.shop.layout.javascripts.tierprice"
+        >
+            <tag name="kernel.event_listener" event="sonata.block.event.sylius.shop.layout.javascripts" method="onBlockEvent" />
+            <argument>@Brille24SyliusTierPricePlugin/Resources/views/Shop/_javascripts.html.twig</argument>
+        </service>
+
+        <service class="Sylius\Bundle\UiBundle\Block\BlockEventListener"
+                 id="brille24_tier_price.sylius.product.show_before_add_to_cart"
+        >
+            <tag name="kernel.event_listener" event="sonata.block.event.sylius.shop.product.show.before_add_to_cart" method="onBlockEvent" />
+            <argument>@Brille24SyliusTierPricePlugin/Resources/views/Shop/Product/Show/_tier_price_promo.html.twig</argument>
+        </service>
+    </services>
+</container>

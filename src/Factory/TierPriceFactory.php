@@ -12,18 +12,23 @@ declare(strict_types=1);
 namespace Brille24\SyliusTierPricePlugin\Factory;
 
 use Brille24\SyliusTierPricePlugin\Entity\ProductVariantInterface;
-use Brille24\SyliusTierPricePlugin\Entity\TierPrice;
 use Brille24\SyliusTierPricePlugin\Entity\TierPriceInterface;
-use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Resource\Factory\FactoryInterface;
 
 final class TierPriceFactory implements TierPriceFactoryInterface
 {
-    public function createNew(int $quantity, ChannelInterface $channel, int $price): TierPriceInterface
-    {
-        $tierPrice = new TierPrice($quantity, $price);
-        $tierPrice->setChannel($channel);
+    /** @var FactoryInterface */
+    private $factory;
 
-        return $tierPrice;
+    public function __construct(FactoryInterface $factory)
+    {
+        $this->factory = $factory;
+    }
+
+    /** {@inheritdoc} */
+    public function createNew(): TierPriceInterface
+    {
+        return $this->factory->createNew();
     }
 
     /** {@inheritdoc} */
@@ -31,13 +36,13 @@ final class TierPriceFactory implements TierPriceFactoryInterface
         ProductVariantInterface $productVariant,
         array $options = []
     ): TierPriceInterface {
-        $tierPrice = $this->createNew(
-            $options['quantity'],
-            $options['channel'],
-            $options['price']
-        );
+        $tierPrice = $this->createNew();
 
+        $tierPrice->setQty($options['quantity']);
+        $tierPrice->setChannel($options['channel']);
+        $tierPrice->setPrice($options['price']);
         $tierPrice->setProductVariant($productVariant);
+
         $productVariant->addTierPrice($tierPrice);
 
         return $tierPrice;

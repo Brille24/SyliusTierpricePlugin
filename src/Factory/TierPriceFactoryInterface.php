@@ -13,7 +13,6 @@ namespace Brille24\SyliusTierPricePlugin\Factory;
 
 use Brille24\SyliusTierPricePlugin\Entity\ProductVariantInterface;
 use Brille24\SyliusTierPricePlugin\Entity\TierPriceInterface;
-use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
 interface TierPriceFactoryInterface extends FactoryInterface

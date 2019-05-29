@@ -28,7 +28,10 @@ final class TierPriceFactory implements TierPriceFactoryInterface
     /** {@inheritdoc} */
     public function createNew(): TierPriceInterface
     {
-        return $this->factory->createNew();
+        /** @var TierPriceInterface $tierPrice */
+        $tierPrice = $this->factory->createNew();
+
+        return $tierPrice;
     }
 
     /** {@inheritdoc} */

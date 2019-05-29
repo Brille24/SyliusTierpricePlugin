@@ -26,12 +26,9 @@ final class TierPriceFactory implements TierPriceFactoryInterface
     }
 
     /** {@inheritdoc} */
-    public function createNew(): TierPriceInterface
+    public function createNew(): object
     {
-        /** @var TierPriceInterface $tierPrice */
-        $tierPrice = $this->factory->createNew();
-
-        return $tierPrice;
+        return $this->factory->createNew();
     }
 
     /** {@inheritdoc} */
@@ -39,6 +36,7 @@ final class TierPriceFactory implements TierPriceFactoryInterface
         ProductVariantInterface $productVariant,
         array $options = []
     ): TierPriceInterface {
+        /** @var TierPriceInterface $tierPrice */
         $tierPrice = $this->createNew();
 
         $tierPrice->setQty($options['quantity']);

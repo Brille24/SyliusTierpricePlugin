@@ -13,21 +13,10 @@ namespace Brille24\SyliusTierPricePlugin\Factory;
 
 use Brille24\SyliusTierPricePlugin\Entity\ProductVariantInterface;
 use Brille24\SyliusTierPricePlugin\Entity\TierPriceInterface;
-use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Resource\Factory\FactoryInterface;
 
-interface TierPriceFactoryInterface
+interface TierPriceFactoryInterface extends FactoryInterface
 {
-    /**
-     * Creates a Tier price entity
-     *
-     * @param int              $quantity
-     * @param ChannelInterface $channel
-     * @param int              $price
-     *
-     * @return TierPriceInterface
-     */
-    public function createNew(int $quantity, ChannelInterface $channel, int $price): TierPriceInterface;
-
     /**
      * Creates a tierprice entity which is attached to a product variant
      *

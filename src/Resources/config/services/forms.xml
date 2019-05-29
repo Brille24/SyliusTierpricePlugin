@@ -1,0 +1,16 @@
+<container xmlns="http://symfony.com/schema/dic/services">
+    <services>
+        <service class="Brille24\SyliusTierPricePlugin\Form\TierPriceType"
+                 id="brille24_tier_price.form.tier_price_type"
+        >
+            <tag name="form.type" />
+            <argument type="service" id="sylius.repository.channel" />
+        </service>
+
+        <service class="Brille24\SyliusTierPricePlugin\Form\Extension\ProductVariantTypeExtension"
+                 id="brille24_tier_price.form.extension.product_variant_type"
+        >
+            <tag name="form.type_extension" extended_type="Sylius\Bundle\ProductBundle\Form\Type\ProductVariantType" />
+        </service>
+    </services>
+</container>

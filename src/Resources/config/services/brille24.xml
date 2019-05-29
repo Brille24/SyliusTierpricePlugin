@@ -1,0 +1,24 @@
+<container xmlns="http://symfony.com/schema/dic/services">
+    <services>
+        <service class="Brille24\SyliusTierPricePlugin\Services\TierPriceFinder"
+                 id="brille24_tier_price.tier_price_finder"
+        >
+            <argument type="service" id="brille24.repository.tierprice" />
+        </service>
+
+        <service class="Brille24\SyliusTierPricePlugin\Services\ProductVariantPriceCalculator"
+                 id="brille24_tier_price.calculator.product_variant_price"
+                 decorates="sylius.calculator.product_variant_price"
+        >
+            <argument type="service" id="brille24_tier_price.calculator.product_variant_price.inner" />
+            <argument type="service" id="brille24_tier_price.tier_price_finder" />
+        </service>
+
+        <service class="Brille24\SyliusTierPricePlugin\Services\OrderPricesRecalculator"
+                 id="brille24_tier_price.order_processing.order_prices_recalculator"
+                 decorates="sylius.order_processing.order_prices_recalculator"
+        >
+            <argument type="service" id="brille24_tier_price.calculator.product_variant_price" />
+        </service>
+    </services>
+</container>

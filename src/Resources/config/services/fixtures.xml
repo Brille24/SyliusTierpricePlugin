@@ -1,0 +1,11 @@
+<container xmlns="http://symfony.com/schema/dic/services">
+    <services>
+        <service class="Brille24\SyliusTierPricePlugin\Fixtures\TierPriceFixture"
+                 id="brille24_tier_price.fixtures.product_variant_fixture"
+        >
+            <tag name="sylius_fixtures.fixture" />
+            <argument type="service" id="doctrine.orm.default_entity_manager" />
+            <argument type="service" id="brille24_tierprice_tierprice_example_factory" />
+        </service>
+    </services>
+</container>

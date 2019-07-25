@@ -28,14 +28,6 @@ class TierPriceType extends AbstractType
         $builder->add('qty', NumberType::class, [
             'label'       => 'sylius.ui.amount',
             'required'    => true,
-            'constraints' => [
-                new Range([
-                  'min'        => 0,
-                  'groups'     => 'sylius',
-                  'minMessage' => 'Quantity has to be positive',
-                ]),
-                new NotBlank(['groups' => 'sylius']),
-            ],
         ]);
 
         $builder->add('price', MoneyType::class, [
@@ -45,10 +37,7 @@ class TierPriceType extends AbstractType
         ]);
 
         $builder->add('channel', ChannelChoiceType::class, [
-            'attr'        => ['style' => 'display:none'],
-            'constraints' => [
-                new NotBlank(['groups' => 'sylius']),
-            ],
+            'attr' => ['style' => 'display:none'],
         ]);
     }
 

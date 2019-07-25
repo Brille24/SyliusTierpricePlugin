@@ -1,3 +1,4 @@
 framework:
     validation:
-        enable_annotations: true
+        enabled: true
+        enable_annotations: false

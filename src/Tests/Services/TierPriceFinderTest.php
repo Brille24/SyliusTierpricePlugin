@@ -15,9 +15,10 @@ use Brille24\SyliusTierPricePlugin\Entity\ProductVariant;
 use Brille24\SyliusTierPricePlugin\Entity\TierPrice;
 use Brille24\SyliusTierPricePlugin\Repository\TierPriceRepositoryInterface;
 use Brille24\SyliusTierPricePlugin\Services\TierPriceFinder;
+use PHPUnit\Framework\TestCase;
 use Sylius\Component\Core\Model\ChannelInterface;
 
-class TierPriceFinderTest extends \PHPUnit\Framework\TestCase
+class TierPriceFinderTest extends TestCase
 {
     /** @var TierPriceFinder */
     private $tierPriceFinder;
@@ -41,7 +42,7 @@ class TierPriceFinderTest extends \PHPUnit\Framework\TestCase
         $this->testChannel = $this->createMock(ChannelInterface::class);
     }
 
-    public function testCalculateWithNotEnoughQuantity()
+    public function testCalculateWithNotEnoughQuantity(): void
     {
         //## PREPARE
         $tierPrice = $this->createMock(TierPrice::class);
@@ -58,7 +59,7 @@ class TierPriceFinderTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals(null, $tierPriceFound);
     }
 
-    public function testCalculateWithOneTierPrice()
+    public function testCalculateWithOneTierPrice(): void
     {
         //## PREPARE
         $tierPrice = $this->createMock(TierPrice::class);
@@ -75,7 +76,7 @@ class TierPriceFinderTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($tierPriceFound, $tierPrice);
     }
 
-    public function testCalculateWithHighestTierPrice()
+    public function testCalculateWithHighestTierPrice(): void
     {
         //## PREPARE
         $tierPrice1 = $this->createMock(TierPrice::class);

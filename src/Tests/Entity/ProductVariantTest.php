@@ -14,9 +14,10 @@ namespace Brille24\SyliusTierPricePlugin\Tests\Entity;
 use Brille24\SyliusTierPricePlugin\Entity\ProductVariant;
 use Brille24\SyliusTierPricePlugin\Entity\TierPrice;
 use Brille24\SyliusTierPricePlugin\Entity\TierPriceInterface;
+use PHPUnit\Framework\TestCase;
 use Sylius\Component\Core\Model\ChannelInterface;
 
-class ProductVariantTest extends \PHPUnit\Framework\TestCase
+class ProductVariantTest extends TestCase
 {
     /** @var ChannelInterface */
     private $testChannel;

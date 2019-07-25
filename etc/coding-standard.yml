@@ -37,6 +37,16 @@ services:
     PhpCsFixer\Fixer\ClassNotation\VisibilityRequiredFixer:
       - property
       - method
+    PhpCsFixer\Fixer\Comment\HeaderCommentFixer:
+        comment_type: "PHPDoc"
+        location: 'after_open'
+        header: |
+            This file is part of the Brille24 tierprice plugin.
+
+            (c) Brille24 GmbH
+
+            For the full copyright and license information, please view the LICENSE
+            file that was distributed with this source code.
     PhpCsFixer\Fixer\Comment\MultilineCommentOpeningClosingFixer: ~
     PhpCsFixer\Fixer\Comment\NoTrailingWhitespaceInCommentFixer: ~
     PhpCsFixer\Fixer\ControlStructure\ElseifFixer: ~

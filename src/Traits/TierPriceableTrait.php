@@ -16,7 +16,9 @@ use Brille24\SyliusTierPricePlugin\Entity\ProductVariant;
 use Brille24\SyliusTierPricePlugin\Entity\TierPriceInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
+use Sylius\Component\Customer\Model\CustomerGroupInterface;
 
 /**
  * Trait TierPriceableTrait
@@ -48,33 +50,39 @@ trait TierPriceableTrait
     /**
      * Returns the tier prices only for one channel
      *
-     * @param ChannelInterface $channel
+     * @param ChannelInterface       $channel
+     * @param CustomerInterface|null $customer
      *
      * @return TierPriceInterface[]
      */
-    public function getTierPricesForChannel(ChannelInterface $channel): array
+    public function getTierPricesForChannel(ChannelInterface $channel, ?CustomerInterface $customer = null): array
     {
-        return array_filter($this->getTierPrices(), function (TierPriceInterface $tierPrice) use ($channel) {
+        $channelTierPrices = array_filter($this->getTierPrices(), function (TierPriceInterface $tierPrice) use ($channel) {
             $tierPriceChannel = $tierPrice->getChannel();
 
             return $tierPriceChannel === null ? false : $tierPriceChannel->getId() === $channel->getId();
         });
+
+        return $this->filterPricesWithCustomerGroup($channelTierPrices, $customer);
     }
 
     /**
      * Returns the tier prices only for one channel
      *
-     * @param string $code
+     * @param string                 $code
+     * @param CustomerInterface|null $customer
      *
      * @return TierPriceInterface[]
      */
-    public function getTierPricesForChannelCode(string $code): array
+    public function getTierPricesForChannelCode(string $code, ?CustomerInterface $customer = null): array
     {
-        return array_filter($this->getTierPrices(), function (TierPriceInterface $tierPrice) use ($code) {
+        $channelTierPrices = array_filter($this->getTierPrices(), function (TierPriceInterface $tierPrice) use ($code) {
             $tierPriceChannel = $tierPrice->getChannel();
 
             return $tierPriceChannel === null ? false : $tierPriceChannel->getCode() === $code;
         });
+
+        return $this->filterPricesWithCustomerGroup($channelTierPrices, $customer);
     }
 
     /**
@@ -116,4 +124,40 @@ trait TierPriceableTrait
             $this->addTierPrice($tierPrice);
         }
     }
+
+    /**
+     * @param array                  $tierPrices
+     * @param CustomerInterface|null $customer
+     *
+     * @return CustomerInterface[]
+     */
+    private function filterPricesWithCustomerGroup(array $tierPrices, ?CustomerInterface $customer = null): array
+    {
+        $group = null;
+        if($customer instanceof CustomerInterface){
+            $group = $customer->getGroup();
+        }
+
+        $hasGroupPrice = false;
+        if($group instanceof CustomerGroupInterface){
+            foreach($tierPrices as $tierPrice){
+                if($tierPrice->getCustomerGroup() instanceof CustomerGroupInterface && $tierPrice->getCustomerGroup()->getId() === $group->getId()){
+                    $hasGroupPrice = true;
+                    break;
+                }
+            }
+        }
+
+        if(! $group instanceof CustomerGroupInterface || !$hasGroupPrice){
+            // No customer group or group so filter out any prices with group set and return
+            return array_filter($tierPrices, static function(TierPriceInterface $tierPrice){
+                return $tierPrice->getCustomerGroup() === null;
+            });
+        }
+
+        return array_filter($tierPrices, static function(TierPriceInterface $tierPrice) use ($group){
+            return $tierPrice->getCustomerGroup() !== null && $tierPrice->getCustomerGroup()->getId() === $group->getId();
+        });
+    }
+
 }

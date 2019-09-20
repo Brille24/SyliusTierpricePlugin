@@ -19,5 +19,8 @@
         <many-to-one target-entity="Sylius\Component\Channel\Model\ChannelInterface" field="channel" />
 
         <many-to-one target-entity="Sylius\Component\Product\Model\ProductVariantInterface" field="productVariant" inversed-by="tierPrices"/>
+
+        <many-to-one target-entity="Sylius\Component\Customer\Model\CustomerGroupInterface" field="customerGroup" />
+
     </mapped-superclass>
 </doctrine-mapping>

@@ -14,7 +14,13 @@
             </div>
             {{ form_widget(tierprice.channel) }}
         </td>
-
+        <td>
+            <div class="field">
+                {{ form_widget(tierprice.customerGroup) }}
+                {{ form_errors(tierprice.customerGroup) }}
+            </div>
+            {{ form_widget(tierprice.channel) }}
+        </td>
         <td>
             <a class="ui red labeled icon button" onclick="tierPriceTableRemove(this);">
                 <i class="trash icon"></i>{{ 'sylius.ui.delete'|trans }}
@@ -55,6 +61,7 @@
                 <tr>
                     <th class="table-column-quantity">{{ 'sylius.ui.quantity'|trans }}</th>
                     <th>{{ 'sylius.ui.unit_price'|trans }} </th>
+                    <th>{{ 'sylius.form.customer.group'|trans }} </th>
                     <th>{{ 'sylius.ui.delete'|trans }}</th>
                 </tr>
                 </thead>

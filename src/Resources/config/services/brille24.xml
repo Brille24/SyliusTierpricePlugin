@@ -12,6 +12,7 @@
         >
             <argument type="service" id="brille24_tier_price.calculator.product_variant_price.inner" />
             <argument type="service" id="brille24_tier_price.tier_price_finder" />
+            <argument type="service" id="sylius.context.customer" />
         </service>
 
         <service class="Brille24\SyliusTierPricePlugin\Services\OrderPricesRecalculator"

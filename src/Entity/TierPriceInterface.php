@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace Brille24\SyliusTierPricePlugin\Entity;
 
 use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Customer\Model\CustomerGroupInterface;
 
 /**
  * Class ProductVariant
@@ -66,4 +67,14 @@ interface TierPriceInterface
      * @param ChannelInterface|null $channel
      */
     public function setChannel(?ChannelInterface $channel): void;
+
+    /**
+     * @return CustomerGroupInterface|null
+     */
+    public function getCustomerGroup(): ?CustomerGroupInterface;
+
+    /**
+     * @param CustomerGroupInterface $customerGroup
+     */
+    public function setCustomerGroup(?CustomerGroupInterface $customerGroup): void;
 }

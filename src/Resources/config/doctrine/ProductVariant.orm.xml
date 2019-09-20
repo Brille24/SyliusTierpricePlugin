@@ -10,6 +10,7 @@
                 <cascade-all />
             </cascade>
             <order-by>
+                <order-by-field name="customerGroup" direction="ASC"/>
                 <order-by-field name="qty" direction="ASC"/>
             </order-by>
         </one-to-many>

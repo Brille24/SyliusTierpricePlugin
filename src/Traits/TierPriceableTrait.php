@@ -60,7 +60,7 @@ trait TierPriceableTrait
         $channelTierPrices = array_filter($this->getTierPrices(), function (TierPriceInterface $tierPrice) use ($channel) {
             $tierPriceChannel = $tierPrice->getChannel();
 
-            return $tierPriceChannel === null ? false : $tierPriceChannel->getId() === $channel->getId();
+            return $tierPriceChannel !== null && $tierPriceChannel->getId() === $channel->getId();
         });
 
         return $this->filterPricesWithCustomerGroup($channelTierPrices, $customer);
@@ -79,7 +79,7 @@ trait TierPriceableTrait
         $channelTierPrices = array_filter($this->getTierPrices(), function (TierPriceInterface $tierPrice) use ($code) {
             $tierPriceChannel = $tierPrice->getChannel();
 
-            return $tierPriceChannel === null ? false : $tierPriceChannel->getCode() === $code;
+            return $tierPriceChannel !== null && $tierPriceChannel->getCode() === $code;
         });
 
         return $this->filterPricesWithCustomerGroup($channelTierPrices, $customer);
@@ -129,7 +129,7 @@ trait TierPriceableTrait
      * @param array                  $tierPrices
      * @param CustomerInterface|null $customer
      *
-     * @return CustomerInterface[]
+     * @return TierPriceInterface[]
      */
     private function filterPricesWithCustomerGroup(array $tierPrices, ?CustomerInterface $customer = null): array
     {

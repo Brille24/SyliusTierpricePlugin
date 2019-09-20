@@ -27,7 +27,7 @@ class TierPriceRepository extends EntityRepository implements TierPriceRepositor
     {
         if($customerGroup instanceof CustomerGroupInterface){
             $prices = $this->findBy(['productVariant' => $productVariant, 'channel' => $channel, 'customerGroup' => $customerGroup], ['qty' => 'ASC']);
-            if(count($prices)){
+            if(count($prices) > 0){
                 return $prices;
             }
         }

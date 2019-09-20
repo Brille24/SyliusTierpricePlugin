@@ -50,7 +50,7 @@ class TierPrice implements ResourceInterface, TierPriceInterface
 
     public function __construct(int $quantity = 0, int $price = 0)
     {
-        $this->qty   = $quantity;
+        $this->qty = $quantity;
         $this->price = $price;
     }
 

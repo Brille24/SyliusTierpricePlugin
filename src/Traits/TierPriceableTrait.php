@@ -134,30 +134,35 @@ trait TierPriceableTrait
     private function filterPricesWithCustomerGroup(array $tierPrices, ?CustomerInterface $customer = null): array
     {
         $group = null;
-        if($customer instanceof CustomerInterface){
+        if ($customer instanceof CustomerInterface) {
             $group = $customer->getGroup();
         }
 
         $hasGroupPrice = false;
-        if($group instanceof CustomerGroupInterface){
-            foreach($tierPrices as $tierPrice){
-                if($tierPrice->getCustomerGroup() instanceof CustomerGroupInterface && $tierPrice->getCustomerGroup()->getId() === $group->getId()){
+        if ($group instanceof CustomerGroupInterface) {
+            foreach ($tierPrices as $tierPrice) {
+                if (
+                    $tierPrice->getCustomerGroup() instanceof CustomerGroupInterface &&
+                    $tierPrice->getCustomerGroup()->getId() === $group->getId()
+                ) {
                     $hasGroupPrice = true;
+
                     break;
                 }
             }
         }
 
-        if(! $group instanceof CustomerGroupInterface || !$hasGroupPrice){
+        if (!$group instanceof CustomerGroupInterface || !$hasGroupPrice) {
             // No customer group or group so filter out any prices with group set and return
-            return array_filter($tierPrices, static function(TierPriceInterface $tierPrice){
+            return array_filter($tierPrices, static function (TierPriceInterface $tierPrice) {
                 return $tierPrice->getCustomerGroup() === null;
             });
         }
 
-        return array_filter($tierPrices, static function(TierPriceInterface $tierPrice) use ($group){
-            return $tierPrice->getCustomerGroup() !== null && $tierPrice->getCustomerGroup()->getId() === $group->getId();
+        return array_filter($tierPrices, static function (TierPriceInterface $tierPrice) use ($group) {
+            return
+                $tierPrice->getCustomerGroup() !== null &&
+                $tierPrice->getCustomerGroup()->getId() === $group->getId();
         });
     }
-
 }

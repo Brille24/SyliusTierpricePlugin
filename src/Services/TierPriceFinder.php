@@ -44,7 +44,7 @@ class TierPriceFinder implements TierPriceFinderInterface
         int $quantity
     ): ?TierPriceInterface {
         $group = null;
-        if($customer instanceof CustomerInterface){
+        if ($customer instanceof CustomerInterface) {
             $group = $customer->getGroup();
         }
         $possibleTierPrices = $this->tierPriceRepository->getSortedTierPrices($tierPriceableEntity, $channel, $group);

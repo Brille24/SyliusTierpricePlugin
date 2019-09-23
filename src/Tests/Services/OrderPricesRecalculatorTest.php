@@ -1,10 +1,14 @@
 <?php
+
 /**
- * Created by PhpStorm.
- * User: mamazu
- * Date: 08/01/18
- * Time: 10:45
+ * This file is part of the Brille24 tierprice plugin.
+ *
+ * (c) Brille24 GmbH
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
+
 declare(strict_types=1);
 
 namespace Brille24\SyliusTierPricePlugin\Tests\Services;

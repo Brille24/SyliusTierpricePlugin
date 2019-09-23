@@ -28,12 +28,12 @@ class TierPriceType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->add('qty', NumberType::class, [
-            'label' => 'sylius.ui.amount',
-            'required' => true,
+            'label'       => 'sylius.ui.amount',
+            'required'    => true,
             'constraints' => [
                 new Range([
-                  'min' => 0,
-                  'groups' => 'sylius',
+                  'min'        => 0,
+                  'groups'     => 'sylius',
                   'minMessage' => 'Quantity has to be positive',
                 ]),
                 new NotBlank(['groups' => 'sylius']),
@@ -41,18 +41,18 @@ class TierPriceType extends AbstractType
         ]);
 
         $builder->add('price', MoneyType::class, [
-            'label' => 'sylius.ui.price',
+            'label'    => 'sylius.ui.price',
             'required' => true,
             'currency' => $options['currency'],
         ]);
 
         $builder->add('customerGroup', EntityType::class, [
-            'class' => CustomerGroup::class,
+            'class'    => CustomerGroup::class,
             'required' => false,
         ]);
 
         $builder->add('channel', ChannelChoiceType::class, [
-            'attr' => ['style' => 'display:none'],
+            'attr'        => ['style' => 'display:none'],
             'constraints' => [
                 new NotBlank(['groups' => 'sylius']),
             ],
@@ -64,7 +64,7 @@ class TierPriceType extends AbstractType
         $resolver->setRequired(['currency']);
         $resolver->setDefaults([
            'data_class' => TierPrice::class,
-           'currency' => 'USD',
+           'currency'   => 'USD',
         ]);
     }
 

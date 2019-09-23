@@ -35,8 +35,8 @@ final class ProductVariantPriceCalculator implements ProductVariantPriceCalculat
         CustomerContextInterface $customerContext
     ) {
         $this->basePriceCalculator = $basePriceCalculator;
-        $this->tierPriceFinder = $tierPriceFinder;
-        $this->customerContext = $customerContext;
+        $this->tierPriceFinder     = $tierPriceFinder;
+        $this->customerContext     = $customerContext;
     }
 
     /**

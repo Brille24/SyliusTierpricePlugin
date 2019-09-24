@@ -3,4 +3,4 @@ brille24_tier_price:
         tier_prices: Staffelpreise
     form:
         validation:
-            not_unique: Staffelpreis f�r diese Menge existiert schon.
+            not_unique: Staffelpreis für diese Menge existiert schon.

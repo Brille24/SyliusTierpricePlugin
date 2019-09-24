@@ -19,11 +19,11 @@
         <many-to-one target-entity="Sylius\Component\Channel\Model\ChannelInterface" field="channel" />
 
         <many-to-one target-entity="Sylius\Component\Product\Model\ProductVariantInterface" field="productVariant" inversed-by="tierPrices"/>
-        
+
 	<many-to-one target-entity="Sylius\Component\Customer\Model\CustomerGroupInterface" field="customerGroup" />
 
         <unique-constraints>
-            <unique-constraint columns="qty,channel_id,productVariant_id" name="no_duplicate_prices"/>
+            <unique-constraint columns="qty,channel_id,productVariant_id,customerGroup_id" name="no_duplicate_prices"/>
         </unique-constraints>
     </mapped-superclass>
 </doctrine-mapping>

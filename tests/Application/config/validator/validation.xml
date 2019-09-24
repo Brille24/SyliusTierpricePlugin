@@ -24,6 +24,7 @@
                 <value>qty</value>
                 <value>channel</value>
                 <value>productVariant</value>
+                <value>customerGroup</value>
             </option>
             <option name="message">brille24_tier_price.form.validation.not_unique</option>
             <option name="groups">sylius</option>

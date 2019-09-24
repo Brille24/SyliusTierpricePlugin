@@ -13,11 +13,12 @@ use Brille24\SyliusTierPricePlugin\Entity\ProductVariant;
 use Brille24\SyliusTierPricePlugin\Entity\TierPrice;
 use Brille24\SyliusTierPricePlugin\Services\ProductVariantPriceCalculator;
 use Brille24\SyliusTierPricePlugin\Services\TierPriceFinderInterface;
+use PHPUnit\Framework\TestCase;
 use Sylius\Component\Core\Calculator\ProductVariantPriceCalculatorInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductVariant as SyliusProductVariant;
 
-class ProductVariantPriceCalculatorTest extends \PHPUnit\Framework\TestCase
+class ProductVariantPriceCalculatorTest extends TestCase
 {
     /** @var ProductVariantPriceCalculatorInterface */
     private $basePriceCalculator;
@@ -38,7 +39,7 @@ class ProductVariantPriceCalculatorTest extends \PHPUnit\Framework\TestCase
         $this->priceCalculator = new ProductVariantPriceCalculator($this->basePriceCalculator, $this->tierPriceFinder);
     }
 
-    public function testCalculateWithNonTierpriceable()
+    public function testCalculateWithNonTierpriceable(): void
     {
         //## PREPARE
         $productVariant = $this->createMock(SyliusProductVariant::class);
@@ -51,7 +52,7 @@ class ProductVariantPriceCalculatorTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals(-1, $price);
     }
 
-    public function testCalculatePriceWithEmptyTierPrices()
+    public function testCalculatePriceWithEmptyTierPrices(): void
     {
         //## PREPARE
         $productVariant = $this->createMock(ProductVariant::class);
@@ -66,7 +67,7 @@ class ProductVariantPriceCalculatorTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals(-1, $result);
     }
 
-    public function testCalculatePriceWithTierPrices()
+    public function testCalculatePriceWithTierPrices(): void
     {
         //## PREPARE
         $productVariant = $this->createMock(ProductVariant::class);

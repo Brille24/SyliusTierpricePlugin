@@ -1,3 +1,6 @@
 brille24_tier_price:
     ui:
         tier_prices: Staffelpreise
+    form:
+        validation:
+            not_unique: Staffelpreis f�r diese Menge existiert schon.

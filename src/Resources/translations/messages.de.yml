@@ -1,6 +1,7 @@
 brille24_tier_price:
     ui:
         tier_prices: Staffelpreise
+        customer_group: Kunden Gruppe
     form:
         validation:
             not_unique: Staffelpreis für diese Menge existiert schon.

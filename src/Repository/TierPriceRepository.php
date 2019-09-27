@@ -36,4 +36,17 @@ class TierPriceRepository extends EntityRepository implements TierPriceRepositor
 
         return $this->findBy(['productVariant' => $productVariant, 'channel' => $channel, 'customerGroup' => null], ['qty' => 'ASC']);
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getTierPriceForQuantity(TierPriceableInterface $productVariant, ChannelInterface $channel, ?CustomerGroupInterface $customerGroup, int $quantity): ?TierPriceInterface
+    {
+        return $this->findOneBy([
+            'productVariant' => $productVariant,
+            'channel'        => $channel,
+            'customerGroup'  => $customerGroup,
+            'qty'            => $quantity,
+        ]);
+    }
 }

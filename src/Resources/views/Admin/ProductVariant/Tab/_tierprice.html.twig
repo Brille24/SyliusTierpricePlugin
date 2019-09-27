@@ -43,6 +43,8 @@
             var tierPriceIndex = {{ variantForm.tierPrices|length }};
         </script>
 
+        {{ form_errors(variantForm) }}
+
         {# Generating the new row prototype#}
         <span data-prototype="{{ row.tierPriceRow(variantForm.tierPrices.vars.prototype, '__name__')|e('html_attr') }}"
               id="prototype_holder">
@@ -61,7 +63,7 @@
                 <tr>
                     <th class="table-column-quantity">{{ 'sylius.ui.quantity'|trans }}</th>
                     <th>{{ 'sylius.ui.unit_price'|trans }} </th>
-                    <th>{{ 'sylius.form.customer.group'|trans }} </th>
+                    <th>{{ 'brille24_tier_price.ui.customer_group'|trans }} </th>
                     <th>{{ 'sylius.ui.delete'|trans }}</th>
                 </tr>
                 </thead>

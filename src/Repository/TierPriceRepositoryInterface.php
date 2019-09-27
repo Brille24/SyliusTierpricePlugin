@@ -31,4 +31,16 @@ interface TierPriceRepositoryInterface extends ObjectRepository
      * @return TierPriceInterface[]
      */
     public function getSortedTierPrices(TierPriceableInterface $productVariant, ChannelInterface $channel, ?CustomerGroupInterface $customerGroup): array;
+
+    /**
+     * Gets a tierprice by product variant and quantity
+     *
+     * @param TierPriceableInterface $productVariant
+     * @param ChannelInterface $channel
+     * @param CustomerGroupInterface|null $customerGroup
+     * @param int $quantity
+     *
+     * @return TierPriceInterface|null
+     */
+    public function getTierPriceForQuantity(TierPriceableInterface $productVariant, ChannelInterface $channel, ?CustomerGroupInterface $customerGroup, int $quantity): ?TierPriceInterface;
 }

@@ -21,6 +21,15 @@ class TierPriceUniqueConstraint extends Constraint
      *  @var string
      */
     public $message = 'brille24_tier_price.form.validation.not_unique';
+    /**
+     * @var array
+     */
+    public $fields = [];
+
+    public function getRequiredOptions(): array
+    {
+        return ['fields'];
+    }
 
     public function getTargets(): string
     {
@@ -30,5 +39,10 @@ class TierPriceUniqueConstraint extends Constraint
     public function validatedBy(): string
     {
         return TierPriceUniqueValidator::class;
+    }
+
+    public function getDefaultOption(): ?string
+    {
+        return 'fields';
     }
 }

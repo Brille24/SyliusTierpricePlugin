@@ -20,6 +20,12 @@
             </constraint>
         </property>
         <constraint name="Brille24\SyliusTierPricePlugin\Validator\TierPriceUniqueConstraint">
+            <option name="fields">
+                <value>qty</value>
+                <value>channel</value>
+                <value>productVariant</value>
+                <value>customerGroup</value>
+            </option>
             <option name="groups">sylius</option>
         </constraint>
     </class>

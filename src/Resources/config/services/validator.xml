@@ -2,8 +2,7 @@
     <services>
         <service class="Brille24\SyliusTierPricePlugin\Validator\TierPriceUniqueValidator"
                  id="brille24.sylius_tier_price_plugin.validator.tier_price_unique_validator">
-            <argument type="service" id="brille24.repository.tierprice" />
-
+            <argument type="service" id="doctrine" />
             <tag name="validator.constraint_validator" alias="brille24.tier_price_validator.unqiue" />
         </service>
     </services>

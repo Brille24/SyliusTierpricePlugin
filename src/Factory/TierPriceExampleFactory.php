@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Brille24\SyliusTierPricePlugin\Factory;
 
 use Brille24\SyliusTierPricePlugin\Entity\ProductVariantInterface;
-use Brille24\SyliusTierPricePlugin\Entity\TierPrice;
 use Brille24\SyliusTierPricePlugin\Entity\TierPriceInterface;
 use Doctrine\ORM\EntityNotFoundException;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\AbstractExampleFactory;
@@ -36,18 +35,25 @@ class TierPriceExampleFactory extends AbstractExampleFactory
      */
     private $channelRepository;
 
+    /**
+     * @var TierPriceFactoryInterface
+     */
+    private $tierPriceFactory;
+
     public function __construct(
         ProductVariantRepositoryInterface $productVariantRepository,
-        ChannelRepositoryInterface $channelRepository
+        ChannelRepositoryInterface $channelRepository,
+        TierPriceFactoryInterface $tierPriceFactory
     ) {
         $this->productVariantRepository = $productVariantRepository;
         $this->channelRepository        = $channelRepository;
+        $this->tierPriceFactory         = $tierPriceFactory;
     }
 
     /**
-     * Creates a tierprice
+     * Creates a tier price
      *
-     * @param array $options The configuration of the tierprice
+     * @param array $options The configuration of the tier price
      *
      * @return TierPriceInterface
      *
@@ -55,18 +61,10 @@ class TierPriceExampleFactory extends AbstractExampleFactory
      */
     public function create(array $options = []): TierPriceInterface
     {
-        $tierPrice = new TierPrice();
-
-        $tierPrice->setQty($options['quantity']);
-        $tierPrice->setChannel($options['channel']);
-        $tierPrice->setPrice($options['price']);
-
         /** @var ProductVariantInterface $productVariant */
         $productVariant = $options['product_variant'];
-        $tierPrice->setProductVariant($productVariant);
-        $productVariant->addTierPrice($tierPrice);
 
-        return $tierPrice;
+        return $this->tierPriceFactory->createAtProductVariant($productVariant, $options);
     }
 
     /**

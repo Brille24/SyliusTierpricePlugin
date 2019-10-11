@@ -15,7 +15,7 @@ namespace Brille24\SyliusTierPricePlugin\Validator;
 
 use Brille24\SyliusTierPricePlugin\Entity\TierPriceInterface;
 use function count;
-use Doctrine\Common\Persistence\Mapping\ClassMetadata;
+use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\ORM\Mapping\ClassMetadataInfo;
 use function get_class;
 use ReflectionProperty;
@@ -58,8 +58,6 @@ class TierPriceUniqueValidator extends ConstraintValidator
                 )
             );
         }
-        /* @var $class ClassMetadataInfo */
-        $class = $em->getClassMetadata(get_class($value));
 
         $otherTierPrices = $this->context->getRoot()->getData()->getTierPrices();
         $otherTierPrices = array_filter($otherTierPrices, static function ($tierPrice) use ($value) {
@@ -67,7 +65,7 @@ class TierPriceUniqueValidator extends ConstraintValidator
         });
 
         foreach ($otherTierPrices as $otherTierPrice) {
-            if ($this->areDuplicates($fields, $class, $value, $otherTierPrice)) {
+            if ($this->areDuplicates($fields, $em, $value, $otherTierPrice)) {
                 $this->context->buildViolation($constraint->message)->atPath($fields[0])->addViolation();
 
                 return;
@@ -75,8 +73,10 @@ class TierPriceUniqueValidator extends ConstraintValidator
         }
     }
 
-    private function areDuplicates(array $fields, ClassMetadata $class, TierPriceInterface $first, TierPriceInterface $second): bool
+    private function areDuplicates(array $fields, ObjectManager $em, TierPriceInterface $first, TierPriceInterface $second): bool
     {
+        /* @var $class ClassMetadataInfo */
+        $class = $em->getClassMetadata(get_class($first));
         Assert::isInstanceOf($class, ClassMetadataInfo::class);
 
         foreach ($fields as $fieldName) {
@@ -88,15 +88,39 @@ class TierPriceUniqueValidator extends ConstraintValidator
                     )
                 );
             }
-            /** @var ReflectionProperty $fieldMetaData */
-            $fieldMetaData   = $class->reflFields[$fieldName];
-            $fieldValue      = $fieldMetaData->getValue($first);
-            $otherFieldValue = $fieldMetaData->getValue($second);
+            $fieldValue      = $this->getFieldValue($em, $class, $fieldName, $first);
+            $otherFieldValue = $this->getFieldValue($em, $class, $fieldName, $second);
             if ($fieldValue !== $otherFieldValue) {
                 return false;
             }
         }
 
         return true;
+    }
+
+    /**
+     * @param ObjectManager      $em
+     * @param ClassMetadataInfo  $class
+     * @param string             $fieldName
+     * @param TierPriceInterface $value
+     *
+     * @return mixed
+     */
+    private function getFieldValue(ObjectManager $em, ClassMetadataInfo $class, string $fieldName, TierPriceInterface $value)
+    {
+        /** @var ReflectionProperty $fieldMetaData */
+        $fieldMetaData = $class->reflFields[$fieldName];
+
+        $fieldValue = $fieldMetaData->getValue($value);
+
+        if (null !== $fieldValue && $class->hasAssociation($fieldName)) {
+            /* Ensure the Proxy is initialized before using reflection to
+             * read its identifiers. This is necessary because the wrapped
+             * getter methods in the Proxy are being bypassed.
+             */
+            $em->initializeObject($fieldValue);
+        }
+
+        return $fieldValue;
     }
 }

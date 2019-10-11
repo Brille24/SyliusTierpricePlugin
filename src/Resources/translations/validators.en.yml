@@ -1,0 +1,4 @@
+brille24_tier_price:
+  form:
+    validation:
+      not_unique: Tierprice for this quantity already exists.

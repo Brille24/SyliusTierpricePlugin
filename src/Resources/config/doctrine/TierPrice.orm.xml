@@ -13,17 +13,23 @@
             <generator strategy="AUTO"/>
         </id>
 
-        <field name="price" type="integer" />
-        <field name="qty" type="integer" />
+        <field name="price" type="integer" column="price" />
+        <field name="qty" type="integer" column="qty" />
 
-        <many-to-one target-entity="Sylius\Component\Channel\Model\ChannelInterface" field="channel" />
+        <many-to-one target-entity="Sylius\Component\Channel\Model\ChannelInterface" field="channel">
+            <join-column name="channel_id" />
+        </many-to-one>
 
-        <many-to-one target-entity="Sylius\Component\Product\Model\ProductVariantInterface" field="productVariant" inversed-by="tierPrices"/>
+        <many-to-one target-entity="Sylius\Component\Product\Model\ProductVariantInterface" field="productVariant" inversed-by="tierPrices">
+            <join-column name="product_variant_id" />
+        </many-to-one>
 
-	<many-to-one target-entity="Sylius\Component\Customer\Model\CustomerGroupInterface" field="customerGroup" />
+	    <many-to-one target-entity="Sylius\Component\Customer\Model\CustomerGroupInterface" field="customerGroup">
+            <join-column name="customer_group_id" />
+        </many-to-one>
 
         <unique-constraints>
-            <unique-constraint columns="qty,channel_id,productVariant_id,customerGroup_id" name="no_duplicate_prices"/>
+            <unique-constraint columns="qty,channel_id,product_variant_id,customer_group_id" name="no_duplicate_prices"/>
         </unique-constraints>
     </mapped-superclass>
 </doctrine-mapping>

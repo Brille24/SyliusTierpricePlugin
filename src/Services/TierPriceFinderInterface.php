@@ -23,7 +23,7 @@ interface TierPriceFinderInterface
     public function find(
         TierPriceableInterface $tierPriceableEntity,
         ChannelInterface $channel,
-        ?CustomerInterface $customer,
-        int $quantity
+        int $quantity,
+        ?CustomerInterface $customer = null
     ): ?TierPriceInterface;
 }

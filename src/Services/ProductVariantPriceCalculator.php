@@ -63,7 +63,7 @@ final class ProductVariantPriceCalculator implements ProductVariantPriceCalculat
 
         // Find a tier price and return it
         if ($productVariant instanceof TierPriceableInterface) {
-            $tierPrice = $this->tierPriceFinder->find($productVariant, $context['channel'], $this->customerContext->getCustomer(), $context['quantity']);
+            $tierPrice = $this->tierPriceFinder->find($productVariant, $context['channel'], $context['quantity'], $this->customerContext->getCustomer());
             if ($tierPrice !== null) {
                 return $tierPrice->getPrice();
             }

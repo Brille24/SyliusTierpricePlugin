@@ -34,16 +34,16 @@ class TierPriceFinder implements TierPriceFinderInterface
      *
      * @param TierPriceableInterface $tierPriceableEntity
      * @param ChannelInterface       $channel
-     * @param CustomerInterface      $customer
      * @param int                    $quantity
+     * @param CustomerInterface      $customer
      *
      * @return TierPriceInterface|null
      */
     public function find(
         TierPriceableInterface $tierPriceableEntity,
         ChannelInterface $channel,
-        ?CustomerInterface $customer,
-        int $quantity
+        int $quantity,
+        ?CustomerInterface $customer = null
     ): ?TierPriceInterface {
         $group = null;
         if ($customer instanceof CustomerInterface) {

@@ -25,8 +25,12 @@ class TierPriceRepository extends EntityRepository implements TierPriceRepositor
      *
      * @return TierPriceInterface[]
      */
-    public function getSortedTierPrices(TierPriceableInterface $productVariant, ChannelInterface $channel, ?CustomerGroupInterface $customerGroup): array
+    public function getSortedTierPrices(TierPriceableInterface $productVariant, ChannelInterface $channel, ?CustomerGroupInterface $customerGroup = null): array
     {
+        /*
+         * If we have a customer group, check for tier prices for that customer group, if we find any return them and
+         * only them.
+         */
         if ($customerGroup instanceof CustomerGroupInterface) {
             $prices = $this->findBy(['productVariant' => $productVariant, 'channel' => $channel, 'customerGroup' => $customerGroup], ['qty' => 'ASC']);
             if (count($prices) > 0) {
@@ -34,6 +38,10 @@ class TierPriceRepository extends EntityRepository implements TierPriceRepositor
             }
         }
 
+        /*
+         * If we don't have a customer group or the customer group has no tier prices get the tier prices with
+         * no group set.
+         */
         return $this->findBy(['productVariant' => $productVariant, 'channel' => $channel, 'customerGroup' => null], ['qty' => 'ASC']);
     }
 

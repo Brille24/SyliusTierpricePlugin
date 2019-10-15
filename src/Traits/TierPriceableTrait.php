@@ -139,6 +139,7 @@ trait TierPriceableTrait
             $group = $customer->getGroup();
         }
 
+        // Check if there are any tier prices specifically for the passed customer's group
         $hasGroupPrice = false;
         if ($group instanceof CustomerGroupInterface) {
             foreach ($tierPrices as $tierPrice) {
@@ -154,12 +155,19 @@ trait TierPriceableTrait
         }
 
         if (!$group instanceof CustomerGroupInterface || !$hasGroupPrice) {
-            // No customer group or group so filter out any prices with group set and return
+            /*
+             * We either have no CustomerGroup or there are no tier prices for the specified group so only return
+             * tier prices with no customer group set
+             */
             return array_filter($tierPrices, static function (TierPriceInterface $tierPrice) {
                 return $tierPrice->getCustomerGroup() === null;
             });
         }
 
+        /*
+         * We have a customer group and $tierPrices contains tier prices for that specific group so only return
+         * tier prices for that group
+         */
         return array_filter($tierPrices, static function (TierPriceInterface $tierPrice) use ($group) {
             return
                 $tierPrice->getCustomerGroup() !== null &&

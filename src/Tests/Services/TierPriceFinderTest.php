@@ -55,7 +55,7 @@ class TierPriceFinderTest extends TestCase
         $this->tierPriceRepo->method('getSortedTierPrices')->willReturn([$tierPrice]);
 
         //## EXECUTE
-        $tierPriceFound = $this->tierPriceFinder->find($productVariant, $this->testChannel, 10);
+        $tierPriceFound = $this->tierPriceFinder->find($productVariant, $this->testChannel, null, 10);
 
         //## CHECK
         $this->assertEquals(null, $tierPriceFound);
@@ -72,7 +72,7 @@ class TierPriceFinderTest extends TestCase
         $this->tierPriceRepo->method('getSortedTierPrices')->willReturn([$tierPrice]);
 
         //## EXECUTE
-        $tierPriceFound = $this->tierPriceFinder->find($productVariant, $this->testChannel, 10);
+        $tierPriceFound = $this->tierPriceFinder->find($productVariant, $this->testChannel, null, 10);
 
         //## CHECK
         $this->assertEquals($tierPriceFound, $tierPrice);
@@ -93,7 +93,7 @@ class TierPriceFinderTest extends TestCase
         $this->tierPriceRepo->method('getSortedTierPrices')->willReturn([$tierPrice1, $tierPrice2]);
 
         //## EXECUTE
-        $tierPriceFound = $this->tierPriceFinder->find($productVariant, $this->testChannel, 11);
+        $tierPriceFound = $this->tierPriceFinder->find($productVariant, $this->testChannel, null, 11);
 
         //## CHECK
         $this->assertEquals($tierPrice2, $tierPriceFound);

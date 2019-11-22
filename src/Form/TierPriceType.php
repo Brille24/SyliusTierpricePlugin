@@ -16,6 +16,8 @@ namespace Brille24\SyliusTierPricePlugin\Form;
 use Brille24\SyliusTierPricePlugin\Entity\TierPrice;
 use Sylius\Bundle\ChannelBundle\Form\Type\ChannelChoiceType;
 use Sylius\Bundle\MoneyBundle\Form\Type\MoneyType;
+use Sylius\Component\Customer\Model\CustomerGroup;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -34,6 +36,11 @@ class TierPriceType extends AbstractType
             'label'    => 'sylius.ui.price',
             'required' => true,
             'currency' => $options['currency'],
+        ]);
+
+        $builder->add('customerGroup', EntityType::class, [
+            'class'    => CustomerGroup::class,
+            'required' => false,
         ]);
 
         $builder->add('channel', ChannelChoiceType::class, [

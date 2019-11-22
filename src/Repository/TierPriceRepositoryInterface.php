@@ -17,16 +17,30 @@ use Brille24\SyliusTierPricePlugin\Entity\TierPriceInterface;
 use Brille24\SyliusTierPricePlugin\Traits\TierPriceableInterface;
 use Doctrine\Common\Persistence\ObjectRepository;
 use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Customer\Model\CustomerGroupInterface;
 
 interface TierPriceRepositoryInterface extends ObjectRepository
 {
     /**
-     * Gets all tier prices for a product variant for a channel with quantity in ascending order
+     * Gets all tier prices for a product variant for a channel and optionally customer group with quantity in ascending order
      *
-     * @param TierPriceableInterface    $productVariant
-     * @param ChannelInterface          $channel
+     * @param TierPriceableInterface      $productVariant
+     * @param ChannelInterface            $channel
+     * @param CustomerGroupInterface|null $customerGroup
      *
      * @return TierPriceInterface[]
      */
-    public function getSortedTierPrices(TierPriceableInterface $productVariant, ChannelInterface $channel): array;
+    public function getSortedTierPrices(TierPriceableInterface $productVariant, ChannelInterface $channel, ?CustomerGroupInterface $customerGroup = null): array;
+
+    /**
+     * Gets a tierprice by product variant and quantity
+     *
+     * @param TierPriceableInterface $productVariant
+     * @param ChannelInterface $channel
+     * @param CustomerGroupInterface|null $customerGroup
+     * @param int $quantity
+     *
+     * @return TierPriceInterface|null
+     */
+    public function getTierPriceForQuantity(TierPriceableInterface $productVariant, ChannelInterface $channel, ?CustomerGroupInterface $customerGroup, int $quantity): ?TierPriceInterface;
 }

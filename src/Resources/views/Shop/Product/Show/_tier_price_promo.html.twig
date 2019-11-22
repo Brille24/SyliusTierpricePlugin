@@ -4,7 +4,7 @@
 
 <div id="tier_prices_tables">
     {% for product_variant in product.variants %}
-        {% set tier_prices = product_variant.getTierPricesForChannel(sylius.channel) %}
+        {% set tier_prices = product_variant.getTierPricesForChannel(sylius.channel,sylius.customer) %}
 
         {% set tier_prices_table_id = product_variant.code~'_table' %}
 

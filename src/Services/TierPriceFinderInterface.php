@@ -16,12 +16,14 @@ namespace Brille24\SyliusTierPricePlugin\Services;
 use Brille24\SyliusTierPricePlugin\Entity\TierPriceInterface;
 use Brille24\SyliusTierPricePlugin\Traits\TierPriceableInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Customer\Model\CustomerInterface;
 
 interface TierPriceFinderInterface
 {
     public function find(
         TierPriceableInterface $tierPriceableEntity,
         ChannelInterface $channel,
-        int $quantity
+        int $quantity,
+        ?CustomerInterface $customer = null
     ): ?TierPriceInterface;
 }

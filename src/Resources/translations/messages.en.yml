@@ -1,6 +1,4 @@
 brille24_tier_price:
     ui:
         tier_prices: Tier prices
-    form:
-        validation:
-            not_unique: Tierprice for this quantity already exists.
+        customer_group: Customer group

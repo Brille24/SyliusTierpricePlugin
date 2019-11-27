@@ -36,7 +36,7 @@ final class AdminProductFormMenuListener
             return;
         }
 
-        $TIERPRICE_TAB = '@Brille24SyliusTierPricePlugin/Resources/views/Admin/ProductVariant/Tab/_tierprice.html.twig';
+        $TIERPRICE_TAB = '@Brille24SyliusTierPricePlugin/Admin/ProductVariant/Tab/_tierprice.html.twig';
         $menu
             ->addChild('tierprice')
             ->setAttribute('template', $TIERPRICE_TAB)

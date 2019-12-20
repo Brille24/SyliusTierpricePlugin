@@ -40,6 +40,11 @@ class TierPriceExampleFactory extends AbstractExampleFactory
      */
     private $tierPriceFactory;
 
+    /**
+     * @var OptionsResolver
+     */
+    private $optionsResolver;
+
     public function __construct(
         ProductVariantRepositoryInterface $productVariantRepository,
         ChannelRepositoryInterface $channelRepository,
@@ -48,6 +53,8 @@ class TierPriceExampleFactory extends AbstractExampleFactory
         $this->productVariantRepository = $productVariantRepository;
         $this->channelRepository        = $channelRepository;
         $this->tierPriceFactory         = $tierPriceFactory;
+        $this->optionsResolver          = new OptionsResolver();
+        $this->configureOptions($this->optionsResolver);
     }
 
     /**
@@ -61,6 +68,8 @@ class TierPriceExampleFactory extends AbstractExampleFactory
      */
     public function create(array $options = []): TierPriceInterface
     {
+        $options = $this->optionsResolver->resolve($options);
+
         /** @var ProductVariantInterface $productVariant */
         $productVariant = $options['product_variant'];
 
@@ -81,11 +90,11 @@ class TierPriceExampleFactory extends AbstractExampleFactory
         $resolver->setAllowedTypes('price', 'integer');
 
         $resolver->setDefault('product_variant', LazyOption::randomOne($this->productVariantRepository));
-        $resolver->setAllowedTypes('product_variant', ProductVariantInterface::class);
+        $resolver->setAllowedTypes('product_variant', [ProductVariantInterface::class, 'string']);
         $resolver->setNormalizer('product_variant', LazyOption::findOneBy($this->productVariantRepository, 'code'));
 
         $resolver->setDefault('channel', LazyOption::randomOne($this->channelRepository));
-        $resolver->setAllowedTypes('channel', ChannelInterface::class);
+        $resolver->setAllowedTypes('channel', [ChannelInterface::class, 'string']);
         $resolver->setNormalizer('channel', LazyOption::findOneBy($this->channelRepository, 'code'));
     }
 }

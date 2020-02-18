@@ -7,24 +7,33 @@ Sylius allows for many different customizations like channels and different pric
 
 ## Installation
 * Install the bundle via composer `composer require brille24/sylius-tierprice-plugin`
-* Register the bundle in your `AppKernel`:
+* Register the bundle in your `bundles.php`:
 ```php
 public function registerBundles()
 {
-    return array_merge(parent::registerBundles(), [
+    return [
         ...
 
-        new Brille24\SyliusTierPricePlugin\Brille24SyliusTierPricePlugin(),
+        Brille24\SyliusTierPricePlugin\Brille24SyliusTierPricePlugin::class => ['all' => true],
     ]);
 }
 ```
 
-* Add the `config.yml` and `resources.yml` to your local `app/config/config.yml`
+* Add the `config.yml` to your local `config/config.yml`
 ```yml
 imports:
     ...
     - { resource: '@Brille24SyliusTierPricePlugin/Resources/config/config.yml'}
 ```
+
+and `resources.yml` to your local `config/resource.yml`
+
+```yml
+imports:
+    ...
+    - { resource: '@Brille24SyliusTierPricePlugin/Resources/config/resource.yml'}
+```
+
 
 That way all the Sylius resource overriding happens in the `app/config/resources.yml`
 
@@ -39,7 +48,7 @@ brille24_tierprice_bundle:
 ```sh
 bin/console doctrine:schema:update --force
 bin/console assets:install
-bin/console translation:update
+bin/console translation:update <locale> --force
 ```
 
 ### Integration

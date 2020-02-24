@@ -62,7 +62,7 @@ class TierPriceUniqueValidator extends ConstraintValidator
         }
 
         $formData = $this->context->getRoot()->getData();
-        if ($formData instanceof ProductInterface && $formData->hasVariants()) {
+        if ($formData instanceof ProductInterface && $formData->getVariants()->count() === 1) {
             $formData = $formData->getVariants()->first();
         }
         if (!$formData instanceof ProductVariantInterface) {

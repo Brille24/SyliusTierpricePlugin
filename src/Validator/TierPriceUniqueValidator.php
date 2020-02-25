@@ -13,12 +13,14 @@ declare(strict_types=1);
 
 namespace Brille24\SyliusTierPricePlugin\Validator;
 
+use Brille24\SyliusTierPricePlugin\Entity\ProductVariantInterface;
 use Brille24\SyliusTierPricePlugin\Entity\TierPriceInterface;
 use function count;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\ORM\Mapping\ClassMetadataInfo;
 use function get_class;
 use ReflectionProperty;
+use Sylius\Component\Product\Model\ProductInterface;
 use Symfony\Bridge\Doctrine\ManagerRegistry;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
@@ -59,7 +61,15 @@ class TierPriceUniqueValidator extends ConstraintValidator
             );
         }
 
-        $otherTierPrices = $this->context->getRoot()->getData()->getTierPrices();
+        $formData = $this->context->getRoot()->getData();
+        if ($formData instanceof ProductInterface && $formData->getVariants()->count() === 1) {
+            $formData = $formData->getVariants()->first();
+        }
+        if (!$formData instanceof ProductVariantInterface) {
+            throw new ConstraintDefinitionException('Unable to find ProductVariant in form.');
+        }
+        $otherTierPrices = $formData->getTierPrices();
+
         $otherTierPrices = array_filter($otherTierPrices, static function ($tierPrice) use ($value) {
             return  $tierPrice !== $value;
         });

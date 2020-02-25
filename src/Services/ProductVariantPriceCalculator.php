@@ -61,9 +61,15 @@ final class ProductVariantPriceCalculator implements ProductVariantPriceCalculat
             return $this->basePriceCalculator->calculate($productVariant, $context);
         }
 
+        // If customer passed in through $context use that instead of CustomerContextInterface
+        $customer = $this->customerContext->getCustomer();
+        if (array_key_exists('customer', $context)) {
+            $customer = $context['customer'];
+        }
+
         // Find a tier price and return it
         if ($productVariant instanceof TierPriceableInterface) {
-            $tierPrice = $this->tierPriceFinder->find($productVariant, $context['channel'], $context['quantity'], $this->customerContext->getCustomer());
+            $tierPrice = $this->tierPriceFinder->find($productVariant, $context['channel'], $context['quantity'], $customer);
             if ($tierPrice !== null) {
                 return $tierPrice->getPrice();
             }

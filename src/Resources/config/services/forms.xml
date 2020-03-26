@@ -10,7 +10,7 @@
         <service class="Brille24\SyliusTierPricePlugin\Form\Extension\ProductVariantTypeExtension"
                  id="brille24_tier_price.form.extension.product_variant_type"
         >
-            <tag name="form.type_extension" extended_type="Sylius\Bundle\ProductBundle\Form\Type\ProductVariantType" />
+            <tag name="form.type_extension" extended_type="Sylius\Bundle\ProductBundle\Form\Type\ProductVariantType" priority="-5" />
         </service>
     </services>
 </container>

@@ -3,12 +3,6 @@ imports:
     - tests/Behat/Resources/suites.yml
 
 default:
-    formatters:
-        pretty:
-            verbose: true
-            paths: false
-            snippets: false
-
     extensions:
         Lakion\Behat\MinkDebugExtension:
             directory: etc/build
@@ -36,19 +30,20 @@ default:
                                     - "start-fullscreen"
                                     - "start-maximized"
                                     - "no-sandbox"
+                            extra_capabilities:
+                                unexpectedAlertBehaviour: accept
                 firefox:
                     selenium2:
                         browser: firefox
             show_auto: false
 
         FriendsOfBehat\SymfonyExtension:
+            bootstrap: tests/Application/config/bootstrap.php
             kernel:
                 class: Tests\Brille24\SyliusTierPricePlugin\Application\Kernel
-                path: "%paths.base%/tests/Application/Kernel.php"
 
         FriendsOfBehat\VariadicExtension: ~
 
         FriendsOfBehat\SuiteSettingsExtension:
             paths:
-                #- "vendor/sylius/sylius/features"
                 - "features"

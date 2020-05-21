@@ -1,6 +1,3 @@
-imports:
-    - { resource: '%vendor_dir%/symplify/easy-coding-standard/config/clean-code.yml' }
-
 services:
     PhpCsFixer\Fixer\Alias\NoAliasFunctionsFixer: ~
     PhpCsFixer\Fixer\Alias\NoMixedEchoPrintFixer:

@@ -9,14 +9,11 @@ Sylius allows for many different customizations like channels and different pric
 * Install the bundle via composer `composer require brille24/sylius-tierprice-plugin`
 * Register the bundle in your `bundles.php`:
 ```php
-public function registerBundles()
-{
-    return [
-        ...
+return [
+    //...
 
-        Brille24\SyliusTierPricePlugin\Brille24SyliusTierPricePlugin::class => ['all' => true],
-    ]);
-}
+    Brille24\SyliusTierPricePlugin\Brille24SyliusTierPricePlugin::class => ['all' => true],
+];
 ```
 
 * Add the `config.yml` to your local `config/config.yml`

@@ -4,10 +4,6 @@ dist: trusty
 
 os: linux
 
-php:
-    - 7.2
-    - 7.3
-
 cache:
     yarn: true
     directories:
@@ -19,6 +15,20 @@ env:
         - SYLIUS_CACHE_DIR=$HOME/.sylius-cache
         - SYLIUS_BUILD_DIR=etc/build
 
+jobs:
+    include:
+        -   php: '7.3'
+            env: SYLIUS_VERSION=1.4.*
+
+        -   php: '7.3'
+            env: SYLIUS_VERSION=1.5.*
+
+        -   php: '7.3'
+            env: SYLIUS_VERSION=1.6.*
+            
+        -   php: '7.3'
+            env: SYLIUS_VERSION=1.7.*
+
 services:
   - mysql
 
@@ -28,6 +38,7 @@ before_install:
     - mkdir -p "${SYLIUS_CACHE_DIR}"
 
 install:
+    - composer require sylius/sylius:${SYLIUS_VERSION} --no-interaction --no-update
     - composer install --no-interaction --prefer-dist --no-suggest
     - (cd tests/Application && yarn install)
 

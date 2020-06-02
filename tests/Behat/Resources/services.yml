@@ -1,3 +1,2 @@
 imports:
     - { resource: "contexts.yml" }
-    - { resource: "pages.yml" }

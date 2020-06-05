@@ -16,7 +16,7 @@ namespace Brille24\SyliusTierPricePlugin\Repository;
 use Brille24\SyliusTierPricePlugin\Entity\TierPriceInterface;
 use Brille24\SyliusTierPricePlugin\Traits\TierPriceableInterface;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
-use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Channel\Model\ChannelInterface;
 use Sylius\Component\Customer\Model\CustomerGroupInterface;
 
 class TierPriceRepository extends EntityRepository implements TierPriceRepositoryInterface

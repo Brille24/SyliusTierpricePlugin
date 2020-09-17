@@ -7,7 +7,7 @@
          bootstrap="vendor/autoload.php">
     <testsuites>
         <testsuite name="Brille24TestPlugin Test Suite">
-            <directory>src/Brille24</directory>
+            <directory>src/Tests</directory>
         </testsuite>
     </testsuites>
 

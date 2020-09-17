@@ -14,14 +14,14 @@ declare(strict_types=1);
 namespace Brille24\SyliusTierPricePlugin\Services;
 
 use Brille24\SyliusTierPricePlugin\Traits\TierPriceableInterface;
-use Sylius\Component\Core\Calculator\ProductVariantPriceCalculatorInterface;
+use Sylius\Component\Core\Calculator\ProductVariantPricesCalculatorInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Customer\Context\CustomerContextInterface;
 
-final class ProductVariantPriceCalculator implements ProductVariantPriceCalculatorInterface
+final class ProductVariantPriceCalculator implements ProductVariantPricesCalculatorInterface
 {
     /**
-     * @var ProductVariantPriceCalculatorInterface
+     * @var ProductVariantPricesCalculatorInterface
      */
     private $basePriceCalculator;
 
@@ -32,13 +32,19 @@ final class ProductVariantPriceCalculator implements ProductVariantPriceCalculat
     private $customerContext;
 
     public function __construct(
-        ProductVariantPriceCalculatorInterface $basePriceCalculator,
+        ProductVariantPricesCalculatorInterface $basePriceCalculator,
         TierPriceFinderInterface $tierPriceFinder,
         CustomerContextInterface $customerContext
     ) {
         $this->basePriceCalculator = $basePriceCalculator;
         $this->tierPriceFinder     = $tierPriceFinder;
         $this->customerContext     = $customerContext;
+    }
+
+    /** {@inheritDoc} */
+    public function calculate(ProductVariantInterface $productVariant, array $context): int
+    {
+        return $this->calculateOriginal($productVariant, $context);
     }
 
     /**
@@ -54,11 +60,11 @@ final class ProductVariantPriceCalculator implements ProductVariantPriceCalculat
      *
      * @return int
      */
-    public function calculate(ProductVariantInterface $productVariant, array $context): int
+    public function calculateOriginal(ProductVariantInterface $productVariant, array $context): int
     {
         // Return the base price if the quantity is not provided
         if (!array_key_exists('quantity', $context)) {
-            return $this->basePriceCalculator->calculate($productVariant, $context);
+            return $this->basePriceCalculator->calculateOriginal($productVariant, $context);
         }
 
         // If customer passed in through $context use that instead of CustomerContextInterface
@@ -76,6 +82,6 @@ final class ProductVariantPriceCalculator implements ProductVariantPriceCalculat
         }
 
         // Return the base price if there are no tier prices
-        return $this->basePriceCalculator->calculate($productVariant, $context);
+        return $this->basePriceCalculator->calculateOriginal($productVariant, $context);
     }
 }

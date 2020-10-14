@@ -6,6 +6,8 @@ includes:
 
 parameters:
     reportUnmatchedIgnoredErrors: false
+    checkMissingIterableValueType: false
+    checkGenericClassInNonGenericObjectType: false
 
     symfony:
         container_xml_path: tests/Application/var/cache/test/ApplicationTests_Brille24_SyliusTierPricePlugin_Application_KernelTestDebugContainer.xml
@@ -24,5 +26,5 @@ parameters:
         - '*Test.php'
 
     ignoreErrors:
-        - '/Parameter #1 \$configuration of method Symfony\\Component\\DependencyInjection\\Extension\\Extension::processConfiguration\(\) expects Symfony\\Component\\Config\\Definition\\ConfigurationInterface, Symfony\\Component\\Config\\Definition\\ConfigurationInterface|null given./'
+        - '/Parameter #1 \$configuration of method Symfony\\Component\\DependencyInjection\\Extension\\Extension::processConfiguration\(\) expects Symfony\\Component\\Config\\Definition\\ConfigurationInterface, Symfony\\Component\\Config\\Definition\\ConfigurationInterface\|null given./'
         - '/Instanceof between/'

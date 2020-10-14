@@ -45,7 +45,7 @@ class TierPrice implements ResourceInterface, TierPriceInterface
     private $productVariant;
 
     /**
-     * @var CustomerGroupInterface
+     * @var CustomerGroupInterface|null
      */
     private $customerGroup;
 

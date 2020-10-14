@@ -22,7 +22,7 @@ class TierPriceUniqueConstraint extends Constraint
      */
     public $message = 'brille24_tier_price.form.validation.not_unique';
     /**
-     * @var array
+     * @var string[]
      */
     public $fields = [];
 

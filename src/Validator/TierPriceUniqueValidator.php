@@ -70,7 +70,7 @@ class TierPriceUniqueValidator extends ConstraintValidator
         }
         $otherTierPrices = $formData->getTierPrices();
 
-        $otherTierPrices = array_filter($otherTierPrices, static function ($tierPrice) use ($value) {
+        $otherTierPrices = array_filter($otherTierPrices, static function ($tierPrice) use ($value): bool {
             return  $tierPrice !== $value;
         });
 

@@ -35,7 +35,7 @@ trait TierPriceableTrait
         $this->tierPrices = new ArrayCollection();
     }
 
-    /** @var TierPriceInterface[]|ArrayCollection */
+    /** @var ArrayCollection<TierPriceInterface> */
     protected $tierPrices;
 
     /**
@@ -58,7 +58,7 @@ trait TierPriceableTrait
      */
     public function getTierPricesForChannel(ChannelInterface $channel, ?CustomerInterface $customer = null): array
     {
-        $channelTierPrices = array_filter($this->getTierPrices(), function (TierPriceInterface $tierPrice) use ($channel) {
+        $channelTierPrices = array_filter($this->getTierPrices(), function (TierPriceInterface $tierPrice) use ($channel): bool {
             $tierPriceChannel = $tierPrice->getChannel();
 
             return $tierPriceChannel !== null && $tierPriceChannel->getId() === $channel->getId();
@@ -77,7 +77,7 @@ trait TierPriceableTrait
      */
     public function getTierPricesForChannelCode(string $code, ?CustomerInterface $customer = null): array
     {
-        $channelTierPrices = array_filter($this->getTierPrices(), function (TierPriceInterface $tierPrice) use ($code) {
+        $channelTierPrices = array_filter($this->getTierPrices(), function (TierPriceInterface $tierPrice) use ($code): bool {
             $tierPriceChannel = $tierPrice->getChannel();
 
             return $tierPriceChannel !== null && $tierPriceChannel->getCode() === $code;
@@ -159,7 +159,7 @@ trait TierPriceableTrait
              * We either have no CustomerGroup or there are no tier prices for the specified group so only return
              * tier prices with no customer group set
              */
-            return array_filter($tierPrices, static function (TierPriceInterface $tierPrice) {
+            return array_filter($tierPrices, static function (TierPriceInterface $tierPrice): bool {
                 return $tierPrice->getCustomerGroup() === null;
             });
         }
@@ -168,7 +168,7 @@ trait TierPriceableTrait
          * We have a customer group and $tierPrices contains tier prices for that specific group so only return
          * tier prices for that group
          */
-        return array_filter($tierPrices, static function (TierPriceInterface $tierPrice) use ($group) {
+        return array_filter($tierPrices, static function (TierPriceInterface $tierPrice) use ($group): bool {
             return
                 $tierPrice->getCustomerGroup() !== null &&
                 $tierPrice->getCustomerGroup()->getId() === $group->getId();

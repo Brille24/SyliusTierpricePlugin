@@ -52,7 +52,6 @@ class TierPriceFinder implements TierPriceFinderInterface
         $possibleTierPrices = $this->tierPriceRepository->getSortedTierPrices($tierPriceableEntity, $channel, $group);
 
         $cheapestTierPrice = null;
-        /** @var TierPriceInterface[] $tierPricesForChannel */
         foreach ($possibleTierPrices as $tierPrice) {
             if ($tierPrice->getQty() > $quantity) {
                 break;

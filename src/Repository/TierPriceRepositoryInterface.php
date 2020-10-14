@@ -15,11 +15,11 @@ namespace Brille24\SyliusTierPricePlugin\Repository;
 
 use Brille24\SyliusTierPricePlugin\Entity\TierPriceInterface;
 use Brille24\SyliusTierPricePlugin\Traits\TierPriceableInterface;
-use Doctrine\Common\Persistence\ObjectRepository;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Customer\Model\CustomerGroupInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 
-interface TierPriceRepositoryInterface extends ObjectRepository
+interface TierPriceRepositoryInterface extends RepositoryInterface
 {
     /**
      * Gets all tier prices for a product variant for a channel and optionally customer group with quantity in ascending order

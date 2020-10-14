@@ -36,7 +36,7 @@ final class Brille24SyliusTierPriceExtension extends Extension implements Prepen
 
         $container->prependExtensionConfig('doctrine_migrations', [
             'migrations_paths' => [
-                'Brille24\SyliusTierPricePlugin\Migrations' => '@Brille24SyliusSpecialPricePlugin/Migrations',
+                'Brille24\SyliusTierPricePlugin\Migrations' => '@Brille24SyliusTierPricePlugin/Migrations',
             ],
         ]);
 

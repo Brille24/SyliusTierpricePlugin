@@ -44,10 +44,10 @@ install:
   - (cd tests/Application && yarn install)
 
 before_script:
-  - (cd tests/Application && bin/console doctrine:database:create -vvv)
-  - (cd tests/Application && bin/console doctrine:migrations:migrate -vvv --no-interaction)
-  - (cd tests/Application && bin/console assets:install public -vvv)
-  - (cd tests/Application && bin/console cache:warmup -vvv)
+  - (cd tests/Application && bin/console doctrine:database:create)
+  - (cd tests/Application && bin/console doctrine:migrations:migrate --no-interaction)
+  - (cd tests/Application && bin/console assets:install public)
+  - (cd tests/Application && bin/console cache:warmup)
   - (cd tests/Application && yarn build)
 
   # Download Symfony CLI
@@ -69,7 +69,7 @@ before_script:
 
 script:
   - bin/phpstan analyse -c phpstan.neon -l max src/
-  - bin/ecs check --config etc/coding-standard.yml src/
+  - bin/ecs check --config etc/coding-standard.php src/
 
   - bin/phpunit
   - bin/phpspec run

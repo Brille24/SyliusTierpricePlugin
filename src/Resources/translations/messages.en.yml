@@ -2,3 +2,4 @@ brille24_tier_price:
     ui:
         tier_prices: Tier prices
         customer_group: Customer group
+        product_not_enabled_in_any_channel: 'The product is not enabled in any channel. Please enable the product in a channel first and reload before configuring it here.'

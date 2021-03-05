@@ -7,6 +7,7 @@
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
+ *
  */
 
 declare(strict_types=1);
@@ -16,8 +17,8 @@ namespace Brille24\SyliusTierPricePlugin\Validator;
 use Brille24\SyliusTierPricePlugin\Entity\ProductVariantInterface;
 use Brille24\SyliusTierPricePlugin\Entity\TierPriceInterface;
 use function count;
-use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\ORM\Mapping\ClassMetadataInfo;
+use Doctrine\Persistence\ObjectManager;
 use function get_class;
 use ReflectionProperty;
 use Sylius\Component\Product\Model\ProductInterface;

@@ -1,6 +1,6 @@
 function hideOtherTierPriceTable(targetTableId) {
-    $('#tier_prices_tables').children().each(function () {
-        var element = $(this);
+    $('#tier_prices_tables').children().each(function (i, table) {
+        var element = $(table);
         if (element.attr('id') === targetTableId) {
             element.show();
         } else {

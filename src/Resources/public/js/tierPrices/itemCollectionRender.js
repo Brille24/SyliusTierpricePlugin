@@ -92,10 +92,11 @@ function setSortingListener() {
 setSortingListener();
 
 $(document).ready(function () {
-    $('table').filter(function () {
-        return $(this).attr('id').indexOf('tierPricesTable_') === 0;
-    }).each(function () {
-        var tableId = $(this).attr('id');
+    $('table').map(function (index, table) {
+        return $(table).attr('id')
+    }).filter(function (_, tableId) {
+        return tableId.indexOf('tierPricesTable_') === 0;
+    }).each(function (_,tableId) {
         tierPriceTableSort(tableId);
     })
 });

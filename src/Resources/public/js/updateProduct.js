@@ -37,3 +37,8 @@ $('#sylius_add_to_cart_cartItem_quantity').on('change', function (event) {
     var quantity = Number(event.target.value);
     recalculatePrices(quantity);
 });
+
+$(document).ready(function () {
+    var quantity = Number($('#sylius_add_to_cart_cartItem_quantity').val())
+    recalculatePrices(quantity);
+})

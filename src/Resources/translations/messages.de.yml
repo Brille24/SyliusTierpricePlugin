@@ -2,3 +2,4 @@ brille24_tier_price:
     ui:
         tier_prices: Staffelpreise
         customer_group: Kunden Gruppe
+        product_not_enabled_in_any_channel: 'Dieses Produkt ist in keinem Kanal aktiv. Bitte aktivieren Sie es in einem Kanal und laden die Seite neu. Dann können Sie es hier konfigurieren.'

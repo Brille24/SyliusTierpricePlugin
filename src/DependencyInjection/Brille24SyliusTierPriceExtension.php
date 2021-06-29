@@ -44,7 +44,7 @@ final class Brille24SyliusTierPriceExtension extends Extension implements Prepen
 
     protected function getMigrationsDirectory(): string
     {
-        return '@BitBagSyliusWishlistPlugin/Migrations';
+        return '@Brille24SyliusTierPricePlugin/Migrations';
     }
 
     protected function getNamespacesOfMigrationsExecutedBefore(): array

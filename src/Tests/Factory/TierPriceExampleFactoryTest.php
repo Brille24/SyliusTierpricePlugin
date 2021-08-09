@@ -68,6 +68,10 @@ class TierPriceExampleFactoryTest extends TestCase
             'channel'         => $channel,
         ];
 
+        /**
+         * @psalm-suppress PossiblyUndefinedMethod
+         * @psalm-suppress MixedMethodCall
+         */
         $this->tierPriceFactory
             ->method('createAtProductVariant')
             ->with($productVariant, $options)

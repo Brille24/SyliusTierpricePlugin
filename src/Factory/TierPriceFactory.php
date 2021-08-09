@@ -16,7 +16,9 @@ namespace Brille24\SyliusTierPricePlugin\Factory;
 
 use Brille24\SyliusTierPricePlugin\Entity\ProductVariantInterface;
 use Brille24\SyliusTierPricePlugin\Entity\TierPriceInterface;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
+use Webmozart\Assert\Assert;
 
 final class TierPriceFactory implements TierPriceFactoryInterface
 {
@@ -39,6 +41,10 @@ final class TierPriceFactory implements TierPriceFactoryInterface
         ProductVariantInterface $productVariant,
         array $options = []
     ): TierPriceInterface {
+        Assert::integer($options['quantity']);
+        Assert::nullOrIsInstanceOf($options['channel'], ChannelInterface::class);
+        Assert::integer($options['price']);
+
         /** @var TierPriceInterface $tierPrice */
         $tierPrice = $this->createNew();
 

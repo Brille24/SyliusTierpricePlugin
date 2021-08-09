@@ -17,7 +17,7 @@ namespace Brille24\SyliusTierPricePlugin\Tests\Services;
 use Brille24\SyliusTierPricePlugin\Services\OrderPricesRecalculator;
 use Doctrine\Common\Collections\ArrayCollection;
 use PHPUnit\Framework\TestCase;
-use Sylius\Component\Core\Calculator\ProductVariantPriceCalculatorInterface;
+use Sylius\Component\Core\Calculator\ProductVariantPricesCalculatorInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItem;
@@ -36,7 +36,7 @@ class OrderPricesRecalculatorTest extends TestCase
 
     public function setUp(): void
     {
-        $productVariantCalculator = $this->createMock(ProductVariantPriceCalculatorInterface::class);
+        $productVariantCalculator = $this->createMock(ProductVariantPricesCalculatorInterface::class);
         $calculated               = &$this->calculated;
 
         $productVariantCalculator->method('calculate')->willReturnCallback(

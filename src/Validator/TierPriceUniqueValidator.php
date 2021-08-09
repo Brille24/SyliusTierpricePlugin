@@ -46,7 +46,7 @@ class TierPriceUniqueValidator extends ConstraintValidator
     {
         Assert::isInstanceOf($value, TierPriceInterface::class);
         Assert::isInstanceOf($constraint, TierPriceUniqueConstraint::class);
-        /** @var TierPriceInterface $value */
+
         $fields = $constraint->fields;
         if (0 === count($fields)) {
             throw new ConstraintDefinitionException('At least one field has to be specified.');
@@ -62,6 +62,7 @@ class TierPriceUniqueValidator extends ConstraintValidator
             );
         }
 
+        /** @psalm-suppress MixedMethodCall */
         $formData = $this->context->getRoot()->getData();
         if ($formData instanceof ProductInterface && $formData->getVariants()->count() === 1) {
             $formData = $formData->getVariants()->first();
@@ -84,6 +85,14 @@ class TierPriceUniqueValidator extends ConstraintValidator
         }
     }
 
+    /**
+     * @param string[] $fields
+     * @param ObjectManager $em
+     * @param TierPriceInterface $first
+     * @param TierPriceInterface $second
+     *
+     * @return bool
+     */
     private function areDuplicates(array $fields, ObjectManager $em, TierPriceInterface $first, TierPriceInterface $second): bool
     {
         /* @var $class ClassMetadataInfo */
@@ -99,7 +108,9 @@ class TierPriceUniqueValidator extends ConstraintValidator
                     )
                 );
             }
+            /** @psalm-suppress MixedAssignment $fieldValue */
             $fieldValue      = $this->getFieldValue($em, $class, $fieldName, $first);
+            /** @psalm-suppress MixedAssignment $fieldValue */
             $otherFieldValue = $this->getFieldValue($em, $class, $fieldName, $second);
             if ($fieldValue !== $otherFieldValue) {
                 return false;
@@ -122,6 +133,7 @@ class TierPriceUniqueValidator extends ConstraintValidator
         /** @var ReflectionProperty $fieldMetaData */
         $fieldMetaData = $class->reflFields[$fieldName];
 
+        /** @psalm-suppress MixedAssignment $fieldValue */
         $fieldValue = $fieldMetaData->getValue($value);
 
         if (null !== $fieldValue && $class->hasAssociation($fieldName)) {
@@ -129,6 +141,7 @@ class TierPriceUniqueValidator extends ConstraintValidator
              * read its identifiers. This is necessary because the wrapped
              * getter methods in the Proxy are being bypassed.
              */
+            /** @var object $fieldValue */
             $em->initializeObject($fieldValue);
         }
 

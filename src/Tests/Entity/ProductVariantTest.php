@@ -28,13 +28,8 @@ class ProductVariantTest extends TestCase
     /** @var ChannelInterface */
     private $otherChannel;
 
-    public function __construct(
-        ?string $name = null,
-        array $data = [],
-        string $dataName = ''
-    ) {
-        parent::__construct($name, $data, $dataName);
-
+    public function setUp(): void
+    {
         $this->testChannel = $this->createMock(ChannelInterface::class);
         $this->testChannel->method('getId')->willReturn(1);
 

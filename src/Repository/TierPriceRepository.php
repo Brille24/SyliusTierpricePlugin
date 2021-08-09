@@ -22,10 +22,6 @@ use Sylius\Component\Customer\Model\CustomerGroupInterface;
 
 class TierPriceRepository extends EntityRepository implements TierPriceRepositoryInterface
 {
-    /** {@inheritdoc}
-     *
-     * @return TierPriceInterface[]
-     */
     public function getSortedTierPrices(TierPriceableInterface $productVariant, ChannelInterface $channel, ?CustomerGroupInterface $customerGroup = null): array
     {
         /*
@@ -46,11 +42,10 @@ class TierPriceRepository extends EntityRepository implements TierPriceRepositor
         return $this->findBy(['productVariant' => $productVariant, 'channel' => $channel, 'customerGroup' => null], ['qty' => 'ASC']);
     }
 
-    /**
-     * {@inheritdoc}
-     */
+    /** @psalm-suppress MixedInferredReturnType */
     public function getTierPriceForQuantity(TierPriceableInterface $productVariant, ChannelInterface $channel, ?CustomerGroupInterface $customerGroup, int $quantity): ?TierPriceInterface
     {
+        /** @psalm-suppress MixedReturnStatement */
         return $this->findOneBy([
             'productVariant' => $productVariant,
             'channel'        => $channel,

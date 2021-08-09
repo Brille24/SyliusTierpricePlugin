@@ -14,7 +14,7 @@ declare(strict_types=1);
 
 namespace Brille24\SyliusTierPricePlugin\Services;
 
-use Sylius\Component\Core\Calculator\ProductVariantPriceCalculatorInterface;
+use Sylius\Component\Core\Calculator\ProductVariantPricesCalculatorInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
@@ -25,21 +25,18 @@ use TypeError;
 final class OrderPricesRecalculator implements OrderProcessorInterface
 {
     /**
-     * @var ProductVariantPriceCalculatorInterface
+     * @var ProductVariantPricesCalculatorInterface
      */
     private $productVariantPriceCalculator;
 
     /**
-     * @param ProductVariantPriceCalculatorInterface $productVariantPriceCalculator
+     * @param ProductVariantPricesCalculatorInterface $productVariantPriceCalculator
      */
-    public function __construct(ProductVariantPriceCalculatorInterface $productVariantPriceCalculator)
+    public function __construct(ProductVariantPricesCalculatorInterface $productVariantPriceCalculator)
     {
         $this->productVariantPriceCalculator = $productVariantPriceCalculator;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function process(BaseOrderInterface $order): void
     {
         if (!$order instanceof OrderInterface) {
@@ -48,7 +45,6 @@ final class OrderPricesRecalculator implements OrderProcessorInterface
 
         $channel = $order->getChannel();
 
-        /** @var OrderItemInterface $item */
         foreach ($order->getItems() as $item) {
             if ($item->isImmutable()) {
                 continue;

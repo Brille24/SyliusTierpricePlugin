@@ -40,7 +40,7 @@ class OrderPricesRecalculatorTest extends TestCase
         $calculated               = &$this->calculated;
 
         $productVariantCalculator->method('calculate')->willReturnCallback(
-            function (ProductVariantInterface $productVariant, array $options) use (&$calculated) {
+            function (ProductVariantInterface $productVariant, array $options) use (&$calculated): int {
                 Assert::keyExists($options, 'quantity');
                 Assert::keyExists($options, 'channel');
                 $calculated[] = $options['quantity'] * 2;
@@ -66,7 +66,7 @@ class OrderPricesRecalculatorTest extends TestCase
 
         //## CHECK
         foreach ($expectedUnitPrices as $index => $expectedUnitPrice) {
-            $this->assertEquals($expectedUnitPrice, $this->calculated[$index]);
+            self::assertEquals($expectedUnitPrice, $this->calculated[$index]);
         }
     }
 

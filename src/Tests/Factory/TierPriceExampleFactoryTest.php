@@ -42,7 +42,7 @@ class TierPriceExampleFactoryTest extends TestCase
     private $channelRepository;
 
     /**
-     * @var TierPriceFactoryInterface|MockObject
+     * @var MockObject|TierPriceFactoryInterface
      */
     private $tierPriceFactory;
 
@@ -73,6 +73,6 @@ class TierPriceExampleFactoryTest extends TestCase
             ->with($productVariant, $options)
             ->willReturn($tierPrice);
 
-        $this->assertSame($tierPrice, $this->subject->create($options));
+        self::assertSame($tierPrice, $this->subject->create($options));
     }
 }

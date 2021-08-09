@@ -66,11 +66,11 @@ class ProductVariantTest extends TestCase
         $resultEntries = $productVariant->getTierPricesForChannel($this->testChannel);
 
         //## CHECK
-        $this->assertCount(count($resultEntries), $expectedTierPrices);
+        self::assertCount(count($resultEntries), $expectedTierPrices);
         $i = 0;
         foreach ($resultEntries as $entry) {
             /** @var TierPrice $entry */
-            $this->assertEquals($expectedTierPrices[$i]->getQty(), $entry->getQty());
+            self::assertEquals($expectedTierPrices[$i]->getQty(), $entry->getQty());
             ++$i;
         }
     }

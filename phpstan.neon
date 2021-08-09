@@ -1,6 +1,7 @@
 parameters:
     reportUnmatchedIgnoredErrors: false
     checkMissingIterableValueType: false
+    checkGenericClassInNonGenericObjectType: false
 
     excludes_analyse:
         # Makes PHPStan crash
@@ -13,3 +14,5 @@ parameters:
     ignoreErrors:
         - '/Parameter #1 \$configuration of method Symfony\\Component\\DependencyInjection\\Extension\\Extension::processConfiguration\(\) expects Symfony\\Component\\Config\\Definition\\ConfigurationInterface, Symfony\\Component\\Config\\Definition\\ConfigurationInterface\|null given./'
         - '/Instanceof between/'
+        - '/Cannot call method scalarNode\(\) on Symfony\\Component\\Config\\Definition\\Builder\\NodeParentInterface\|null\./'
+        - '/^Call to an undefined method .*PHPUnit\\Framework\\MockObject\\MockObject.*\:\:(expects|method)\(\)\.$/'

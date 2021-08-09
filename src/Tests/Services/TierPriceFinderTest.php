@@ -18,6 +18,7 @@ use Brille24\SyliusTierPricePlugin\Entity\ProductVariant;
 use Brille24\SyliusTierPricePlugin\Entity\TierPrice;
 use Brille24\SyliusTierPricePlugin\Repository\TierPriceRepositoryInterface;
 use Brille24\SyliusTierPricePlugin\Services\TierPriceFinder;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Core\Model\ChannelInterface;
 
@@ -29,7 +30,7 @@ class TierPriceFinderTest extends TestCase
     /** @var ChannelInterface */
     private $testChannel;
 
-    /** @var TierPriceRepositoryInterface */
+    /** @var TierPriceRepositoryInterface|MockObject */
     private $tierPriceRepo;
 
     public function __construct(
@@ -59,7 +60,7 @@ class TierPriceFinderTest extends TestCase
         $tierPriceFound = $this->tierPriceFinder->find($productVariant, $this->testChannel, 10);
 
         //## CHECK
-        $this->assertEquals(null, $tierPriceFound);
+        self::assertEquals(null, $tierPriceFound);
     }
 
     public function testCalculateWithOneTierPrice(): void
@@ -76,7 +77,7 @@ class TierPriceFinderTest extends TestCase
         $tierPriceFound = $this->tierPriceFinder->find($productVariant, $this->testChannel, 10);
 
         //## CHECK
-        $this->assertEquals($tierPriceFound, $tierPrice);
+        self::assertEquals($tierPriceFound, $tierPrice);
     }
 
     public function testCalculateWithHighestTierPrice(): void
@@ -97,6 +98,6 @@ class TierPriceFinderTest extends TestCase
         $tierPriceFound = $this->tierPriceFinder->find($productVariant, $this->testChannel, 11);
 
         //## CHECK
-        $this->assertEquals($tierPrice2, $tierPriceFound);
+        self::assertEquals($tierPrice2, $tierPriceFound);
     }
 }

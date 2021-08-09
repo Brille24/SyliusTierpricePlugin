@@ -36,7 +36,7 @@ trait TierPriceableTrait
         $this->tierPrices = new ArrayCollection();
     }
 
-    /** @var ArrayCollection<TierPriceInterface> */
+    /** @var ArrayCollection<int, TierPriceInterface> */
     protected $tierPrices;
 
     /**

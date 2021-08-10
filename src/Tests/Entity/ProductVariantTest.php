@@ -22,21 +22,6 @@ use Sylius\Component\Core\Model\ChannelInterface;
 
 class ProductVariantTest extends TestCase
 {
-    /** @var ChannelInterface */
-    private $testChannel;
-
-    /** @var ChannelInterface */
-    private $otherChannel;
-
-    public function setUp(): void
-    {
-        $this->testChannel = $this->createMock(ChannelInterface::class);
-        $this->testChannel->method('getId')->willReturn(1);
-
-        $this->otherChannel = $this->createMock(ChannelInterface::class);
-        $this->otherChannel->method('getId')->willReturn(2);
-    }
-
     private function createTierPrice(ChannelInterface $channel, int $quantity): TierPriceInterface
     {
         $result = new TierPrice($quantity);
@@ -51,14 +36,17 @@ class ProductVariantTest extends TestCase
      * @param array $givenTierPrices
      * @param array $expectedTierPrices
      */
-    public function test_getTierPricesForChannel(array $givenTierPrices, array $expectedTierPrices): void
-    {
+    public function test_getTierPricesForChannel(
+        array $givenTierPrices,
+        array $expectedTierPrices,
+        array $channels
+    ): void {
         //## PREPARE
         $productVariant = new ProductVariant();
         $productVariant->setTierPrices($givenTierPrices);
 
         //## EXECUTE
-        $resultEntries = $productVariant->getTierPricesForChannel($this->testChannel);
+        $resultEntries = $productVariant->getTierPricesForChannel($channels['testChannel']);
 
         //## CHECK
         self::assertCount(count($resultEntries), $expectedTierPrices);
@@ -72,38 +60,54 @@ class ProductVariantTest extends TestCase
 
     public function data_getTierPricesForChannel(): array
     {
+        // We can't put this in setUp() as data providers are called before setUp().
+        $testChannel = $this->createMock(ChannelInterface::class);
+        $testChannel->method('getId')->willReturn(1);
+
+        $otherChannel = $this->createMock(ChannelInterface::class);
+        $otherChannel->method('getId')->willReturn(2);
+
+        $channels = [
+            'testChannel' => $testChannel,
+            'otherChannel' => $otherChannel
+        ];
+
         return
             [
                 'no tier prices' => [
                     [],
                     [],
+                    $channels,
                 ],
                 'one tier price matches' => [
                     // Input
-                    [$this->createTierPrice($this->testChannel, 1)],
+                    [$this->createTierPrice($testChannel, 1)],
                     // Expected Output
-                    [$this->createTierPrice($this->testChannel, 1)],
+                    [$this->createTierPrice($testChannel, 1)],
+                    $channels,
                 ],
                 'one tier price no match' => [
                     // Input
-                    [$this->createTierPrice($this->otherChannel, 10)],
+                    [$this->createTierPrice($otherChannel, 10)],
                     // Expected Output
                     [],
+                    $channels,
                 ],
                 'multiple tier prices' => [
                     // Input
                     [
-                        $this->createTierPrice($this->otherChannel, 1),
-                        $this->createTierPrice($this->otherChannel, 2),
-                        $this->createTierPrice($this->testChannel, 3),
-                        $this->createTierPrice($this->otherChannel, 4),
-                        $this->createTierPrice($this->testChannel, 5),
+                        $this->createTierPrice($otherChannel, 1),
+                        $this->createTierPrice($otherChannel, 2),
+                        $this->createTierPrice($testChannel, 3),
+                        $this->createTierPrice($otherChannel, 4),
+                        $this->createTierPrice($testChannel, 5),
                     ],
                     // Expected Output
                     [
-                        $this->createTierPrice($this->testChannel, 3),
-                        $this->createTierPrice($this->testChannel, 5),
+                        $this->createTierPrice($testChannel, 3),
+                        $this->createTierPrice($testChannel, 5),
                     ],
+                    $channels,
                 ],
             ];
     }

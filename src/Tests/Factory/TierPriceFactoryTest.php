@@ -34,7 +34,7 @@ class TierPriceFactoryTest extends TestCase
      */
     private $baseFactory;
 
-    public function setup(): void
+    public function setUp(): void
     {
         $this->baseFactory = $this->createMock(FactoryInterface::class);
 
@@ -47,7 +47,7 @@ class TierPriceFactoryTest extends TestCase
 
         $this->baseFactory->method('createNew')->willReturn($tierPrice);
 
-        $this->assertSame($tierPrice, $this->subject->createNew());
+        self::assertSame($tierPrice, $this->subject->createNew());
     }
 
     public function test_createAtProductVariant(): void
@@ -56,13 +56,13 @@ class TierPriceFactoryTest extends TestCase
         $productVariant = $this->createMock(ProductVariantInterface::class);
 
         $tierPrice = $this->createMock(TierPrice::class);
-        $tierPrice->expects($this->once())->method('setQty')->with(10);
-        $tierPrice->expects($this->once())->method('setChannel')->with($channel);
-        $tierPrice->expects($this->once())->method('setPrice')->with(100);
-        $tierPrice->expects($this->once())->method('setProductVariant')->with($productVariant);
+        $tierPrice->expects(self::once())->method('setQty')->with(10);
+        $tierPrice->expects(self::once())->method('setChannel')->with($channel);
+        $tierPrice->expects(self::once())->method('setPrice')->with(100);
+        $tierPrice->expects(self::once())->method('setProductVariant')->with($productVariant);
 
         $productVariant->method('addTierPrice')->with($tierPrice);
-        $this->baseFactory->expects($this->once())->method('createNew')->willReturn($tierPrice);
+        $this->baseFactory->expects(self::once())->method('createNew')->willReturn($tierPrice);
 
         $this->subject->createAtProductVariant($productVariant, [
             'quantity' => 10,

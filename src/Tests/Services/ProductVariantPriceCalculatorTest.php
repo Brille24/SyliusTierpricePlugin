@@ -18,29 +18,31 @@ use Brille24\SyliusTierPricePlugin\Entity\ProductVariant;
 use Brille24\SyliusTierPricePlugin\Entity\TierPrice;
 use Brille24\SyliusTierPricePlugin\Services\ProductVariantPriceCalculator;
 use Brille24\SyliusTierPricePlugin\Services\TierPriceFinderInterface;
+use Mockery\Mock;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use Sylius\Component\Core\Calculator\ProductVariantPriceCalculatorInterface;
+use Sylius\Component\Core\Calculator\ProductVariantPricesCalculatorInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductVariant as SyliusProductVariant;
 use Sylius\Component\Customer\Context\CustomerContextInterface;
 
 class ProductVariantPriceCalculatorTest extends TestCase
 {
-    /** @var ProductVariantPriceCalculatorInterface */
+    /** @var ProductVariantPricesCalculatorInterface|MockObject */
     private $basePriceCalculator;
 
-    /** @var ProductVariantPriceCalculatorInterface */
+    /** @var ProductVariantPricesCalculatorInterface */
     private $priceCalculator;
 
-    /** @var TierPriceFinderInterface */
+    /** @var TierPriceFinderInterface|MockObject */
     private $tierPriceFinder;
 
-    /** @var CustomerContextInterface */
+    /** @var CustomerContextInterface|MockObject */
     private $customerContext;
 
-    public function setup()
+    public function setUp(): void
     {
-        $this->basePriceCalculator = $this->createMock(ProductVariantPriceCalculatorInterface::class);
+        $this->basePriceCalculator = $this->createMock(ProductVariantPricesCalculatorInterface::class);
         $this->basePriceCalculator->method('calculate')->willReturn(-1); // To indicate no tier prices
 
         $this->tierPriceFinder = $this->createMock(TierPriceFinderInterface::class);
@@ -60,7 +62,7 @@ class ProductVariantPriceCalculatorTest extends TestCase
         $price = $this->priceCalculator->calculate($productVariant, ['channel' => $testChannel, 'quantity' => 10]);
 
         //## CHECK
-        $this->assertEquals(-1, $price);
+        self::assertEquals(-1, $price);
     }
 
     public function testCalculatePriceWithEmptyTierPrices(): void
@@ -75,7 +77,7 @@ class ProductVariantPriceCalculatorTest extends TestCase
         $result = $this->priceCalculator->calculate($productVariant, ['channel' => $testChannel, 'quantity' => 10]);
 
         //## CHECK
-        $this->assertEquals(-1, $result);
+        self::assertEquals(-1, $result);
     }
 
     public function testCalculatePriceWithTierPrices(): void
@@ -90,6 +92,6 @@ class ProductVariantPriceCalculatorTest extends TestCase
         $result = $this->priceCalculator->calculate($productVariant, ['channel' => $testChannel, 'quantity' => 10]);
 
         //## CHECK
-        $this->assertEquals(2, $result);
+        self::assertEquals(2, $result);
     }
 }

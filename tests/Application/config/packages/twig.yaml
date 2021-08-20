@@ -10,4 +10,3 @@ services:
         autoconfigure: true
 
     Twig\Extra\Intl\IntlExtension: ~
-

@@ -16,9 +16,13 @@ namespace Brille24\SyliusTierPricePlugin\Services;
 
 use Brille24\SyliusTierPricePlugin\Traits\TierPriceableInterface;
 use Sylius\Component\Core\Calculator\ProductVariantPricesCalculatorInterface;
+use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Customer\Context\CustomerContextInterface;
+use Webmozart\Assert\Assert;
 
+/** @psalm-suppress DeprecatedInterface */
 final class ProductVariantPriceCalculator implements ProductVariantPricesCalculatorInterface
 {
     /**
@@ -65,11 +69,15 @@ final class ProductVariantPriceCalculator implements ProductVariantPricesCalcula
         // If customer passed in through $context use that instead of CustomerContextInterface
         $customer = $this->customerContext->getCustomer();
         if (array_key_exists('customer', $context)) {
+            /** @var CustomerInterface $customer */
             $customer = $context['customer'];
         }
 
         // Find a tier price and return it
         if ($productVariant instanceof TierPriceableInterface) {
+            Assert::isInstanceOf($context['channel'], ChannelInterface::class);
+            Assert::integer($context['quantity']);
+
             $tierPrice = $this->tierPriceFinder->find($productVariant, $context['channel'], $context['quantity'], $customer);
             if ($tierPrice !== null) {
                 return $tierPrice->getPrice();

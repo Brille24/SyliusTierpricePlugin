@@ -36,7 +36,7 @@ trait TierPriceableTrait
         $this->tierPrices = new ArrayCollection();
     }
 
-    /** @var ArrayCollection<TierPriceInterface> */
+    /** @var ArrayCollection<int, TierPriceInterface> */
     protected $tierPrices;
 
     /**
@@ -111,7 +111,7 @@ trait TierPriceableTrait
     /**
      * Sets the tier prices form the array collection
      *
-     * @param array $tierPrices
+     * @param TierPriceInterface[] $tierPrices
      */
     public function setTierPrices(array $tierPrices): void
     {
@@ -122,13 +122,12 @@ trait TierPriceableTrait
         $this->tierPrices = new ArrayCollection();
 
         foreach ($tierPrices as $tierPrice) {
-            /** @var TierPriceInterface $tierPrice */
             $this->addTierPrice($tierPrice);
         }
     }
 
     /**
-     * @param array                  $tierPrices
+     * @param TierPriceInterface[] $tierPrices
      * @param CustomerInterface|null $customer
      *
      * @return TierPriceInterface[]
@@ -144,6 +143,7 @@ trait TierPriceableTrait
         $hasGroupPrice = false;
         if ($group instanceof CustomerGroupInterface) {
             foreach ($tierPrices as $tierPrice) {
+                /** @psalm-suppress PossiblyNullReference */
                 if (
                     $tierPrice->getCustomerGroup() instanceof CustomerGroupInterface &&
                     $tierPrice->getCustomerGroup()->getId() === $group->getId()
@@ -170,6 +170,7 @@ trait TierPriceableTrait
          * tier prices for that group
          */
         return array_filter($tierPrices, static function (TierPriceInterface $tierPrice) use ($group): bool {
+            /** @psalm-suppress PossiblyNullReference */
             return
                 $tierPrice->getCustomerGroup() !== null &&
                 $tierPrice->getCustomerGroup()->getId() === $group->getId();

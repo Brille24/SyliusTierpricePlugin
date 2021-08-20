@@ -1,4 +1,0 @@
-services:
-    brille24.behat.context.tierprice:
-        public: true
-        class: Tests\Brille24\SyliusTierPricePlugin\Behat\Context\TierPriceContext

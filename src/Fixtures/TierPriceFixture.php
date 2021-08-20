@@ -22,6 +22,11 @@ class TierPriceFixture extends AbstractResourceFixture
 {
     protected function configureResourceNode(ArrayNodeDefinition $resourceNode): void
     {
+        /**
+         * @psalm-suppress PossiblyNullReference
+         * @psalm-suppress MixedMethodCall
+         * @psalm-suppress PossiblyUndefinedMethod
+         */
         $resourceNode
             ->children()
                 ->scalarNode('channel')

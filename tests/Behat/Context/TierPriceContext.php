@@ -24,7 +24,7 @@ final class TierPriceContext implements Context
     }
 
     //<editor-fold desc="Helper Function">
-    private function createTierPrice(int $quantity, $price): TierPriceInterface
+    private function createTierPrice(int $quantity, int $price): TierPriceInterface
     {
         $tierPrice = new TierPrice($quantity);
         $tierPrice->setPrice((int)(floatval($price) * 100));

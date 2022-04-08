@@ -38,10 +38,7 @@ class TierPriceUniqueValidator extends ConstraintValidator
         $this->registry = $registry;
     }
 
-    /**
-     * @param mixed $value
-     * @param Constraint $constraint
-     */
+    /** {@inheritdoc} */
     public function validate($value, Constraint $constraint): void
     {
         Assert::isInstanceOf($value, TierPriceInterface::class);
@@ -95,7 +92,7 @@ class TierPriceUniqueValidator extends ConstraintValidator
      */
     private function areDuplicates(array $fields, ObjectManager $em, TierPriceInterface $first, TierPriceInterface $second): bool
     {
-        /* @var $class ClassMetadataInfo */
+        /* @var ClassMetadataInfo $class */
         $class = $em->getClassMetadata(get_class($first));
         Assert::isInstanceOf($class, ClassMetadataInfo::class);
 

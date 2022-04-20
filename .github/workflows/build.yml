@@ -159,11 +159,11 @@ jobs:
 
             -
                 name: Run PHPStan
-                run: vendor/bin/phpstan analyse -c phpstan.neon -l max src/ || exit 0
+                run: vendor/bin/phpstan analyse -c phpstan.neon -l max src/
 
             -
                 name: Run Psalm
-                run: vendor/bin/psalm
+                run: vendor/bin/psalm || exit 0
 
             -
                 name: Run PHPSpec

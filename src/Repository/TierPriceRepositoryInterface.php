@@ -20,10 +20,6 @@ use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Customer\Model\CustomerGroupInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
-/**
- * @method array<TierPriceInterface> findBy(array $criteria, ?array $orderBy = null, $limit = null, $offset = null)
- * @method TierPriceInterface|null findOneBy(array $criteria)
- */
 interface TierPriceRepositoryInterface extends RepositoryInterface
 {
     /**

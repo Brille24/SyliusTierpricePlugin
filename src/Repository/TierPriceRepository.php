@@ -20,6 +20,10 @@ use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Customer\Model\CustomerGroupInterface;
 
+/**
+ * @method array<TierPriceInterface> findBy(array $criteria, ?array $orderBy = null, $limit = null, $offset = null)
+ * @method TierPriceInterface|null findOneBy(array $criteria)
+ */
 class TierPriceRepository extends EntityRepository implements TierPriceRepositoryInterface
 {
     public function getSortedTierPrices(TierPriceableInterface $productVariant, ChannelInterface $channel, ?CustomerGroupInterface $customerGroup = null): array

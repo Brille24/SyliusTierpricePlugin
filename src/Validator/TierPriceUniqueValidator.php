@@ -42,7 +42,10 @@ class TierPriceUniqueValidator extends ConstraintValidator
     public function validate($value, Constraint $constraint): void
     {
         Assert::isInstanceOf($value, TierPriceInterface::class);
+        /** @var TierPriceInterface $value */
+
         Assert::isInstanceOf($constraint, TierPriceUniqueConstraint::class);
+        /** @var TierPriceUniqueConstraint $constraint */
 
         $fields = $constraint->fields;
         if (0 === count($fields)) {

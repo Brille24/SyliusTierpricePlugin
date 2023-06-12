@@ -28,7 +28,7 @@ and `resources.yml` to your local `config/resource.yml`
 ```yml
 imports:
     ...
-    - { resource: '@Brille24SyliusTierPricePlugin/Resources/config/resource.yml'}
+    - { resource: '@Brille24SyliusTierPricePlugin/Resources/config/resources.yml'}
 ```
 
 

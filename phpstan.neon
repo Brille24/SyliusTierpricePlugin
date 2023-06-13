@@ -1,18 +1,19 @@
 parameters:
-    reportUnmatchedIgnoredErrors: false
+    level: max
+    reportUnmatchedIgnoredErrors: true
     checkMissingIterableValueType: false
     checkGenericClassInNonGenericObjectType: false
 
+    paths:
+        - src
+        - tests/Behat
+
     excludes_analyse:
-        # Makes PHPStan crash
-        - 'src/DependencyInjection/Configuration.php'
 
         # Test dependencies
         - 'tests/Application/app/**.php'
         - 'tests/Application/src/**.php'
 
     ignoreErrors:
-        - '/Parameter #1 \$configuration of method Symfony\\Component\\DependencyInjection\\Extension\\Extension::processConfiguration\(\) expects Symfony\\Component\\Config\\Definition\\ConfigurationInterface, Symfony\\Component\\Config\\Definition\\ConfigurationInterface\|null given./'
-        - '/Instanceof between/'
         - '/Cannot call method scalarNode\(\) on Symfony\\Component\\Config\\Definition\\Builder\\NodeParentInterface\|null\./'
         - '/^Call to an undefined method .*PHPUnit\\Framework\\MockObject\\MockObject.*\:\:(expects|method)\(\)\.$/'

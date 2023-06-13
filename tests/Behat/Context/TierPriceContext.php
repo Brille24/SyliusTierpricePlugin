@@ -17,7 +17,6 @@ namespace Tests\Brille24\SyliusTierPricePlugin\Behat\Context;
 use Behat\Behat\Context\Context;
 use Brille24\SyliusTierPricePlugin\Entity\ProductVariant;
 use Brille24\SyliusTierPricePlugin\Entity\TierPrice;
-use Brille24\SyliusTierPricePlugin\Entity\TierPriceInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 
 final class TierPriceContext implements Context
@@ -30,17 +29,7 @@ final class TierPriceContext implements Context
         /** @var ProductVariant $productVariant */
         $productVariant = $product->getVariants()->toArray()[0];
 
-        $tierPrice = $this->createTierPrice($quantity, $price);
+        $tierPrice = new TierPrice($quantity, $price * 100);
         $productVariant->addTierPrice($tierPrice);
     }
-
-    //<editor-fold desc="Helper Function">
-    private function createTierPrice(int $quantity, $price): TierPriceInterface
-    {
-        $tierPrice = new TierPrice($quantity);
-        $tierPrice->setPrice((int) ((float) $price * 100));
-
-        return $tierPrice;
-    }
-    //</editor-fold>
 }

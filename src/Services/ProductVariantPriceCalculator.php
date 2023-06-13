@@ -25,23 +25,11 @@ use Webmozart\Assert\Assert;
 /** @psalm-suppress DeprecatedInterface */
 final class ProductVariantPriceCalculator implements ProductVariantPricesCalculatorInterface
 {
-    /** @var ProductVariantPricesCalculatorInterface */
-    private $basePriceCalculator;
-
-    /** @var TierPriceFinderInterface */
-    private $tierPriceFinder;
-
-    /** @var CustomerContextInterface */
-    private $customerContext;
-
     public function __construct(
-        ProductVariantPricesCalculatorInterface $basePriceCalculator,
-        TierPriceFinderInterface $tierPriceFinder,
-        CustomerContextInterface $customerContext,
+        private ProductVariantPricesCalculatorInterface $basePriceCalculator,
+        private TierPriceFinderInterface $tierPriceFinder,
+        private CustomerContextInterface $customerContext
     ) {
-        $this->basePriceCalculator = $basePriceCalculator;
-        $this->tierPriceFinder = $tierPriceFinder;
-        $this->customerContext = $customerContext;
     }
 
     /**

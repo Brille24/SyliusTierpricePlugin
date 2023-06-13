@@ -22,25 +22,14 @@ class TierPrice implements TierPriceInterface
     /** @var int */
     private $id;
 
-    /** @var int */
-    private $price;
+    private ?ChannelInterface $channel = null;
 
-    /** @var int */
-    private $qty;
+    private ProductVariantInterface $productVariant;
 
-    /** @var ChannelInterface|null */
-    private $channel;
+    private ?CustomerGroupInterface $customerGroup = null;
 
-    /** @var ProductVariantInterface */
-    private $productVariant;
-
-    /** @var CustomerGroupInterface|null */
-    private $customerGroup;
-
-    public function __construct(int $quantity = 0, int $price = 0)
+    public function __construct(private int $qty = 0, private int $price = 0)
     {
-        $this->qty = $quantity;
-        $this->price = $price;
     }
 
     public function getId(): ?int

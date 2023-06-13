@@ -22,12 +22,8 @@ use Webmozart\Assert\Assert;
 
 final class TierPriceFactory implements TierPriceFactoryInterface
 {
-    /** @var FactoryInterface */
-    private $factory;
-
-    public function __construct(FactoryInterface $factory)
+    public function __construct(private FactoryInterface $factory)
     {
-        $this->factory = $factory;
     }
 
     /** @inheritdoc */

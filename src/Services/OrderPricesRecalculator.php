@@ -23,12 +23,8 @@ use TypeError;
 
 final class OrderPricesRecalculator implements OrderProcessorInterface
 {
-    /** @var ProductVariantPricesCalculatorInterface */
-    private $productVariantPriceCalculator;
-
-    public function __construct(ProductVariantPricesCalculatorInterface $productVariantPriceCalculator)
+    public function __construct(private ProductVariantPricesCalculatorInterface $productVariantPriceCalculator)
     {
-        $this->productVariantPriceCalculator = $productVariantPriceCalculator;
     }
 
     public function process(BaseOrderInterface $order): void

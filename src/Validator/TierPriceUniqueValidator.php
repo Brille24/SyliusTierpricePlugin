@@ -30,12 +30,8 @@ use Webmozart\Assert\Assert;
 
 class TierPriceUniqueValidator extends ConstraintValidator
 {
-    /** @var ManagerRegistry */
-    private $registry;
-
-    public function __construct(ManagerRegistry $registry)
+    public function __construct(private ManagerRegistry $registry)
     {
-        $this->registry = $registry;
     }
 
     /**
@@ -52,12 +48,12 @@ class TierPriceUniqueValidator extends ConstraintValidator
             throw new ConstraintDefinitionException('At least one field has to be specified.');
         }
 
-        $em = $this->registry->getManagerForClass(get_class($value));
+        $em = $this->registry->getManagerForClass($value::class);
         if ($em === null) {
             throw new ConstraintDefinitionException(
                 sprintf(
                     'Unable to find the object manager associated with an entity of class "%s".',
-                    get_class($value),
+                    $value::class,
                 ),
             );
         }
@@ -72,9 +68,7 @@ class TierPriceUniqueValidator extends ConstraintValidator
         }
         $otherTierPrices = $formData->getTierPrices();
 
-        $otherTierPrices = array_filter($otherTierPrices, static function ($tierPrice) use ($value): bool {
-            return  $tierPrice !== $value;
-        });
+        $otherTierPrices = array_filter($otherTierPrices, static fn($tierPrice): bool => $tierPrice !== $value);
 
         foreach ($otherTierPrices as $otherTierPrice) {
             if ($this->areDuplicates($fields, $em, $value, $otherTierPrice)) {
@@ -91,7 +85,7 @@ class TierPriceUniqueValidator extends ConstraintValidator
     private function areDuplicates(array $fields, ObjectManager $em, TierPriceInterface $first, TierPriceInterface $second): bool
     {
         /** @var ClassMetadataInfo $class */
-        $class = $em->getClassMetadata(get_class($first));
+        $class = $em->getClassMetadata($first::class);
         Assert::isInstanceOf($class, ClassMetadataInfo::class);
 
         foreach ($fields as $fieldName) {

@@ -26,26 +26,13 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class TierPriceExampleFactory extends AbstractExampleFactory
 {
-    /** @var ProductVariantRepositoryInterface */
-    private $productVariantRepository;
-
-    /** @var ChannelRepositoryInterface */
-    private $channelRepository;
-
-    /** @var TierPriceFactoryInterface */
-    private $tierPriceFactory;
-
-    /** @var OptionsResolver */
-    private $optionsResolver;
+    private OptionsResolver $optionsResolver;
 
     public function __construct(
-        ProductVariantRepositoryInterface $productVariantRepository,
-        ChannelRepositoryInterface $channelRepository,
-        TierPriceFactoryInterface $tierPriceFactory,
+        private ProductVariantRepositoryInterface $productVariantRepository,
+        private ChannelRepositoryInterface $channelRepository,
+        private TierPriceFactoryInterface $tierPriceFactory,
     ) {
-        $this->productVariantRepository = $productVariantRepository;
-        $this->channelRepository = $channelRepository;
-        $this->tierPriceFactory = $tierPriceFactory;
         $this->optionsResolver = new OptionsResolver();
         $this->configureOptions($this->optionsResolver);
     }

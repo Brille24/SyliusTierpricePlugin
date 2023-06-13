@@ -22,12 +22,8 @@ use Sylius\Component\Customer\Model\CustomerInterface;
 
 class TierPriceFinder implements TierPriceFinderInterface
 {
-    /** @var TierPriceRepositoryInterface */
-    private $tierPriceRepository;
-
-    public function __construct(TierPriceRepositoryInterface $tierPriceRepository)
+    public function __construct(private TierPriceRepositoryInterface $tierPriceRepository)
     {
-        $this->tierPriceRepository = $tierPriceRepository;
     }
 
     /**

@@ -26,46 +26,38 @@ use Sylius\Component\Core\Repository\ProductVariantRepositoryInterface;
 
 class TierPriceExampleFactoryTest extends TestCase
 {
-    /**
-     * @var TierPriceExampleFactory
-     */
+    /** @var TierPriceExampleFactory */
     private $subject;
 
-    /**
-     * @var MockObject|ProductVariantRepositoryInterface
-     */
+    /** @var MockObject|ProductVariantRepositoryInterface */
     private $productVariantRepository;
 
-    /**
-     * @var MockObject|ChannelRepositoryInterface
-     */
+    /** @var MockObject|ChannelRepositoryInterface */
     private $channelRepository;
 
-    /**
-     * @var MockObject|TierPriceFactoryInterface
-     */
+    /** @var MockObject|TierPriceFactoryInterface */
     private $tierPriceFactory;
 
     protected function setUp(): void
     {
         $this->productVariantRepository = $this->createMock(ProductVariantRepositoryInterface::class);
-        $this->channelRepository        = $this->createMock(ChannelRepositoryInterface::class);
-        $this->tierPriceFactory         = $this->createMock(TierPriceFactoryInterface::class);
+        $this->channelRepository = $this->createMock(ChannelRepositoryInterface::class);
+        $this->tierPriceFactory = $this->createMock(TierPriceFactoryInterface::class);
 
         $this->subject = new TierPriceExampleFactory($this->productVariantRepository, $this->channelRepository, $this->tierPriceFactory);
     }
 
     public function test_create(): void
     {
-        $tierPrice      = $this->createMock(TierPrice::class);
+        $tierPrice = $this->createMock(TierPrice::class);
         $productVariant = $this->createMock(ProductVariantInterface::class);
-        $channel        = $this->createMock(ChannelInterface::class);
+        $channel = $this->createMock(ChannelInterface::class);
 
         $options = [
-            'quantity'        => 10,
-            'price'           => 100,
+            'quantity' => 10,
+            'price' => 100,
             'product_variant' => $productVariant,
-            'channel'         => $channel,
+            'channel' => $channel,
         ];
 
         /**

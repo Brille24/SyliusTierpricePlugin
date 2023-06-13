@@ -16,7 +16,6 @@ namespace Brille24\SyliusTierPricePlugin\Services;
 
 use Sylius\Component\Core\Calculator\ProductVariantPricesCalculatorInterface;
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Order\Model\OrderInterface as BaseOrderInterface;
 use Sylius\Component\Order\Processor\OrderProcessorInterface;
@@ -24,14 +23,9 @@ use TypeError;
 
 final class OrderPricesRecalculator implements OrderProcessorInterface
 {
-    /**
-     * @var ProductVariantPricesCalculatorInterface
-     */
+    /** @var ProductVariantPricesCalculatorInterface */
     private $productVariantPriceCalculator;
 
-    /**
-     * @param ProductVariantPricesCalculatorInterface $productVariantPriceCalculator
-     */
     public function __construct(ProductVariantPricesCalculatorInterface $productVariantPriceCalculator)
     {
         $this->productVariantPriceCalculator = $productVariantPriceCalculator;
@@ -40,7 +34,7 @@ final class OrderPricesRecalculator implements OrderProcessorInterface
     public function process(BaseOrderInterface $order): void
     {
         if (!$order instanceof OrderInterface) {
-            throw new TypeError('Order has to implement '.OrderInterface::class);
+            throw new TypeError('Order has to implement ' . OrderInterface::class);
         }
 
         $channel = $order->getChannel();
@@ -55,7 +49,7 @@ final class OrderPricesRecalculator implements OrderProcessorInterface
 
             $item->setUnitPrice($this->productVariantPriceCalculator->calculate(
                 $variant,
-                ['channel' => $channel, 'quantity' => $item->getQuantity(), 'customer' => $order->getCustomer()]
+                ['channel' => $channel, 'quantity' => $item->getQuantity(), 'customer' => $order->getCustomer()],
             ));
         }
     }

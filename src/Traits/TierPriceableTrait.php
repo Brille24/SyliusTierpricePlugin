@@ -52,8 +52,6 @@ trait TierPriceableTrait
     /**
      * Returns the tier prices only for one channel
      *
-     * @param ChannelInterface       $channel
-     * @param CustomerInterface|null $customer
      *
      * @return TierPriceInterface[]
      */
@@ -71,8 +69,6 @@ trait TierPriceableTrait
     /**
      * Returns the tier prices only for one channel
      *
-     * @param string                 $code
-     * @param CustomerInterface|null $customer
      *
      * @return TierPriceInterface[]
      */
@@ -89,8 +85,6 @@ trait TierPriceableTrait
 
     /**
      * Removes a tier price from the array collection
-     *
-     * @param TierPriceInterface $tierPrice
      */
     public function removeTierPrice(TierPriceInterface $tierPrice): void
     {
@@ -99,8 +93,6 @@ trait TierPriceableTrait
 
     /**
      * Adds an element to the list
-     *
-     * @param TierPriceInterface $tierPrice
      */
     public function addTierPrice(TierPriceInterface $tierPrice): void
     {
@@ -128,7 +120,6 @@ trait TierPriceableTrait
 
     /**
      * @param TierPriceInterface[] $tierPrices
-     * @param CustomerInterface|null $customer
      *
      * @return TierPriceInterface[]
      */

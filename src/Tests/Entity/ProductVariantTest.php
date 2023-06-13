@@ -33,13 +33,11 @@ class ProductVariantTest extends TestCase
 
     /** @dataProvider data_getTierPricesForChannel
      *
-     * @param array $givenTierPrices
-     * @param array $expectedTierPrices
      */
     public function test_getTierPricesForChannel(
         array $givenTierPrices,
         array $expectedTierPrices,
-        array $channels
+        array $channels,
     ): void {
         //## PREPARE
         $productVariant = new ProductVariant();
@@ -69,7 +67,7 @@ class ProductVariantTest extends TestCase
 
         $channels = [
             'testChannel' => $testChannel,
-            'otherChannel' => $otherChannel
+            'otherChannel' => $otherChannel,
         ];
 
         return

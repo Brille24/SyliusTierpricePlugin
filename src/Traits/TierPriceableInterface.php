@@ -23,8 +23,6 @@ interface TierPriceableInterface
     /**
      * Returns all tier prices for a given channel
      *
-     * @param ChannelInterface       $channel
-     * @param CustomerInterface|null $customer
      *
      * @return TierPriceInterface[]
      */
@@ -33,7 +31,6 @@ interface TierPriceableInterface
     /**
      * Returns all tier prices for a given channel
      *
-     * @param string $code
      *
      * @return TierPriceInterface[]
      */

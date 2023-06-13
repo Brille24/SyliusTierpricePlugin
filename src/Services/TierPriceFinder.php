@@ -33,18 +33,13 @@ class TierPriceFinder implements TierPriceFinderInterface
     /**
      * Finds the cheapest tier price with the matching channel
      *
-     * @param TierPriceableInterface $tierPriceableEntity
-     * @param ChannelInterface       $channel
-     * @param int                    $quantity
      * @param CustomerInterface      $customer
-     *
-     * @return TierPriceInterface|null
      */
     public function find(
         TierPriceableInterface $tierPriceableEntity,
         ChannelInterface $channel,
         int $quantity,
-        ?CustomerInterface $customer = null
+        ?CustomerInterface $customer = null,
     ): ?TierPriceInterface {
         $group = null;
         if ($customer instanceof CustomerInterface) {

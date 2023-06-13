@@ -18,7 +18,6 @@ use Brille24\SyliusTierPricePlugin\Entity\ProductVariant;
 use Brille24\SyliusTierPricePlugin\Entity\TierPrice;
 use Brille24\SyliusTierPricePlugin\Services\ProductVariantPriceCalculator;
 use Brille24\SyliusTierPricePlugin\Services\TierPriceFinderInterface;
-use Mockery\Mock;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Sylius\Component\Core\Calculator\ProductVariantPricesCalculatorInterface;
@@ -56,7 +55,7 @@ class ProductVariantPriceCalculatorTest extends TestCase
     {
         //## PREPARE
         $productVariant = $this->createMock(SyliusProductVariant::class);
-        $testChannel    = $this->createMock(ChannelInterface::class);
+        $testChannel = $this->createMock(ChannelInterface::class);
 
         //## EXECUTE
         $price = $this->priceCalculator->calculate($productVariant, ['channel' => $testChannel, 'quantity' => 10]);
@@ -69,7 +68,7 @@ class ProductVariantPriceCalculatorTest extends TestCase
     {
         //## PREPARE
         $productVariant = $this->createMock(ProductVariant::class);
-        $testChannel    = $this->createMock(ChannelInterface::class);
+        $testChannel = $this->createMock(ChannelInterface::class);
 
         $this->tierPriceFinder->method('find')->willReturn(null);
 
@@ -84,7 +83,7 @@ class ProductVariantPriceCalculatorTest extends TestCase
     {
         //## PREPARE
         $productVariant = $this->createMock(ProductVariant::class);
-        $testChannel    = $this->createMock(ChannelInterface::class);
+        $testChannel = $this->createMock(ChannelInterface::class);
 
         $this->tierPriceFinder->method('find')->willReturn(new TierPrice(2, 2));
 

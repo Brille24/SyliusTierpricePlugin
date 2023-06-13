@@ -24,14 +24,10 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 
 class TierPriceFactoryTest extends TestCase
 {
-    /**
-     * @var TierPriceFactory
-     */
+    /** @var TierPriceFactory */
     private $subject;
 
-    /**
-     * @var MockObject|FactoryInterface
-     */
+    /** @var MockObject|FactoryInterface */
     private $baseFactory;
 
     public function setUp(): void
@@ -52,7 +48,7 @@ class TierPriceFactoryTest extends TestCase
 
     public function test_createAtProductVariant(): void
     {
-        $channel        = $this->createMock(ChannelInterface::class);
+        $channel = $this->createMock(ChannelInterface::class);
         $productVariant = $this->createMock(ProductVariantInterface::class);
 
         $tierPrice = $this->createMock(TierPrice::class);
@@ -66,8 +62,8 @@ class TierPriceFactoryTest extends TestCase
 
         $this->subject->createAtProductVariant($productVariant, [
             'quantity' => 10,
-            'channel'  => $channel,
-            'price'    => 100,
+            'channel' => $channel,
+            'price' => 100,
         ]);
     }
 }

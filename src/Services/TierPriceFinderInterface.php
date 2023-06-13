@@ -25,6 +25,6 @@ interface TierPriceFinderInterface
         TierPriceableInterface $tierPriceableEntity,
         ChannelInterface $channel,
         int $quantity,
-        ?CustomerInterface $customer = null
+        ?CustomerInterface $customer = null,
     ): ?TierPriceInterface;
 }

@@ -18,13 +18,10 @@ use Symfony\Component\Validator\Constraint;
 
 class TierPriceUniqueConstraint extends Constraint
 {
-    /**
-     *  @var string
-     */
+    /** @var string */
     public $message = 'brille24_tier_price.form.validation.not_unique';
-    /**
-     * @var string[]
-     */
+
+    /** @var string[] */
     public $fields = [];
 
     public function getRequiredOptions(): array

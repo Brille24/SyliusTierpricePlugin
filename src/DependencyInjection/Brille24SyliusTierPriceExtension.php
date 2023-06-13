@@ -26,11 +26,11 @@ final class Brille24SyliusTierPriceExtension extends Extension implements Prepen
 {
     use PrependDoctrineMigrationsTrait;
 
-    /** {@inheritdoc} */
+    /** @inheritdoc */
     public function load(array $configs, ContainerBuilder $container): void
     {
         $this->processConfiguration($this->getConfiguration([], $container), $configs);
-        new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+        new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
     }
 
     public function prepend(ContainerBuilder $container): void

@@ -30,16 +30,16 @@ final class TierPriceFactory implements TierPriceFactoryInterface
         $this->factory = $factory;
     }
 
-    /** {@inheritdoc} */
+    /** @inheritdoc */
     public function createNew(): object
     {
         return $this->factory->createNew();
     }
 
-    /** {@inheritdoc} */
+    /** @inheritdoc */
     public function createAtProductVariant(
         ProductVariantInterface $productVariant,
-        array $options = []
+        array $options = [],
     ): TierPriceInterface {
         Assert::integer($options['quantity']);
         Assert::nullOrIsInstanceOf($options['channel'], ChannelInterface::class);

@@ -36,11 +36,11 @@ class TierPriceFinderTest extends TestCase
     public function __construct(
         ?string $name = null,
         array $data = [],
-        string $dataName = ''
+        string $dataName = '',
     ) {
         parent::__construct($name, $data, $dataName);
 
-        $this->tierPriceRepo   = $this->createMock(TierPriceRepositoryInterface::class);
+        $this->tierPriceRepo = $this->createMock(TierPriceRepositoryInterface::class);
         $this->tierPriceFinder = new TierPriceFinder($this->tierPriceRepo);
 
         $this->testChannel = $this->createMock(ChannelInterface::class);

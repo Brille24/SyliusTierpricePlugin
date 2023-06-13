@@ -26,35 +26,27 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class TierPriceExampleFactory extends AbstractExampleFactory
 {
-    /**
-     * @var ProductVariantRepositoryInterface
-     */
+    /** @var ProductVariantRepositoryInterface */
     private $productVariantRepository;
 
-    /**
-     * @var ChannelRepositoryInterface
-     */
+    /** @var ChannelRepositoryInterface */
     private $channelRepository;
 
-    /**
-     * @var TierPriceFactoryInterface
-     */
+    /** @var TierPriceFactoryInterface */
     private $tierPriceFactory;
 
-    /**
-     * @var OptionsResolver
-     */
+    /** @var OptionsResolver */
     private $optionsResolver;
 
     public function __construct(
         ProductVariantRepositoryInterface $productVariantRepository,
         ChannelRepositoryInterface $channelRepository,
-        TierPriceFactoryInterface $tierPriceFactory
+        TierPriceFactoryInterface $tierPriceFactory,
     ) {
         $this->productVariantRepository = $productVariantRepository;
-        $this->channelRepository        = $channelRepository;
-        $this->tierPriceFactory         = $tierPriceFactory;
-        $this->optionsResolver          = new OptionsResolver();
+        $this->channelRepository = $channelRepository;
+        $this->tierPriceFactory = $tierPriceFactory;
+        $this->optionsResolver = new OptionsResolver();
         $this->configureOptions($this->optionsResolver);
     }
 
@@ -62,8 +54,6 @@ class TierPriceExampleFactory extends AbstractExampleFactory
      * Creates a tier price
      *
      * @param array $options The configuration of the tier price
-     *
-     * @return TierPriceInterface
      *
      * @throws EntityNotFoundException
      */
@@ -79,8 +69,6 @@ class TierPriceExampleFactory extends AbstractExampleFactory
 
     /**
      * Configuring the options that are allowed in the factory
-     *
-     * @param OptionsResolver $resolver
      */
     protected function configureOptions(OptionsResolver $resolver): void
     {

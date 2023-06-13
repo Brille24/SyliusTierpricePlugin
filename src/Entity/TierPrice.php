@@ -16,43 +16,30 @@ namespace Brille24\SyliusTierPricePlugin\Entity;
 
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Customer\Model\CustomerGroupInterface;
-use Sylius\Component\Resource\Model\ResourceInterface;
 
 class TierPrice implements TierPriceInterface
 {
-    /**
-     * @var int
-     */
+    /** @var int */
     private $id;
 
-    /**
-     * @var int
-     */
+    /** @var int */
     private $price;
 
-    /**
-     * @var int
-     */
+    /** @var int */
     private $qty;
 
-    /**
-     * @var ChannelInterface|null
-     */
+    /** @var ChannelInterface|null */
     private $channel;
 
-    /**
-     * @var ProductVariantInterface
-     */
+    /** @var ProductVariantInterface */
     private $productVariant;
 
-    /**
-     * @var CustomerGroupInterface|null
-     */
+    /** @var CustomerGroupInterface|null */
     private $customerGroup;
 
     public function __construct(int $quantity = 0, int $price = 0)
     {
-        $this->qty   = $quantity;
+        $this->qty = $quantity;
         $this->price = $price;
     }
 

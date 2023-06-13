@@ -25,9 +25,7 @@ use Webmozart\Assert\Assert;
 /** @psalm-suppress DeprecatedInterface */
 final class ProductVariantPriceCalculator implements ProductVariantPricesCalculatorInterface
 {
-    /**
-     * @var ProductVariantPricesCalculatorInterface
-     */
+    /** @var ProductVariantPricesCalculatorInterface */
     private $basePriceCalculator;
 
     /** @var TierPriceFinderInterface */
@@ -39,25 +37,22 @@ final class ProductVariantPriceCalculator implements ProductVariantPricesCalcula
     public function __construct(
         ProductVariantPricesCalculatorInterface $basePriceCalculator,
         TierPriceFinderInterface $tierPriceFinder,
-        CustomerContextInterface $customerContext
+        CustomerContextInterface $customerContext,
     ) {
         $this->basePriceCalculator = $basePriceCalculator;
-        $this->tierPriceFinder     = $tierPriceFinder;
-        $this->customerContext     = $customerContext;
+        $this->tierPriceFinder = $tierPriceFinder;
+        $this->customerContext = $customerContext;
     }
 
     /**
      * Calculates the unit price of a product variant based on the context
      *
-     * @param ProductVariantInterface $productVariant
      * @param array                   $context
      * The context has to have the following keys:
      * <ul>
      * <li>channel</li>
      * <li>quantity</li>
      * </ul>
-     *
-     * @return int
      */
     public function calculate(ProductVariantInterface $productVariant, array $context): int
     {

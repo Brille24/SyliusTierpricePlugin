@@ -22,12 +22,9 @@ interface TierPriceFactoryInterface extends FactoryInterface
 {
     /**
      * Creates a tierprice entity which is attached to a product variant
-     *
-     * @param ProductVariantInterface $productVariant
-     * @param array                   $options
-     *
-     * @return TierPriceInterface
      */
-    public function createAtProductVariant(ProductVariantInterface $productVariant, array $options = []
+    public function createAtProductVariant(
+        ProductVariantInterface $productVariant,
+        array $options = [],
     ): TierPriceInterface;
 }

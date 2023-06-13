@@ -40,13 +40,13 @@ class TierPriceUniqueValidator extends ConstraintValidator
 
     /**
      * @param mixed $value
-     * @param Constraint $constraint
      */
     public function validate($value, Constraint $constraint): void
     {
         Assert::isInstanceOf($value, TierPriceInterface::class);
         Assert::isInstanceOf($constraint, TierPriceUniqueConstraint::class);
 
+        /** @var TierPriceUniqueConstraint $constraint */
         $fields = $constraint->fields;
         if (0 === count($fields)) {
             throw new ConstraintDefinitionException('At least one field has to be specified.');
@@ -57,8 +57,8 @@ class TierPriceUniqueValidator extends ConstraintValidator
             throw new ConstraintDefinitionException(
                 sprintf(
                     'Unable to find the object manager associated with an entity of class "%s".',
-                    get_class($value)
-                )
+                    get_class($value),
+                ),
             );
         }
 
@@ -87,15 +87,10 @@ class TierPriceUniqueValidator extends ConstraintValidator
 
     /**
      * @param string[] $fields
-     * @param ObjectManager $em
-     * @param TierPriceInterface $first
-     * @param TierPriceInterface $second
-     *
-     * @return bool
      */
     private function areDuplicates(array $fields, ObjectManager $em, TierPriceInterface $first, TierPriceInterface $second): bool
     {
-        /* @var $class ClassMetadataInfo */
+        /** @var ClassMetadataInfo $class */
         $class = $em->getClassMetadata(get_class($first));
         Assert::isInstanceOf($class, ClassMetadataInfo::class);
 
@@ -104,12 +99,12 @@ class TierPriceUniqueValidator extends ConstraintValidator
                 throw new ConstraintDefinitionException(
                     sprintf(
                         'The field "%s" is not mapped by Doctrine, so it cannot be validated for uniqueness.',
-                        $fieldName
-                    )
+                        $fieldName,
+                    ),
                 );
             }
             /** @psalm-suppress MixedAssignment $fieldValue */
-            $fieldValue      = $this->getFieldValue($em, $class, $fieldName, $first);
+            $fieldValue = $this->getFieldValue($em, $class, $fieldName, $first);
             /** @psalm-suppress MixedAssignment $fieldValue */
             $otherFieldValue = $this->getFieldValue($em, $class, $fieldName, $second);
             if ($fieldValue !== $otherFieldValue) {
@@ -121,11 +116,6 @@ class TierPriceUniqueValidator extends ConstraintValidator
     }
 
     /**
-     * @param ObjectManager      $em
-     * @param ClassMetadataInfo  $class
-     * @param string             $fieldName
-     * @param TierPriceInterface $value
-     *
      * @return mixed
      */
     private function getFieldValue(ObjectManager $em, ClassMetadataInfo $class, string $fieldName, TierPriceInterface $value)
@@ -141,7 +131,6 @@ class TierPriceUniqueValidator extends ConstraintValidator
              * read its identifiers. This is necessary because the wrapped
              * getter methods in the Proxy are being bypassed.
              */
-            /** @var object $fieldValue */
             $em->initializeObject($fieldValue);
         }
 

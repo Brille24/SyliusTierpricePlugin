@@ -1,12 +1,23 @@
 <?php
+
+/**
+ * This file is part of the Brille24 tierprice plugin.
+ *
+ * (c) Brille24 GmbH
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ *
+ */
+
 declare(strict_types=1);
 
 namespace Tests\Brille24\SyliusTierPricePlugin\Behat\Context;
 
 use Behat\Behat\Context\Context;
-use Brille24\SyliusTierPricePlugin\Entity\{
-    ProductVariant, TierPrice, TierPriceInterface
-};
+use Brille24\SyliusTierPricePlugin\Entity\ProductVariant;
+use Brille24\SyliusTierPricePlugin\Entity\TierPrice;
+use Brille24\SyliusTierPricePlugin\Entity\TierPriceInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 
 final class TierPriceContext implements Context
@@ -27,7 +38,7 @@ final class TierPriceContext implements Context
     private function createTierPrice(int $quantity, $price): TierPriceInterface
     {
         $tierPrice = new TierPrice($quantity);
-        $tierPrice->setPrice((int)(floatval($price) * 100));
+        $tierPrice->setPrice((int) ((float) $price * 100));
 
         return $tierPrice;
     }

@@ -37,7 +37,7 @@ class OrderPricesRecalculatorTest extends TestCase
     public function setUp(): void
     {
         $productVariantCalculator = $this->createMock(ProductVariantPricesCalculatorInterface::class);
-        $calculated               = &$this->calculated;
+        $calculated = &$this->calculated;
 
         $productVariantCalculator->method('calculate')->willReturnCallback(
             function (ProductVariantInterface $productVariant, array $options) use (&$calculated): int {
@@ -46,7 +46,8 @@ class OrderPricesRecalculatorTest extends TestCase
                 $calculated[] = $options['quantity'] * 2;
 
                 return 0;
-            });
+            },
+        );
 
         $this->orderPriceRecalculator = new OrderPricesRecalculator($productVariantCalculator);
     }
@@ -86,7 +87,7 @@ class OrderPricesRecalculatorTest extends TestCase
 
     private function createOrder(int $quantity): OrderItemInterface
     {
-        $orderItem      = $this->createMock(OrderItem::class);
+        $orderItem = $this->createMock(OrderItem::class);
         $productVariant = $this->createMock(ProductVariantInterface::class);
 
         $orderItem->method('getVariant')->willReturn($productVariant);

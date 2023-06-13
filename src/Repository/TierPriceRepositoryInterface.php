@@ -25,9 +25,6 @@ interface TierPriceRepositoryInterface extends RepositoryInterface
     /**
      * Gets all tier prices for a product variant for a channel and optionally customer group with quantity in ascending order
      *
-     * @param TierPriceableInterface      $productVariant
-     * @param ChannelInterface            $channel
-     * @param CustomerGroupInterface|null $customerGroup
      *
      * @return TierPriceInterface[]
      */
@@ -35,13 +32,6 @@ interface TierPriceRepositoryInterface extends RepositoryInterface
 
     /**
      * Gets a tierprice by product variant and quantity
-     *
-     * @param TierPriceableInterface $productVariant
-     * @param ChannelInterface $channel
-     * @param CustomerGroupInterface|null $customerGroup
-     * @param int $quantity
-     *
-     * @return TierPriceInterface|null
      */
     public function getTierPriceForQuantity(TierPriceableInterface $productVariant, ChannelInterface $channel, ?CustomerGroupInterface $customerGroup, int $quantity): ?TierPriceInterface;
 }

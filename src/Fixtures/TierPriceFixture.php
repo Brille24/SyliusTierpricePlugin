@@ -15,7 +15,6 @@ declare(strict_types=1);
 namespace Brille24\SyliusTierPricePlugin\Fixtures;
 
 use Sylius\Bundle\CoreBundle\Fixture\AbstractResourceFixture;
-use Sylius\Bundle\FixturesBundle\Fixture\FixtureInterface;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 
 class TierPriceFixture extends AbstractResourceFixture
@@ -46,9 +45,6 @@ class TierPriceFixture extends AbstractResourceFixture
             ->end();
     }
 
-    /**
-     * @return string
-     */
     public function getName(): string
     {
         return 'tier_prices';

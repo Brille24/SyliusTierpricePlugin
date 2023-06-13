@@ -1,10 +1,24 @@
 <?php
 
-return [
+$oldBundles = [];
+if (class_exists(Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle::class)) {
+    $oldBundles[Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle::class] = ['all' => true];
+}
+
+// Bundles from Sylius 1.12
+if(class_exists(League\FlysystemBundle\FlysystemBundle::class)) {
+    $oldBundles[League\FlysystemBundle\FlysystemBundle::class] = ['all' => true];
+}
+
+if(class_exists(Symfony\WebpackEncoreBundle\WebpackEncoreBundle::class)) {
+    $oldBundles[Symfony\WebpackEncoreBundle\WebpackEncoreBundle::class] = ['all' => true];
+}
+
+
+return array_merge($oldBundles, [
     Symfony\Bundle\FrameworkBundle\FrameworkBundle::class => ['all' => true],
     Symfony\Bundle\MonologBundle\MonologBundle::class => ['all' => true],
     Symfony\Bundle\SecurityBundle\SecurityBundle::class => ['all' => true],
-    Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle::class => ['all' => true],
     Symfony\Bundle\TwigBundle\TwigBundle::class => ['all' => true],
     Doctrine\Bundle\DoctrineBundle\DoctrineBundle::class => ['all' => true],
     Sylius\Bundle\OrderBundle\SyliusOrderBundle::class => ['all' => true],
@@ -57,4 +71,4 @@ return [
     BabDev\PagerfantaBundle\BabDevPagerfantaBundle::class => ['all' => true],
     SyliusLabs\Polyfill\Symfony\Security\Bundle\SyliusLabsPolyfillSymfonySecurityBundle::class => ['all' => true],
     Sylius\Calendar\SyliusCalendarBundle::class => ['all' => true],
-];
+]);

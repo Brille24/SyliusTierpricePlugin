@@ -28,7 +28,7 @@ final class ProductVariantPriceCalculator implements ProductVariantPricesCalcula
     public function __construct(
         private ProductVariantPricesCalculatorInterface $basePriceCalculator,
         private TierPriceFinderInterface $tierPriceFinder,
-        private CustomerContextInterface $customerContext
+        private CustomerContextInterface $customerContext,
     ) {
     }
 

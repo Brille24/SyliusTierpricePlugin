@@ -19,7 +19,6 @@ use Brille24\SyliusTierPricePlugin\Entity\TierPriceInterface;
 use function count;
 use Doctrine\ORM\Mapping\ClassMetadataInfo;
 use Doctrine\Persistence\ObjectManager;
-use function get_class;
 use ReflectionProperty;
 use Sylius\Component\Product\Model\ProductInterface;
 use Symfony\Bridge\Doctrine\ManagerRegistry;
@@ -68,7 +67,7 @@ class TierPriceUniqueValidator extends ConstraintValidator
         }
         $otherTierPrices = $formData->getTierPrices();
 
-        $otherTierPrices = array_filter($otherTierPrices, static fn($tierPrice): bool => $tierPrice !== $value);
+        $otherTierPrices = array_filter($otherTierPrices, static fn ($tierPrice): bool => $tierPrice !== $value);
 
         foreach ($otherTierPrices as $otherTierPrice) {
             if ($this->areDuplicates($fields, $em, $value, $otherTierPrice)) {

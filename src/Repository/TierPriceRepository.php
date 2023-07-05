@@ -23,7 +23,7 @@ use Sylius\Component\Customer\Model\CustomerGroupInterface;
 /**
  * @method array<TierPriceInterface> findBy(array $criteria, ?array $orderBy = null, $limit = null, $offset = null)
  * @method TierPriceInterface|null findOneBy(array $criteria, ?array $orderBy = null, $limit = null, $offset = null)
-*/
+ */
 class TierPriceRepository extends EntityRepository implements TierPriceRepositoryInterface
 {
     public function getSortedTierPrices(TierPriceableInterface $productVariant, ChannelInterface $channel, ?CustomerGroupInterface $customerGroup = null): array
@@ -50,7 +50,7 @@ class TierPriceRepository extends EntityRepository implements TierPriceRepositor
         TierPriceableInterface $productVariant,
         ChannelInterface $channel,
         ?CustomerGroupInterface $customerGroup,
-        int $quantity
+        int $quantity,
     ): ?TierPriceInterface {
         return $this->findOneBy([
             'productVariant' => $productVariant,

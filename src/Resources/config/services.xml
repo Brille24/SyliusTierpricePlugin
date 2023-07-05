@@ -1,5 +1,0 @@
-<container xmlns="http://symfony.com/schema/dic/services">
-    <imports>
-        <import resource="services/**/*.xml"/>
-    </imports>
-</container>

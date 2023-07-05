@@ -1,5 +1,4 @@
 imports:
-  - { resource: "services.xml" }
   - { resource: "resources.yml" }
 
 sylius_ui:

@@ -20,6 +20,7 @@ use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\Extension;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
+use Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 
 final class Brille24SyliusTierPriceExtension extends Extension implements PrependExtensionInterface
@@ -31,6 +32,9 @@ final class Brille24SyliusTierPriceExtension extends Extension implements Prepen
     {
         $this->processConfiguration($this->getConfiguration([], $container), $configs);
         new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
+
+        $loder = new PhpFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
+        $loder->load('services.php');
     }
 
     public function prepend(ContainerBuilder $container): void

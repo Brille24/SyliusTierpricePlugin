@@ -16,11 +16,15 @@ use Brille24\SyliusTierPricePlugin\Factory\TierPriceExampleFactory;
 use Brille24\SyliusTierPricePlugin\Factory\TierPriceFactory;
 use Brille24\SyliusTierPricePlugin\Factory\TierPriceFactoryInterface;
 use Brille24\SyliusTierPricePlugin\Fixtures\TierPriceFixture;
+use Brille24\SyliusTierPricePlugin\Form\Extension\ProductVariantTypeExtension;
+use Brille24\SyliusTierPricePlugin\Form\TierPriceType;
 use Brille24\SyliusTierPricePlugin\Repository\TierPriceRepositoryInterface;
 use Brille24\SyliusTierPricePlugin\Services\OrderPricesRecalculator;
 use Brille24\SyliusTierPricePlugin\Services\ProductVariantPriceCalculator;
 use Brille24\SyliusTierPricePlugin\Services\TierPriceFinder;
 use Brille24\SyliusTierPricePlugin\Services\TierPriceFinderInterface;
+use Brille24\SyliusTierPricePlugin\Validator\TierPriceUniqueValidator;
+use Sylius\Bundle\ProductBundle\Form\Type\ProductVariantType;
 use Sylius\Component\Core\Calculator\ProductVariantPricesCalculatorInterface;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use function Symfony\Component\DependencyInjection\Loader\Configurator\service;
@@ -51,7 +55,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ->args([service(TierPriceFactoryInterface::class . '.inner')])
     ;
 
-    $services->set(\Brille24\SyliusTierPricePlugin\Factory\TierPriceExampleFactory::class);
+    $services->set(TierPriceExampleFactory::class);
 
     $services->set(TierPriceFixture::class)
         ->args([
@@ -61,13 +65,13 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ->tag('sylius_fixtures.fixture')
     ;
 
-    $services->set(\Brille24\SyliusTierPricePlugin\Form\TierPriceType::class);
+    $services->set(TierPriceType::class);
 
-    $services->set(\Brille24\SyliusTierPricePlugin\Form\Extension\ProductVariantTypeExtension::class)
-        ->tag('form.type_extension', ['extended_type' => \Sylius\Bundle\CoreBundle\Form\Type\ProductVariant::class, 'priority' => -5])
+    $services->set(ProductVariantTypeExtension::class)
+        ->tag('form.type_extension', ['extended_type' => ProductVariantType::class, 'priority' => -5])
     ;
 
-    $services->set(\Brille24\SyliusTierPricePlugin\Validator\TierPriceUniqueValidator::class)
+    $services->set(TierPriceUniqueValidator::class)
         ->args([service('doctrine')])
         ->tag('validator.constraint_validator', ['alias' => 'brille24.tier_price_validator.unqiue'])
     ;

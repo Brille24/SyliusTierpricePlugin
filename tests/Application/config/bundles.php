@@ -1,6 +1,9 @@
 <?php
 
 $oldBundles = [];
+if (class_exists(Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle::class)) {
+    $oldBundles[Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle::class] = ['all' => true];
+}
 
 // Bundles from Sylius 1.12
 if(class_exists(League\FlysystemBundle\FlysystemBundle::class)) {

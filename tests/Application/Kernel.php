@@ -61,9 +61,12 @@ final class Kernel extends BaseKernel
     protected function configureRoutes(RoutingConfigurator $routes): void
     {
         foreach ($this->getConfigurationDirectories() as $confDir) {
-            $routes->import($confDir . '/{routes}' . self::CONFIG_EXTS, 'glob');
+            $routes->import($confDir . '/{routes}/*' . self::CONFIG_EXTS);
+            $routes->import($confDir . '/{routes}/' . $this->environment . '/**/*' . self::CONFIG_EXTS);
+            $routes->import($confDir . '/{routes}' . self::CONFIG_EXTS);
         }
     }
+
 
     protected function getContainerBaseClass(): string
     {

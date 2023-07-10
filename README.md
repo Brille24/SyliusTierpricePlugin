@@ -23,17 +23,6 @@ imports:
     - { resource: '@Brille24SyliusTierPricePlugin/Resources/config/config.yml'}
 ```
 
-and `resources.yml` to your local `config/resource.yml`
-
-```yml
-imports:
-    ...
-    - { resource: '@Brille24SyliusTierPricePlugin/Resources/config/resources.yml'}
-```
-
-
-That way all the Sylius resource overriding happens in the `app/config/resources.yml`
-
 * For API functionality add the bundle's `routing.yml` to the local `app/config/routing.yml`
 ```yml
 ...

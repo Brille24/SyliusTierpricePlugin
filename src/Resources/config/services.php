@@ -40,19 +40,20 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     $services->set(ProductVariantPricesCalculatorInterface::class, ProductVariantPriceCalculator::class)
         ->decorate('sylius.calculator.product_variant_price')
         ->args([
-            service(ProductVariantPricesCalculatorInterface::class . '.inner'),
+            service('.inner'),
         ])
     ;
 
     $services->set(OrderPricesRecalculator::class)
         ->decorate('sylius.order_processing.order_prices_recalculator')
+        ->args([service('.inner')])
     ;
 
     $services->load('Brille24\\SyliusTierPricePlugin\\Menu\\', __DIR__ . '/../../Menu/');
 
     $services->set(TierPriceFactoryInterface::class, TierPriceFactory::class)
         ->decorate('brille24.factory.tierprice')
-        ->args([service(TierPriceFactoryInterface::class . '.inner')])
+        ->args([service('.inner')])
     ;
 
     $services->set(TierPriceExampleFactory::class);

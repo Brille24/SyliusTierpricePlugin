@@ -23,8 +23,10 @@ use TypeError;
 
 final class OrderPricesRecalculator implements OrderProcessorInterface
 {
-    public function __construct(private ProductVariantPricesCalculatorInterface $productVariantPriceCalculator)
-    {
+    public function __construct(
+        private ProductVariantPricesCalculatorInterface $productVariantPriceCalculator,
+        private OrderProcessorInterface $orderProcessor,
+    ) {
     }
 
     public function process(BaseOrderInterface $order): void
@@ -32,6 +34,8 @@ final class OrderPricesRecalculator implements OrderProcessorInterface
         if (!$order instanceof OrderInterface) {
             throw new TypeError('Order has to implement ' . OrderInterface::class);
         }
+
+        $this->orderProcessor->process($order);
 
         $channel = $order->getChannel();
 

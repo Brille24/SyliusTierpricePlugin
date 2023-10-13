@@ -46,7 +46,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
 
     $services->set(OrderPricesRecalculator::class)
         ->decorate('sylius.order_processing.order_prices_recalculator')
-        ->args([service('.inner')])
+        ->arg('$orderProcessor', service('.inner'))
     ;
 
     $services->load('Brille24\\SyliusTierPricePlugin\\Menu\\', __DIR__ . '/../../Menu/');

@@ -30,6 +30,20 @@ brille24_tierprice_bundle:
     resource: '@Brille24SyliusTierPricePlugin/Resources/config/routing.yml'
 ```
 
+* Go into your ProductVariant class and add the following trait and add one method call to the constructor
+```php
+class ProductVariant
+{
+    use \Brille24\SyliusTierPricePlugin\Traits\TierpricableTrait;
+
+    public function __construct() {
+        // Your contructor here
+
+        $this->initTierPriceableTrait() // "Constructor" of the trait
+    }
+}
+````
+
 * Finally update the database, install the assets and update the translations:
 ```sh
 bin/console doctrine:schema:update --force
@@ -38,7 +52,6 @@ bin/console translation:update <locale> --force
 ```
 
 ### Integration
-* This bundle overrides the `ProductVariant` class provided by Sylius. If you wish to override the class in your application too, you have to merge the configuration in the bundle's `resource.yml` with your own.
 * This bundle decorates the `sylius.calculator.product_variant_price` service. If you wish to change that, you could register a [compiler pass](https://symfony.com/doc/current/service_container/compiler_passes.html).
 * This bundle decorates the `sylius.order_processing.order_prices_recalculator` service. If you wish to use your own order processor or change its priority, you could register a [compiler pass](https://symfony.com/doc/current/service_container/compiler_passes.html).
 

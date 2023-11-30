@@ -52,6 +52,8 @@ bin/console translation:update <locale> --force
 ```
 
 ### Integration
+> This bundle uses XML mappings, if you are using [attributes](https://www.doctrine-project.org/projects/doctrine-orm/en/2.17/reference/attributes-reference.html) for mappings these classes don't work.
+
 * This bundle decorates the `sylius.calculator.product_variant_price` service. If you wish to change that, you could register a [compiler pass](https://symfony.com/doc/current/service_container/compiler_passes.html).
 * This bundle decorates the `sylius.order_processing.order_prices_recalculator` service. If you wish to use your own order processor or change its priority, you could register a [compiler pass](https://symfony.com/doc/current/service_container/compiler_passes.html).
 

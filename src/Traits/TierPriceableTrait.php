@@ -15,8 +15,11 @@ declare(strict_types=1);
 namespace Brille24\SyliusTierPricePlugin\Traits;
 
 use Brille24\SyliusTierPricePlugin\Entity\ProductVariant;
+use Brille24\SyliusTierPricePlugin\Entity\TierPrice;
 use Brille24\SyliusTierPricePlugin\Entity\TierPriceInterface;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping\OneToMany;
+use Doctrine\ORM\Mapping\OrderBy;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
@@ -37,6 +40,8 @@ trait TierPriceableTrait
     }
 
     /** @var ArrayCollection<int, TierPriceInterface> */
+    #[OneToMany(TierPrice::class, mappedBy: "productVariant", orphanRemoval: true, cascade: ['all'])]
+    #[OrderBy(['customerGroup' => 'ASC', 'qty' => 'ASC'])]
     protected $tierPrices;
 
     /**

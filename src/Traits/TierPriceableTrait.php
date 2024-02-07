@@ -40,7 +40,7 @@ trait TierPriceableTrait
     }
 
     /** @var ArrayCollection<int, TierPriceInterface> */
-    #[OneToMany(TierPrice::class, mappedBy: "productVariant", orphanRemoval: true, cascade: ['all'])]
+    #[OneToMany(mappedBy: "productVariant", targetEntity: TierPrice::class, cascade: ['all'], orphanRemoval: true)]
     #[OrderBy(['customerGroup' => 'ASC', 'qty' => 'ASC'])]
     protected $tierPrices;
 

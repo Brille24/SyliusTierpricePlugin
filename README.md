@@ -34,7 +34,7 @@ brille24_tierprice_bundle:
 ```php
 class ProductVariant
 {
-    use \Brille24\SyliusTierPricePlugin\Traits\TierpricableTrait;
+    use \Brille24\SyliusTierPricePlugin\Traits\TierPriceableTrait;
 
     public function __construct() {
         // Your contructor here

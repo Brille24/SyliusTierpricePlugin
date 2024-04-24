@@ -17,6 +17,7 @@ use Brille24\SyliusTierPricePlugin\Factory\TierPriceFactory;
 use Brille24\SyliusTierPricePlugin\Factory\TierPriceFactoryInterface;
 use Brille24\SyliusTierPricePlugin\Fixtures\TierPriceFixture;
 use Brille24\SyliusTierPricePlugin\Form\Extension\ProductVariantTypeExtension;
+use Brille24\SyliusTierPricePlugin\Form\TierPriceMapper;
 use Brille24\SyliusTierPricePlugin\Form\TierPriceType;
 use Brille24\SyliusTierPricePlugin\Repository\TierPriceRepositoryInterface;
 use Brille24\SyliusTierPricePlugin\Services\OrderPricesRecalculator;
@@ -27,6 +28,7 @@ use Brille24\SyliusTierPricePlugin\Validator\TierPriceUniqueValidator;
 use Sylius\Bundle\ProductBundle\Form\Type\ProductVariantType;
 use Sylius\Component\Core\Calculator\ProductVariantPricesCalculatorInterface;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+use Symfony\Component\Form\Extension\Core\DataMapper\DataMapper;
 use function Symfony\Component\DependencyInjection\Loader\Configurator\service;
 
 return static function (ContainerConfigurator $containerConfigurator): void {
@@ -66,7 +68,11 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ->tag('sylius_fixtures.fixture')
     ;
 
-    $services->set(TierPriceType::class);
+    $services->set(TierPriceType::class)
+        ->args([TierPriceMapper::class]);
+
+    $services->set(TierPriceMapper::class)
+        ->args([DataMapper::class]);
 
     $services->set(ProductVariantTypeExtension::class)
         ->tag('form.type_extension', ['extended_type' => ProductVariantType::class, 'priority' => -5])

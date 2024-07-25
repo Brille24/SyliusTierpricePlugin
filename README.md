@@ -37,9 +37,9 @@ class ProductVariant
     use \Brille24\SyliusTierPricePlugin\Traits\TierPriceableTrait;
 
     public function __construct() {
-        // Your contructor here
+        parent::__construct(); // Your contructor here
 
-        $this->initTierPriceableTrait() // "Constructor" of the trait
+        $this->initTierPriceableTrait(); // "Constructor" of the trait
     }
 }
 ````

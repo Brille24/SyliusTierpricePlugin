@@ -32,7 +32,7 @@ brille24_tierprice_bundle:
 
 * Go into your ProductVariant class and add the following trait and add one method call to the constructor
 ```php
-class ProductVariant
+class ProductVariant extends BaseProductVariant implements \Brille24\SyliusTierPricePlugin\Entity\ProductVariantInterface
 {
     use \Brille24\SyliusTierPricePlugin\Traits\TierPriceableTrait;
 
@@ -40,6 +40,11 @@ class ProductVariant
         parent::__construct(); // Your contructor here
 
         $this->initTierPriceableTrait(); // "Constructor" of the trait
+    }
+
+    protected function createTranslation(): ProductVariantTranslationInterface
+    {
+        return new ProductVariantTranslation();
     }
 }
 ````

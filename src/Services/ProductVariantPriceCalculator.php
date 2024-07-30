@@ -75,4 +75,12 @@ final class ProductVariantPriceCalculator implements ProductVariantPricesCalcula
     {
         return $this->basePriceCalculator->calculateOriginal($productVariant, $context);
     }
+
+    public function calculateLowestPriceBeforeDiscount(ProductVariantInterface $productVariant, array $context): ?int
+    {
+        if (method_exists($this->basePriceCalculator, 'calculateLowestPriceBeforeDiscount')) {
+            return $this->basePriceCalculator->calculateLowestPriceBeforeDiscount($productVariant, $context);
+        }
+        return null;
+    }
 }

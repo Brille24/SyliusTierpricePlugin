@@ -1,38 +1,263 @@
 {% import "@SyliusShop/Common/Macro/money.html.twig" as money %}
 
-<div id="tier_prices_tables">
-    {% for product_variant in product.variants %}
-        {% set tier_prices = product_variant.getTierPricesForChannel(sylius.channel,sylius.customer) %}
+{# Initialize the variantsData variable #}
+{% set variantsData = {} %}
 
-        {% set tier_prices_table_id = product_variant.code~'_table' %}
-
-        {% if tier_prices|length > 0 %}
-            <div id="{{ tier_prices_table_id }}">
-                <span style="font-weight: bold;">{{ 'brille24_tier_price.ui.tier_prices'|trans }}</span>
-
-                <table class="ui stackable celled table">
-                    <thead>
-                    <tr>
-                        <th>{{ 'sylius.ui.quantity'|trans }}</th>
-                        <th>{{ 'sylius.ui.unit_price'|trans }}</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr style="display: none">
-                        <td>{{ 1|number_format }}</td>
-                        <td>{{ money.convertAndFormat(product_variant.channelPricings[sylius.channel.code].price) }}</td>
-                    </tr>
-                    {% for tierPrice in tier_prices %}
-                        <tr>
-                            <td>{{ tierPrice.qty|number_format }}</td>
-                            <td>{{ money.convertAndFormat(tierPrice.price, sylius.channel.baseCurrency) }}</td>
-                        </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
-
-                <br />
-            </div>
+{% for variant in product.variants %}
+    {% set optionValues = [] %}
+    {% set optionCodes = [
+        'rigid_size',
+        'digital_option',
+        'goodie_type',
+        'print_option',
+        'print_size',
+        'product_type',
+        'rigid_option'
+    ] %}
+    {% for optionCode in optionCodes %}
+        {% set optionValue = variant.optionValues|filter(v => v.option.code == optionCode)|first %}
+        {% if optionValue is defined %}
+            {% set optionValues = optionValues|merge([optionValue.code]) %}
+        {% else %}
+            {% set optionValues = optionValues|merge(['default_' ~ optionCode]) %}
         {% endif %}
     {% endfor %}
+    {% set variantKey = optionValues|join('|') %}
+
+    {% set tierPrices = [] %}
+    {% for tierPrice in variant.getTierPricesForChannel(sylius.channel, sylius.customer) %}
+        {% set tierPrices = tierPrices|merge([{
+            'qty': tierPrice.qty,
+            'price': tierPrice.price
+        }]) %}
+    {% endfor %}
+
+    {% set variantsData = variantsData|merge({
+        (variantKey): {
+            'variantId': variant.id,
+            'variantCode': variant.code,
+            'tierPrices': tierPrices
+        }
+    }) %}
+{% endfor %}
+
+{# Include a container for the tier price table #}
+<div id="tier_prices_container">
+    <!-- The tier price table for the selected variant will be inserted here -->
 </div>
+
+{% block javascripts %}
+ <script>
+    var variantsData = {{ variantsData|json_encode(constant('JSON_PRETTY_PRINT'))|raw }};
+    console.log('variantsData:', variantsData);
+
+    document.addEventListener('DOMContentLoaded', () => {
+        let currentVariantData = null;
+
+        function getSelectedOptions() {
+            const optionFields = [
+                'product_type',
+                'digital_option',
+                'print_size',
+                'print_option',
+                'rigid_size',
+                'rigid_option',
+                'goodie_type'
+            ];
+
+            let selectedOptions = {};
+
+            optionFields.forEach(optionField => {
+                const selectElement = document.getElementById(`sylius_add_to_cart_cartItem_variant_${optionField}`);
+                if (selectElement && selectElement.value) {
+                    selectedOptions[optionField] = selectElement.value;
+                } else {
+                    // Use default value if element doesn't exist or has no value
+                    selectedOptions[optionField] = `default_${optionField}`;
+                }
+            });
+
+            console.log('Selected options:', selectedOptions);
+            return selectedOptions;
+        }
+
+        function generateVariantKey(selectedOptions) {
+            const optionOrder = [
+                'rigid_size',
+                'digital_option',
+                'goodie_type',
+                'print_option',
+                'print_size',
+                'product_type',
+                'rigid_option'
+            ];
+
+            // Create an array of option values in the correct order
+            let optionValues = optionOrder.map(optionField => selectedOptions[optionField] || `default_${optionField}`);
+
+            return optionValues.join('|');
+        }
+
+        function displayTierPrices(tierPrices) {
+            const tierPricesContainer = document.getElementById('tier_prices_container');
+            tierPricesContainer.innerHTML = ''; // Clear previous content
+
+            if (!tierPrices || tierPrices.length === 0) {
+                tierPricesContainer.innerHTML = '<p>Aucun prix dégressif disponible pour cette combinaison.</p>';
+                return;
+            }
+
+            let tableHtml = `
+                <table class="ui stackable celled table">
+                    <thead>
+                        <tr>
+                            <th>{{ 'sylius.ui.quantity'|trans }}</th>
+                            <th>{{ 'sylius.ui.unit_price'|trans }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+            `;
+
+            tierPrices.forEach(tierPrice => {
+                // Format the price in JavaScript
+                const priceFormatted = (tierPrice.price / 100).toLocaleString('fr-FR', {
+                    style: 'currency',
+                    currency: 'EUR'
+                });
+                tableHtml += `
+                    <tr>
+                        <td>${tierPrice.qty}</td>
+                        <td>${priceFormatted}</td>
+                    </tr>
+                `;
+            });
+
+            tableHtml += `
+                    </tbody>
+                </table>
+            `;
+
+            tierPricesContainer.innerHTML = tableHtml;
+        }
+
+        function updateTierPrices() {
+            const selectedOptions = getSelectedOptions();
+
+            if (Object.keys(selectedOptions).length === 0) {
+                // No options selected
+                displayTierPrices([]);
+                currentVariantData = null;
+                updateDisplayedPrice();
+                return;
+            }
+
+            const variantKey = generateVariantKey(selectedOptions);
+
+            console.log('Generated Variant Key:', variantKey);
+
+            if (variantsData.hasOwnProperty(variantKey)) {
+                const variantData = variantsData[variantKey];
+                currentVariantData = variantData; // Store the current variant data
+                console.log('Corresponding variant ID:', variantData.variantId);
+                displayTierPrices(variantData.tierPrices);
+                updateDisplayedPrice(); // Update the displayed price when options change
+            } else {
+                // No variant matches the selected options
+                console.log('No matching variant found for key:', variantKey);
+                displayTierPrices([]);
+                currentVariantData = null;
+                updateDisplayedPrice(); // Update the displayed price
+            }
+        }
+
+        function updateDisplayedPrice() {
+            const quantityInput = document.getElementById('sylius_add_to_cart_cartItem_quantity');
+            let quantity = 1;
+            if (quantityInput && quantityInput.value) {
+                quantity = parseInt(quantityInput.value, 10);
+                if (isNaN(quantity) || quantity < 1) {
+                    quantity = 1; // Ensure quantity is at least 1
+                }
+            }
+
+            if (!currentVariantData) {
+                // No variant selected, cannot update price
+                console.log('No variant data available to update price.');
+                return;
+            }
+
+            // Get the appropriate unit price from the tierPrices
+            let unitPrice = null;
+            // Ensure tierPrices are sorted by quantity in ascending order
+            const sortedTierPrices = currentVariantData.tierPrices.sort((a, b) => a.qty - b.qty);
+
+            for (let i = 0; i < sortedTierPrices.length; i++) {
+                if (quantity < sortedTierPrices[i].qty) {
+                    if (i === 0) {
+                        // Quantity is less than the first tier
+                        unitPrice = sortedTierPrices[0].price;
+                    } else {
+                        // Use the previous tier's price
+                        unitPrice = sortedTierPrices[i - 1].price;
+                    }
+                    break;
+                } else if (quantity >= sortedTierPrices[sortedTierPrices.length - 1].qty) {
+                    // Quantity is equal to or exceeds the highest tier
+                    unitPrice = sortedTierPrices[sortedTierPrices.length - 1].price;
+                    break;
+                }
+            }
+
+            if (unitPrice === null) {
+                // Default to the base price if no tier matches
+                unitPrice = sortedTierPrices[0].price;
+            }
+
+            // Format the unit price
+            const priceFormatted = (unitPrice / 100).toLocaleString('fr-FR', {
+                style: 'currency',
+                currency: 'EUR'
+            });
+
+            // Update the displayed price on the page
+
+            const priceElement = document.getElementById('product-price');
+            if (priceElement) {
+                priceElement.textContent = priceFormatted;
+            } else {
+                console.warn('Price element not found to update displayed price.');
+            }
+        }
+
+        // Event listeners for option changes
+        const optionFields = [
+            'product_type',
+            'digital_option',
+            'print_size',
+            'print_option',
+            'rigid_size',
+            'rigid_option',
+            'goodie_type'
+        ];
+
+        optionFields.forEach(optionField => {
+            const selectElement = document.getElementById(`sylius_add_to_cart_cartItem_variant_${optionField}`);
+            if (selectElement) {
+                selectElement.addEventListener('change', updateTierPrices);
+            }
+        });
+
+        // Event listener for quantity changes
+        const quantityInput = document.getElementById('sylius_add_to_cart_cartItem_quantity');
+        if (quantityInput) {
+            quantityInput.addEventListener('change', updateDisplayedPrice);
+            quantityInput.addEventListener('keyup', updateDisplayedPrice);
+        }
+
+        // Initialize
+        updateTierPrices();
+        updateDisplayedPrice();
+    });
+</script>
+
+{% endblock %}

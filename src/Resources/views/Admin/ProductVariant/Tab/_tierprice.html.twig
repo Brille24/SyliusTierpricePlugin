@@ -1,4 +1,9 @@
 {# A macro rendering a row of the tier price table#}
+{% block javascripts %}
+    {% include '@SyliusUi/_javascripts.html.twig' with {path: 'bundles/brille24syliustierpriceplugin/js/tierPrices/itemCollectionRender.js'} %}
+{% endblock %}
+
+
 {% macro tierPriceRow(tierprice, index, channel) %}
     <tr class="item">
         <td>

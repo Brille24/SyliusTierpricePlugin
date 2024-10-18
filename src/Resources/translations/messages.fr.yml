@@ -1,3 +1,5 @@
 brille24_tier_price:
-    ui:
-        tier_prices: 'Prix de groupe'
+  ui:
+    tier_prices: 'Prix de groupe'
+    customer_group: 'Groupe de clients'
+    product_not_enabled_in_any_channel: "Ce produit n'est actif dans aucun canal. Veuillez l'activer dans un canal et recharger la page. Vous pourrez ensuite le configurer ici."

@@ -1,102 +1,119 @@
 /**
- * Adds an element to the tierprice table
+ * Adds an element to the tier prices table
  *
- * @param bodyId Id of the body element
- * @param channelCode Code of the channel
+ * @param {string} bodyId - ID of the tbody element
+ * @param {string} channelCode - Channel code
  */
 function tierPriceTableAdd(bodyId, channelCode) {
-    // Sorts the table and adds the body
-    const tableId = bodyId + '_table';
-    tierPriceTableSort(tableId);
+  // Sort the table and add the body
+  const tableId = bodyId + '_table';
+  tierPriceTableSort(tableId);
 
-    const prototype_text = $('#prototype_holder').attr('data-prototype');
-    const prototype_currency = $('table#' + tableId).attr('data-prototype');
+  const prototypeHolder = document.getElementById('prototype_holder');
+  const prototype_text = prototypeHolder.getAttribute('data-prototype');
+  const tableElement = document.getElementById(tableId);
+  const prototype_currency = tableElement.getAttribute('data-prototype');
 
-    const bodySelector = '#' + bodyId;
-    const body = $(bodySelector);
+  const body = document.getElementById(bodyId);
 
-    // Replace '__name__' in the prototype's HTML to
-    // instead be a number based on how many items we have
-    var elementSource = prototype_text.replace(new RegExp('__name__', 'g'), tierPriceIndex);
-    body.append(elementSource);
+  // Replace '__name__' in the prototype HTML with a number based on the number of elements
+  var elementSource = prototype_text.replace(
+    new RegExp('__name__', 'g'),
+    tierPriceIndex
+  );
+  body.insertAdjacentHTML('beforeend', elementSource);
 
-    // Selects the element again and set the channel
-    const newElement_channel = $(bodySelector + ' #sylius_product_variant_tierPrices_' + tierPriceIndex + '_channel');
-    newElement_channel.val(channelCode);
+  // Select the new element and set the channel
+  const newElement_channel = body.querySelector(
+    '#sylius_product_variant_tierPrices_' + tierPriceIndex + '_channel'
+  );
+  if (newElement_channel) {
+    newElement_channel.value = channelCode;
+  }
 
-    // Setting the currency
-    const newElement_currency = $('tbody#'+bodyId + ' tr:last-child div.ui.label');
-    newElement_currency.html(prototype_currency);
+  // Set the currency
+  const newElement_currency = body.querySelector('tr:last-child div.ui.label');
+  if (newElement_currency) {
+    newElement_currency.innerHTML = prototype_currency;
+  }
 
-    // Adds the new element to the sorting listener
-    setSortingListener();
+  // Add the new element to the sorting listener
+  setSortingListener();
 
-    tierPriceIndex++;
+  tierPriceIndex++;
 }
 
 /**
  * Removes an element from the table
  *
- * @param element
+ * @param {HTMLElement} element - The element clicked for removal
  */
 function tierPriceTableRemove(element) {
-    $(element).parent().parent().remove();
+  const row = element.closest('tr');
+  if (row) {
+    row.remove();
+  }
 }
 
 /**
  * Sorts the table by quantity
  *
- * @param tableId
+ * @param {string} tableId - The ID of the table to sort
  */
 function tierPriceTableSort(tableId) {
-    var table = $('#' + tableId);
+  const table = document.getElementById(tableId);
+  if (!table) return;
 
-    function comperator(a, b) {
+  const tbody = table.querySelector('tbody');
+  if (!tbody) return;
 
-        function getValue(cell) {
-            return Number(cell.find('input')[0].value);
-        }
+  const rows = Array.from(tbody.querySelectorAll('tr'));
 
-        return getValue($(a)) > getValue($(b));
-    }
+  function comparator(rowA, rowB) {
+    const inputA = rowA.querySelector('input');
+    const inputB = rowB.querySelector('input');
+    const valueA = inputA ? Number(inputA.value) : 0;
+    const valueB = inputB ? Number(inputB.value) : 0;
+    return valueA - valueB;
+  }
 
-    table.find('th.table-column-quantity')
-        .wrapInner('<span title="sort this column"/>')
-        .each(function () {
-            var th = $(this),
-                thIndex = th.index();
-            // Filters through the table to just extract the sorting column
-            table.find('td').filter(function () {
-                return $(this).index() === thIndex;
-            }).sortElements(comperator, function () {
-                // parentNode is the element we want to move
-                return this.parentNode;
-            });
+  rows.sort(comparator);
 
-        });
+  // Remove existing rows
+  while (tbody.firstChild) {
+    tbody.removeChild(tbody.firstChild);
+  }
 
+  // Add sorted rows
+  rows.forEach(function (row) {
+    tbody.appendChild(row);
+  });
 }
 
 /**
- * Adds a sorting listener to the quantity
+ * Adds a sorting listener to quantity fields
  */
 function setSortingListener() {
-    $('.TIERPRICE_SORTING_CHANGED').on('change', function (event) {
-        var element = event.target;
-        var tableElement = $(element).parent().parent().parent().parent().parent();
-        tierPriceTableSort(tableElement.attr('id'));
+  const elements = document.querySelectorAll('.TIERPRICE_SORTING_CHANGED');
+  elements.forEach(function (element) {
+    element.addEventListener('change', function (event) {
+      const tableElement = element.closest('table');
+      if (tableElement) {
+        tierPriceTableSort(tableElement.id);
+      }
     });
+  });
 }
 
-// Sets the event listener
+// Initialize the sorting listener
 setSortingListener();
 
-$(document).ready(function () {
-    $('table').map(function (index, table) {
-        return $(table).attr('id')
-    }).filter(function (_, tableId) {
-        return tableId.indexOf('tierPricesTable_') === 0;
-    }).each(function (_,tableId) {
-        tierPriceTableSort(tableId);
-    })
+document.addEventListener('DOMContentLoaded', function () {
+  const tables = document.querySelectorAll('table');
+  tables.forEach(function (table) {
+    const tableId = table.id;
+    if (tableId && tableId.indexOf('tierPricesTable_') === 0) {
+      tierPriceTableSort(tableId);
+    }
+  });
 });

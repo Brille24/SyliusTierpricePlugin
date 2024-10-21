@@ -156,15 +156,16 @@ trait TierPriceableTrait
              * We either have no CustomerGroup or there are no tier prices for the specified group so only return
              * tier prices with no customer group set
              */
-            return array_filter($tierPrices, static fn (TierPriceInterface $tierPrice): bool => $tierPrice->getCustomerGroup() === null);
+            return array_filter($tierPrices, static fn(TierPriceInterface $tierPrice): bool => $tierPrice->getCustomerGroup() === null);
         }
 
         /*
          * We have a customer group and $tierPrices contains tier prices for that specific group so only return
          * tier prices for that group
          */
-        return array_filter($tierPrices, static fn (TierPriceInterface $tierPrice): bool => /** @psalm-suppress PossiblyNullReference */
-$tierPrice->getCustomerGroup() !== null &&
-        $tierPrice->getCustomerGroup()->getId() === $group->getId());
+        return array_filter($tierPrices, static fn(TierPriceInterface $tierPrice): bool =>
+        /** @psalm-suppress PossiblyNullReference */
+        $tierPrice->getCustomerGroup() !== null &&
+            $tierPrice->getCustomerGroup()->getId() === $group->getId());
     }
 }

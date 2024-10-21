@@ -18,7 +18,8 @@ use Brille24\SyliusTierPricePlugin\Entity\ProductVariant;
 use Brille24\SyliusTierPricePlugin\Entity\TierPrice;
 use Brille24\SyliusTierPricePlugin\Entity\TierPriceInterface;
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\OneToMany;
+use Doctrine\ORM\Mapping\OrderBy;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
@@ -38,11 +39,9 @@ trait TierPriceableTrait
         $this->tierPrices = new ArrayCollection();
     }
 
-    /**
-     * @var ArrayCollection<int, TierPriceInterface>
-     * @ORM\OneToMany(targetEntity="Brille24\SyliusTierPricePlugin\Entity\TierPrice", mappedBy="productVariant", cascade={"persist", "remove"}, orphanRemoval=true)
-     * @ORM\OrderBy({"customerGroup" = "ASC", "qty" = "ASC"})
-     */
+    /** @var ArrayCollection<int, TierPriceInterface> */
+    #[OneToMany(mappedBy: "productVariant", targetEntity: TierPrice::class, cascade: ['all'], orphanRemoval: true)]
+    #[OrderBy(['customerGroup' => 'ASC', 'qty' => 'ASC'])]
     protected $tierPrices;
 
     /**
@@ -57,6 +56,7 @@ trait TierPriceableTrait
 
     /**
      * Returns the tier prices only for one channel
+     *
      *
      * @return TierPriceInterface[]
      */
@@ -73,6 +73,7 @@ trait TierPriceableTrait
 
     /**
      * Returns the tier prices only for one channel
+     *
      *
      * @return TierPriceInterface[]
      */
@@ -138,6 +139,7 @@ trait TierPriceableTrait
         $hasGroupPrice = false;
         if ($group instanceof CustomerGroupInterface) {
             foreach ($tierPrices as $tierPrice) {
+                /** @psalm-suppress PossiblyNullReference */
                 if (
                     $tierPrice->getCustomerGroup() instanceof CustomerGroupInterface &&
                     $tierPrice->getCustomerGroup()->getId() === $group->getId()
@@ -161,7 +163,9 @@ trait TierPriceableTrait
          * We have a customer group and $tierPrices contains tier prices for that specific group so only return
          * tier prices for that group
          */
-        return array_filter($tierPrices, static fn(TierPriceInterface $tierPrice): bool => $tierPrice->getCustomerGroup() !== null &&
+        return array_filter($tierPrices, static fn(TierPriceInterface $tierPrice): bool =>
+        /** @psalm-suppress PossiblyNullReference */
+        $tierPrice->getCustomerGroup() !== null &&
             $tierPrice->getCustomerGroup()->getId() === $group->getId());
     }
 }

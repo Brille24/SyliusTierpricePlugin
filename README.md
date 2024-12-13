@@ -87,5 +87,3 @@ sylius_fixtures:
 ```
 For this the products need to be created first and the product variant must also exist.
 
-## Extending
-> If you want to extend the tierprices please be aware that this plugin is using XML for configuration. This might collide with projects that use Annotations.

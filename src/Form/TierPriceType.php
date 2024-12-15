@@ -25,6 +25,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class TierPriceType extends AbstractType
 {
+    public function __construct(private TierPriceMapper $dataMapper) {
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->add('qty', NumberType::class, [
@@ -45,6 +48,8 @@ class TierPriceType extends AbstractType
         $builder->add('channel', ChannelChoiceType::class, [
             'attr' => ['style' => 'display:none'],
         ]);
+
+        $builder->setDataMapper($this->dataMapper);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

@@ -1,0 +1,16 @@
+sylius_twig_hooks:
+    hooks:
+        sylius_admin.product.update.content.form.side_navigation:
+            brille24_tierprice:
+                template: '@Brille24SyliusTierPricePlugin/product_variant/form/side_navigation/tierprices.html.twig'
+        sylius_admin.product.update.content.form.sections:
+            brille24_tierprice:
+                template: '@Brille24SyliusTierPricePlugin/Admin/ProductVariant/Tab/_tierprice.html.twig'
+
+
+        sylius_admin.product_variant.update#javascripts:
+            brille24_tierprice_js:
+                template: '@Brille24SyliusTierPricePlugin/Admin/_javascripts.html.twig'
+        sylius.admin.product.update#javascripts:
+            brille24_tierprice_js:
+                template: '@Brille24SyliusTierPricePlugin/Admin/_javascripts.html.twig'

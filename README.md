@@ -20,14 +20,14 @@ return [
 ```yml
 imports:
     ...
-    - { resource: '@Brille24SyliusTierPricePlugin/Resources/config/config.yml'}
+    - { resource: '@Brille24SyliusTierPricePlugin/config/config.yml'}
 ```
 
 * For API functionality add the bundle's `routing.yml` to the local `app/config/routing.yml`
 ```yml
 ...
 brille24_tierprice_bundle:
-    resource: '@Brille24SyliusTierPricePlugin/Resources/config/routing.yml'
+    resource: '@Brille24SyliusTierPricePlugin/config/routing.yml'
 ```
 
 * Go into your ProductVariant class and add the following trait and add one method call to the constructor

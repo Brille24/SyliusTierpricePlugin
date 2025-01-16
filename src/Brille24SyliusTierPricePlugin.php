@@ -20,4 +20,9 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
 final class Brille24SyliusTierPricePlugin extends Bundle
 {
     use SyliusPluginTrait;
+
+    public function getPath(): string
+    {
+        return \dirname(__DIR__);
+    }
 }

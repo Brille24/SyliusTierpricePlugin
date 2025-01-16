@@ -1,2 +1,2 @@
 imports:
-    - { resource: "@Brille24SyliusTierPricePlugin/Resources/config/config.yml" }
+    - { resource: "@Brille24SyliusTierPricePlugin/config/config.yaml" }

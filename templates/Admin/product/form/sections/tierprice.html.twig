@@ -1,26 +1,20 @@
 {% set form = hookable_metadata.context.form %}
 {% set product = hookable_metadata.context.resource %}
 
-<div class="tab-pane {% if hookable_metadata.configuration.active|default(false) %}show active{% endif %}" id="product-tierprice" role="tabpanel" tabindex="0">
-    <div class="card mb-3">
-        <div class="card-header">
-            <h2 id="productMedia" class="card-title">
-                {{ 'brille24_tier_price.ui.tier_prices'|trans }}
-            </h2>
-        </div>
-        <div class="card-body">
-            {# Get the correct form, either the variant form or the product form #}
-            {% if form.tierPrices is defined %}
-                {% set variantForm = form %}
-            {% else %}
-                {% set variantForm = form.variant %}
-            {% endif %}
-
-            {# Trying to the get the product if it's a product variant #}
-            {% set product = product.getProduct()|default(product) %}
-
-            {% hook 'tierprice' with { variantForm, channels: product.channels } %}
+{# Only simple products allow tierprices on the product otherwise they're on the variant #}
+{% if not product.isConfigurable() %}
+    <div class="tab-pane {% if hookable_metadata.configuration.active|default(false) %}show active{% endif %}" id="product-tierprice" role="tabpanel" tabindex="0">
+        <div class="card mb-3">
+            <div class="card-header">
+                <h2 id="productMedia" class="card-title">
+                    {{ 'brille24_tier_price.ui.tier_prices'|trans }}
+                </h2>
+            </div>
+            {{ dump(form) }}
+            {{ dump(product.isSimple) }}
+            {#<div class="card-body">#}
+                {#{% hook 'tierprice' with { form: form, channels: product.channels } %}#}
+            {#</div>#}
         </div>
     </div>
-</div>
-
+{% endif %}

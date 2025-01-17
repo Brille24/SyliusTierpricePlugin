@@ -1,4 +1,4 @@
-{% set variantForm = hookable_metadata.context.variantForm %}
+{% set form = hookable_metadata.context.form %}
 {% set channels = hookable_metadata.context.channels %}
 
 {# Itterating over the channels #}
@@ -16,7 +16,7 @@
         </thead>
         <tbody>
             {# Rendering the table body #}
-            {% for tierprice in variantForm.tierPrices %}
+            {% for tierprice in form.tierPrices %}
                 {% if tierprice.channel.vars['value'] == channel.code %}
                     <tr class="item">
                         <td>
@@ -50,6 +50,6 @@
         </tbody>
     </table>
 
-    {{ form_widget(variantForm.tierPrices.vars.button_add) }}
+    {{ form_widget(form.tierPrices.vars.button_add) }}
 {% endfor %}
 

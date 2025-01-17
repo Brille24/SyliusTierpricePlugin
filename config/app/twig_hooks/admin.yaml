@@ -1,19 +1,16 @@
 sylius_twig_hooks:
     hooks:
+        # Product Menu
         sylius_admin.product.update.content.form.side_navigation:
             brille24_tierprice:
                 template: '@Brille24SyliusTierPricePlugin/Admin/product/form/side_navigation/tierprice.html.twig'
-        sylius_admin.product_variant.update.content.form.side_navigation:
-            brille24_tierprice:
-                template: '@Brille24SyliusTierPricePlugin/Admin/product/form/side_navigation/tierprice.html.twig'
 
+        # Product Hook
         sylius_admin.product.update.content.form.sections:
             brille24_tierprice:
                 template: '@Brille24SyliusTierPricePlugin/Admin/product/form/sections/tierprice.html.twig'
-        sylius_admin.product_variant.update.content.form.sections:
-            brille24_tierprice:
-                template: '@Brille24SyliusTierPricePlugin/Admin/product/form/sections/tierprice.html.twig'
 
+        # Product Tierprices
         sylius_admin.product.update.content.form.sections.tierprice:
             brille24_tierprice_error:
                 priority: 255
@@ -21,17 +18,20 @@ sylius_twig_hooks:
             brille24_tierprice_form:
                 template: '@Brille24SyliusTierPricePlugin/Admin/product/form/sections/tierprice/form.html.twig'
 
+        # Product Variant Menu
+        sylius_admin.product_variant.update.content.form.side_navigation:
+            brille24_tierprice:
+                template: '@Brille24SyliusTierPricePlugin/Admin/product_variant/form/side_navigation/tierprice.html.twig'
+
+        # Product Variant Hook
+        sylius_admin.product_variant.update.content.form.sections:
+            brille24_tierprice:
+                template: '@Brille24SyliusTierPricePlugin/Admin/product_variant/form/sections/tierprice.html.twig'
+
+        # Product Variant Tierprices
         sylius_admin.product_variant.update.content.form.sections.tierprice:
             brille24_tierprice_error:
                 priority: 255
-                template: '@Brille24SyliusTierPricePlugin/Admin/product/form/sections/tierprice/errors.html.twig'
+                template: '@Brille24SyliusTierPricePlugin/Admin/product_variant/form/sections/tierprice/errors.html.twig'
             brille24_tierprice_form:
-                template: '@Brille24SyliusTierPricePlugin/Admin/product/form/sections/tierprice/form.html.twig'
-
-
-        sylius_admin.product_variant.update#javascripts:
-            brille24_tierprice_js:
-                template: '@Brille24SyliusTierPricePlugin/Admin/_javascripts.html.twig'
-        sylius.admin.product.update#javascripts:
-            brille24_tierprice_js:
-                template: '@Brille24SyliusTierPricePlugin/Admin/_javascripts.html.twig'
+                template: '@Brille24SyliusTierPricePlugin/Admin/product_variant/form/sections/tierprice/form.html.twig'

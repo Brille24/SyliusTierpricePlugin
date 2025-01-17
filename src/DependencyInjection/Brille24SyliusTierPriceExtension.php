@@ -7,7 +7,6 @@
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
- *
  */
 
 declare(strict_types=1);
@@ -21,7 +20,6 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\Extension;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
-use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 
 final class Brille24SyliusTierPriceExtension extends Extension implements PrependExtensionInterface
 {
@@ -41,10 +39,10 @@ final class Brille24SyliusTierPriceExtension extends Extension implements Prepen
         $this->prependDoctrineMigrations($container);
     }
 
-     protected function getMigrationsNamespace(): string
-     {
-         return 'Brille24\SyliusTierPricePlugin\Migrations';
-     }
+    protected function getMigrationsNamespace(): string
+    {
+        return 'Brille24\SyliusTierPricePlugin\Migrations';
+    }
 
     protected function getMigrationsDirectory(): string
     {

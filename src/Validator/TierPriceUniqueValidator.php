@@ -7,7 +7,6 @@
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
- *
  */
 
 declare(strict_types=1);
@@ -41,7 +40,6 @@ class TierPriceUniqueValidator extends ConstraintValidator
         Assert::isInstanceOf($value, TierPriceInterface::class);
         Assert::isInstanceOf($constraint, TierPriceUniqueConstraint::class);
 
-        /** @var TierPriceUniqueConstraint $constraint */
         $fields = $constraint->fields;
         if (0 === count($fields)) {
             throw new ConstraintDefinitionException('At least one field has to be specified.');

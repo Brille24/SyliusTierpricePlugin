@@ -7,7 +7,6 @@
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
- *
  */
 
 declare(strict_types=1);
@@ -17,8 +16,8 @@ namespace Brille24\SyliusTierPricePlugin\Form\Extension;
 use Brille24\SyliusTierPricePlugin\Form\TierPriceType;
 use Sylius\Bundle\ProductBundle\Form\Type\ProductVariantType;
 use Symfony\Component\Form\AbstractTypeExtension;
-use Symfony\UX\LiveComponent\Form\Type\LiveCollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\UX\LiveComponent\Form\Type\LiveCollectionType;
 
 class ProductVariantTypeExtension extends AbstractTypeExtension
 {

@@ -1,7 +1,7 @@
 {{ form_errors(hookable_metadata.context.form) }}
 
 {% if hookable_metadata.context.channels|length == 0 %}
-    <div class="ui message info">
+    <div class="alert alert-info">
         {{ 'brille24_tier_price.ui.product_not_enabled_in_any_channel'|trans }}
     </div>
 {% endif %}

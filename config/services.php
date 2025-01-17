@@ -16,6 +16,7 @@ use Brille24\SyliusTierPricePlugin\Factory\TierPriceExampleFactory;
 use Brille24\SyliusTierPricePlugin\Factory\TierPriceFactory;
 use Brille24\SyliusTierPricePlugin\Factory\TierPriceFactoryInterface;
 use Brille24\SyliusTierPricePlugin\Fixtures\TierPriceFixture;
+use Brille24\SyliusTierPricePlugin\Form\Components\ProductVariantFormComponent;
 use Brille24\SyliusTierPricePlugin\Form\Extension\ProductVariantTypeExtension;
 use Brille24\SyliusTierPricePlugin\Form\TierPriceType;
 use Brille24\SyliusTierPricePlugin\Menu\AdminProductFormMenuListener;
@@ -51,12 +52,21 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ->arg('$orderProcessor', service('.inner'))
     ;
 
-    $services->set(AdminProductFormMenuListener::class);
-    $services->set(AdminProductVariantFormMenuListener::class);
-
     $services->set(TierPriceFactoryInterface::class, TierPriceFactory::class)
         ->decorate('brille24.factory.tierprice')
         ->args([service('.inner')])
+    ;
+
+    $services->set('sylius_admin.twig.component.product_variant.form', ProductVariantFormComponent::class)
+        ->args([
+            service('sylius.repository.product_variant'),
+            service('form.factory'),
+            '%sylius.model.product_variant.class%',
+            'Sylius\Bundle\AdminBundle\Form\Type\ProductVariantType',
+            service('sylius.factory.product_variant'),
+            service('sylius.repository.product'),
+        ])
+        ->tag('sylius.live_component.admin', ['key' => "sylius_admin:product_variant:form" ])
     ;
 
     $services->set(TierPriceExampleFactory::class);

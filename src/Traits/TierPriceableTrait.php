@@ -7,7 +7,6 @@
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
- *
  */
 
 declare(strict_types=1);
@@ -40,7 +39,7 @@ trait TierPriceableTrait
     }
 
     /** @var ArrayCollection<int, TierPriceInterface> */
-    #[OneToMany(mappedBy: "productVariant", targetEntity: TierPrice::class, cascade: ['all'], orphanRemoval: true)]
+    #[OneToMany(mappedBy: 'productVariant', targetEntity: TierPrice::class, cascade: ['all'], orphanRemoval: true)]
     #[OrderBy(['customerGroup' => 'ASC', 'qty' => 'ASC'])]
     protected $tierPrices;
 

@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * This file is part of the Brille24 tierprice plugin.
+ *
+ * (c) Brille24 GmbH
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 declare(strict_types=1);
 
 use PhpCsFixer\Fixer\ClassNotation\VisibilityRequiredFixer;
@@ -22,13 +31,13 @@ return static function (ECSConfig $ecsConfig): void {
     $ecsConfig->ruleWithConfiguration(HeaderCommentFixer::class, [
         'comment_type' => 'PHPDoc',
         'location' => 'after_open',
-        'header' => 'This file is part of the Brille24 tierprice plugin.
+        'header' => <<<DOC
+This file is part of the Brille24 tierprice plugin.
 
-        (c) Brille24 GmbH
+(c) Brille24 GmbH
 
-        For the full copyright and license information, please view the LICENSE
-        file that was distributed with this source code.
-        ',
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.
+DOC,
     ]);
 };
-

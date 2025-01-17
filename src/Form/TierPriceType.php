@@ -30,12 +30,14 @@ class TierPriceType extends AbstractType
         $builder->add('qty', NumberType::class, [
             'label' => 'sylius.ui.amount',
             'required' => true,
+            'empty_data' => 0,
         ]);
 
         $builder->add('price', MoneyType::class, [
             'label' => 'sylius.ui.price',
             'required' => true,
             'currency' => $options['currency'],
+            'empty_data' => 0,
         ]);
 
         $builder->add('customerGroup', CustomerGroupChoiceType::class, [

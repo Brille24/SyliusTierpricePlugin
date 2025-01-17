@@ -57,7 +57,6 @@ trait TierPriceableTrait
     /**
      * Returns the tier prices only for one channel
      *
-     *
      * @return TierPriceInterface[]
      */
     public function getTierPricesForChannel(ChannelInterface $channel, ?CustomerInterface $customer = null): array
@@ -73,7 +72,6 @@ trait TierPriceableTrait
 
     /**
      * Returns the tier prices only for one channel
-     *
      *
      * @return TierPriceInterface[]
      */

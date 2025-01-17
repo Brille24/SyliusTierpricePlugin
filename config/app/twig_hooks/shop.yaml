@@ -1,8 +1,6 @@
 sylius_twig_hooks:
     hooks:
-        sylius.shop.layout.javascripts:
-            brille24_tierprice_js:
-                template: '@Brille24SyliusTierPricePlugin/Shop/_javascripts.html.twig'
-        sylius.shop.product.show.before_add_to_cart:
-            brille24_tierprice_js:
+        sylius_shop.product.show.content.info.summary.prices:
+            brille24_tierprice:
+                priority: -100
                 template: '@Brille24SyliusTierPricePlugin/Shop/Product/Show/_tier_price_promo.html.twig'

@@ -1,13 +1,6 @@
 imports:
     - { resource: "app/twig_hooks/**/*.yaml" }
 
-# Overriding product variant of sylius
-sylius_product:
-    resources:
-        product_variant:
-            classes:
-                model: Brille24\SyliusTierPricePlugin\Entity\ProductVariant
-
 # New resources
 sylius_resource:
   resources:

@@ -1,2 +1,9 @@
 imports:
     - { resource: "@Brille24SyliusTierPricePlugin/config/config.yaml" }
+
+# Overriding product variant of sylius
+sylius_product:
+    resources:
+        product_variant:
+            classes:
+                model: Brille24\SyliusTierPricePlugin\Entity\ProductVariant

@@ -3,7 +3,7 @@
 /**
  * This file is part of the Brille24 tierprice plugin.
  *
- * (c) Brille24 GmbH
+ * (c) Mamazu
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -34,7 +34,7 @@ return static function (ECSConfig $ecsConfig): void {
         'header' => <<<DOC
 This file is part of the Brille24 tierprice plugin.
 
-(c) Brille24 GmbH
+(c) Mamazu
 
 For the full copyright and license information, please view the LICENSE
 file that was distributed with this source code.

@@ -81,6 +81,13 @@
             "cache:clear": "symfony-cmd",
             "assets:install %PUBLIC_DIR%": "symfony-cmd",
             "security-checker security:check": "script"
-        }
+        },
+        "analyse": [
+            "vendor/bin/ecs check --ansi --no-progress-bar --config ecs.php",
+            "vendor/bin/phpstan analyse -c phpstan.neon --no-progress -l max src/"
+        ],
+        "fix": [
+            "vendor/bin/ecs check --ansi --no-progress-bar --config ecs.php --fix"
+        ]
     }
 }

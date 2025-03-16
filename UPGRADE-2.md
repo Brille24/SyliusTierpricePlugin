@@ -18,9 +18,10 @@ brille24_tierprice_bundle:
     resource: '@Brille24SyliusTierPricePlugin/config/routing.yml'
 ```
 
-
-
 ### The templates have been split to match the template structure in Sylius.
 The Sylius 2 does not support extending the ProductVariant Menu via a listener, so templates have been created instead and the MenuListeners have been removed.
+
+### The custom javascript has been removed
+All custom javascript has been removed as it does not play nicely with the Live Components. This means that the price on the product page does no longer update live.
 
 

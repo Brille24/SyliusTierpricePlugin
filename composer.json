@@ -41,9 +41,11 @@
     "config": {
         "sort-packages": true,
         "allow-plugins": {
-            "symfony/thanks": false,
             "dealerdirect/phpcodesniffer-composer-installer": false,
-            "phpstan/extension-installer": false
+            "php-http/discovery": false,
+            "phpstan/extension-installer": false,
+            "symfony/flex": false,
+            "symfony/thanks": false
         }
     },
     "extra": {

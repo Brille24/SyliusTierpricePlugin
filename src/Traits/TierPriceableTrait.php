@@ -3,11 +3,10 @@
 /**
  * This file is part of the Brille24 tierprice plugin.
  *
- * (c) Brille24 GmbH
+ * (c) Mamazu
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
- *
  */
 
 declare(strict_types=1);
@@ -40,7 +39,7 @@ trait TierPriceableTrait
     }
 
     /** @var ArrayCollection<int, TierPriceInterface> */
-    #[OneToMany(mappedBy: "productVariant", targetEntity: TierPrice::class, cascade: ['all'], orphanRemoval: true)]
+    #[OneToMany(mappedBy: 'productVariant', targetEntity: TierPrice::class, cascade: ['all'], orphanRemoval: true)]
     #[OrderBy(['customerGroup' => 'ASC', 'qty' => 'ASC'])]
     protected $tierPrices;
 
@@ -57,7 +56,6 @@ trait TierPriceableTrait
     /**
      * Returns the tier prices only for one channel
      *
-     *
      * @return TierPriceInterface[]
      */
     public function getTierPricesForChannel(ChannelInterface $channel, ?CustomerInterface $customer = null): array
@@ -73,7 +71,6 @@ trait TierPriceableTrait
 
     /**
      * Returns the tier prices only for one channel
-     *
      *
      * @return TierPriceInterface[]
      */

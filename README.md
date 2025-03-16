@@ -16,28 +16,28 @@ return [
 ];
 ```
 
-* Add the `config.yml` to your local `config/config.yml`
+* Add the `config.yaml` to your local `config/config.yaml`
 ```yml
 imports:
     ...
-    - { resource: '@Brille24SyliusTierPricePlugin/Resources/config/config.yml'}
+    - { resource: '@Brille24SyliusTierPricePlugin/config/config.yaml'}
 ```
 
-* For API functionality add the bundle's `routing.yml` to the local `app/config/routing.yml`
+* For API functionality add the bundle's `routes.yml` to the local `app/config/routes.yml`
 ```yml
 ...
 brille24_tierprice_bundle:
-    resource: '@Brille24SyliusTierPricePlugin/Resources/config/routing.yml'
+    resource: '@Brille24SyliusTierPricePlugin/config/routes.yml'
 ```
 
-* Go into your ProductVariant class and add the following trait and add one method call to the constructor
+* Go into your `ProductVariant` class and add the following trait and add one method call to the constructor
 ```php
 class ProductVariant extends BaseProductVariant implements \Brille24\SyliusTierPricePlugin\Entity\ProductVariantInterface
 {
     use \Brille24\SyliusTierPricePlugin\Traits\TierPriceableTrait;
 
     public function __construct() {
-        parent::__construct(); // Your contructor here
+        parent::__construct(); // Your constructor here
 
         $this->initTierPriceableTrait(); // "Constructor" of the trait
     }

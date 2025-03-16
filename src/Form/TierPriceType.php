@@ -3,11 +3,10 @@
 /**
  * This file is part of the Brille24 tierprice plugin.
  *
- * (c) Brille24 GmbH
+ * (c) Mamazu
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
- *
  */
 
 declare(strict_types=1);
@@ -30,12 +29,14 @@ class TierPriceType extends AbstractType
         $builder->add('qty', NumberType::class, [
             'label' => 'sylius.ui.amount',
             'required' => true,
+            'empty_data' => 0,
         ]);
 
         $builder->add('price', MoneyType::class, [
             'label' => 'sylius.ui.price',
             'required' => true,
             'currency' => $options['currency'],
+            'empty_data' => 0,
         ]);
 
         $builder->add('customerGroup', CustomerGroupChoiceType::class, [

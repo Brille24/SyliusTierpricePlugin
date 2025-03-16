@@ -3,11 +3,10 @@
 /**
  * This file is part of the Brille24 tierprice plugin.
  *
- * (c) Brille24 GmbH
+ * (c) Mamazu
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
- *
  */
 
 declare(strict_types=1);
@@ -26,7 +25,7 @@ use Sylius\Component\Customer\Model\CustomerGroupInterface;
 
 #[Entity(repositoryClass:TierPriceRepository::class)]
 #[Table(name: 'brille24_tierprice')]
-#[UniqueConstraint(name: 'no_duplicate_prices', columns: ['qty','channel_id','product_variant_id','customer_group_id'])]
+#[UniqueConstraint(name: 'no_duplicate_prices', columns: ['qty', 'channel_id', 'product_variant_id', 'customer_group_id'])]
 class TierPrice implements TierPriceInterface
 {
     /** @var int */
@@ -46,7 +45,7 @@ class TierPrice implements TierPriceInterface
         #[Column(type: 'integer')]
         private int $qty = 0,
         #[Column(type: 'integer')]
-        private int $price = 0
+        private int $price = 0,
     ) {
     }
 

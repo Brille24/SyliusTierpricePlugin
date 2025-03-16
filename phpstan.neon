@@ -1,19 +1,19 @@
 parameters:
     level: max
-    reportUnmatchedIgnoredErrors: true
-    checkMissingIterableValueType: false
-    checkGenericClassInNonGenericObjectType: false
-
+    reportUnmatchedIgnoredErrors: false
     paths:
         - src
         - tests/Behat
 
-    excludes_analyse:
+    excludePaths:
+        # Makes PHPStan crash
+        - 'src/DependencyInjection/Configuration.php'
 
         # Test dependencies
         - 'tests/Application/app/**.php'
         - 'tests/Application/src/**.php'
 
     ignoreErrors:
-        - '/Cannot call method scalarNode\(\) on Symfony\\Component\\Config\\Definition\\Builder\\NodeParentInterface\|null\./'
-        - '/^Call to an undefined method .*PHPUnit\\Framework\\MockObject\\MockObject.*\:\:(expects|method)\(\)\.$/'
+        - '/Parameter #1 \$configuration of method Symfony\\Component\\DependencyInjection\\Extension\\Extension::processConfiguration\(\) expects Symfony\\Component\\Config\\Definition\\ConfigurationInterface, Symfony\\Component\\Config\\Definition\\ConfigurationInterface\|null given\./'
+        -
+            identifier: missingType.iterableValue

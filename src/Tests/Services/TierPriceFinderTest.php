@@ -3,11 +3,10 @@
 /**
  * This file is part of the Brille24 tierprice plugin.
  *
- * (c) Brille24 GmbH
+ * (c) Mamazu
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
- *
  */
 
 declare(strict_types=1);
@@ -24,22 +23,15 @@ use Sylius\Component\Core\Model\ChannelInterface;
 
 class TierPriceFinderTest extends TestCase
 {
-    /** @var TierPriceFinder */
-    private $tierPriceFinder;
+    private TierPriceFinder $tierPriceFinder;
 
-    /** @var ChannelInterface */
-    private $testChannel;
+    private ChannelInterface $testChannel;
 
-    /** @var TierPriceRepositoryInterface|MockObject */
+    /** @var TierPriceRepositoryInterface|MockObject<TierPriceRepositoryInterface> */
     private $tierPriceRepo;
 
-    public function __construct(
-        ?string $name = null,
-        array $data = [],
-        string $dataName = '',
-    ) {
-        parent::__construct($name, $data, $dataName);
-
+    public function setUp(): void
+    {
         $this->tierPriceRepo = $this->createMock(TierPriceRepositoryInterface::class);
         $this->tierPriceFinder = new TierPriceFinder($this->tierPriceRepo);
 

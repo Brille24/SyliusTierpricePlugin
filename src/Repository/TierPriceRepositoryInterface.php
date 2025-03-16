@@ -3,11 +3,10 @@
 /**
  * This file is part of the Brille24 tierprice plugin.
  *
- * (c) Brille24 GmbH
+ * (c) Mamazu
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
- *
  */
 
 declare(strict_types=1);
@@ -24,7 +23,6 @@ interface TierPriceRepositoryInterface extends RepositoryInterface
 {
     /**
      * Gets all tier prices for a product variant for a channel and optionally customer group with quantity in ascending order
-     *
      *
      * @return TierPriceInterface[]
      */

@@ -13,18 +13,14 @@ declare(strict_types=1);
 
 namespace Brille24\SyliusTierPricePlugin\DependencyInjection;
 
-use Sylius\Bundle\CoreBundle\DependencyInjection\PrependDoctrineMigrationsTrait;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\Extension;
-use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
 
-final class Brille24SyliusTierPriceExtension extends Extension implements PrependExtensionInterface
+final class Brille24SyliusTierPriceExtension extends Extension
 {
-    use PrependDoctrineMigrationsTrait;
-
     /** @inheritdoc */
     public function load(array $configs, ContainerBuilder $container): void
     {
@@ -32,26 +28,6 @@ final class Brille24SyliusTierPriceExtension extends Extension implements Prepen
 
         $loder = new PhpFileLoader($container, new FileLocator(__DIR__ . '/../../config'));
         $loder->load('services.php');
-    }
-
-    public function prepend(ContainerBuilder $container): void
-    {
-        $this->prependDoctrineMigrations($container);
-    }
-
-    protected function getMigrationsNamespace(): string
-    {
-        return 'Brille24\SyliusTierPricePlugin\Migrations';
-    }
-
-    protected function getMigrationsDirectory(): string
-    {
-        return '@Brille24SyliusTierPricePlugin/Migrations';
-    }
-
-    protected function getNamespacesOfMigrationsExecutedBefore(): array
-    {
-        return ['Sylius\Bundle\CoreBundle\Migrations'];
     }
 
     public function getConfiguration(array $config, ContainerBuilder $container): ConfigurationInterface
